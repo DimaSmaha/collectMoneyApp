@@ -1,4 +1,12 @@
-let totalMoney = 0;
+let jsonFile;
+fetch("/data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    jsonFile = data;
+    totalMoney = jsonFile.totalMoney;
+  });
+
+let totalMoney;
 
 function changeMoneyScore() {
   let yourMoneyScore = document.getElementById("yourMoneyScore");
