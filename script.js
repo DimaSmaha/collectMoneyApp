@@ -15,9 +15,13 @@ function changeMoneyScore() {
 }
 
 function addMoney() {
+  const errorP = document.getElementById("error");
   const moneyInput = document.getElementById("addMoneyInput");
   const addedMoney = moneyInput.value;
   const moneyToBeAdded = parseInt(addedMoney);
+  if (typeof addedMoney !== "number") {
+    return (errorP.style.display = "flex");
+  }
   totalMoney += moneyToBeAdded;
   console.log(totalMoney);
   moneyInput.value = "";
