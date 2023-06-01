@@ -13,8 +13,14 @@
     </div>
     <div>
       <p>Enter your amount of money</p>
-      <p id="error" style="display: none">Its not a number</p>
-      <input type="text" id="addMoneyInput" placeholder="enter money amount" />
+      <p id="errorNegativeNumber" style="display: none">
+        Its a negative number
+      </p>
+      <input
+        type="number"
+        id="addMoneyInput"
+        placeholder="enter money amount"
+      />
       <button id="addMoneyBtn" onclick="addMoney(); changeMoneyScore();">
         Add Money
       </button>

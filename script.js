@@ -15,12 +15,13 @@ function changeMoneyScore() {
 }
 
 function addMoney() {
-  const errorP = document.getElementById("error");
+  const errorNegative = document.getElementById("errorNegativeNumber");
   const moneyInput = document.getElementById("addMoneyInput");
   const addedMoney = moneyInput.value;
   const moneyToBeAdded = parseInt(addedMoney);
-  if (typeof addedMoney !== "number") {
-    return (errorP.style.display = "flex");
+  if (moneyToBeAdded <= 0) {
+    moneyInput.value = "";
+    return (errorNegative.style.display = "flex");
   }
   totalMoney += moneyToBeAdded;
   console.log(totalMoney);
