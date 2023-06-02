@@ -16,9 +16,14 @@ function changeMoneyScore() {
 
 function addMoney() {
   const errorNegative = document.getElementById("errorNegativeNumber");
+  const errorNotNumber = document.getElementById("errorNotNumber");
   const moneyInput = document.getElementById("addMoneyInput");
   const addedMoney = moneyInput.value;
   const moneyToBeAdded = parseInt(addedMoney);
+  if (isNaN(moneyToBeAdded) == true) {
+    moneyInput.value = "";
+    return (errorNotNumber.style.display = "flex");
+  }
   if (moneyToBeAdded <= 0) {
     moneyInput.value = "";
     return (errorNegative.style.display = "flex");
