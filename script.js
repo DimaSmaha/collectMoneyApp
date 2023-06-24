@@ -1,12 +1,12 @@
 let jsonFile;
-fetch("/data.json")
-  .then((response) => response.json())
-  .then((data) => {
-    jsonFile = data;
-    totalMoney = jsonFile.totalMoney;
-  });
-
 let totalMoney;
+const getData = async () => {
+  const response = await fetch("/data.json");
+  const data = await response.json();
+  jsonFile = data;
+  totalMoney = jsonFile.totalMoney;
+  changeMoneyScore();
+};
 
 function changeMoneyScore() {
   let yourMoneyScore = document.getElementById("yourMoneyScore");
