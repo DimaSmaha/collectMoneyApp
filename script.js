@@ -22,11 +22,17 @@ function addMoney() {
   const moneyToBeAdded = parseInt(addedMoney);
   if (isNaN(moneyToBeAdded)) {
     moneyInput.value = "";
-    return (errorNotNumber.style.display = "flex");
+    errorNotNumber.style.display = "flex";
+    return setTimeout(function () {
+      errorNotNumber.style.display = "none";
+    }, 2000);
   }
   if (moneyToBeAdded <= 0) {
     moneyInput.value = "";
-    return (errorNegative.style.display = "flex");
+    errorNegative.style.display = "flex";
+    return setTimeout(function () {
+      errorNegative.style.display = "none";
+    }, 2000);
   }
   totalMoney += moneyToBeAdded;
   console.log(totalMoney);
