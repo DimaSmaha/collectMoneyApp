@@ -37,5 +37,25 @@ function addMoney() {
   totalMoney += moneyToBeAdded;
   console.log(totalMoney);
   moneyInput.value = "";
+  // updateJSONFile();
   return totalMoney;
 }
+
+// async function updateJSONFile() {
+//   jsonFile.totalMoney = totalMoney;
+//   const jsonString = JSON.stringify(jsonFile);
+
+//   const response = await fetch("/data.json", {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: jsonString,
+//   });
+
+//   if (response.ok) {
+//     console.log("JSON file updated successfully.");
+//   } else {
+//     console.error("Error updating JSON file:", response.status);
+//   }
+// }
