@@ -20,7 +20,7 @@ function addMoney() {
   const moneyInput = document.getElementById("addMoneyInput");
   const addedMoney = moneyInput.value;
   const moneyToBeAdded = parseInt(addedMoney);
-  if (isNaN(moneyToBeAdded) == true) {
+  if (isNaN(moneyToBeAdded)) {
     moneyInput.value = "";
     return (errorNotNumber.style.display = "flex");
   }
