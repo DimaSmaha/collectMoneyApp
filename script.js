@@ -41,6 +41,7 @@ function addMoney() {
   console.log(totalMoney);
   moneyInput.value = "";
   // updateJSONFile();
+  checkGoal();
   return totalMoney;
 }
 
@@ -56,6 +57,14 @@ function setGoal() {
   }
   let sentence = `Your goal : ${goalValue}`;
   userGoal.textContent = sentence;
+}
+
+function checkGoal() {
+  if (totalMoney >= goalValue) {
+    setTimeout(function () {
+      alert("congrats");
+    }, 500);
+  }
 }
 
 // async function updateJSONFile() {
