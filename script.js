@@ -1,6 +1,8 @@
 let jsonFile;
 let totalMoney;
 let goalValue;
+let transactionsArray = [];
+
 const getData = async () => {
   const response = await fetch("/data.json");
   const data = await response.json();
@@ -41,6 +43,7 @@ function addMoney() {
   console.log(totalMoney);
   moneyInput.value = "";
   // updateJSONFile();
+  formArray(moneyToBeAdded);
   checkGoal();
   return totalMoney;
 }
@@ -65,6 +68,11 @@ function checkGoal() {
       alert("congrats");
     }, 500);
   }
+}
+
+function formArray(addedMoney) {
+  transactionsArray.push(addedMoney);
+  console.log(transactionsArray);
 }
 
 // async function updateJSONFile() {
