@@ -41,6 +41,18 @@ function addMoney() {
   return totalMoney;
 }
 
+function getGoal() {
+  const getGoal = prompt("Add Your Goal");
+  return getGoal;
+}
+
+function setGoal() {
+  const userGoal = document.getElementById("yourGoal");
+  const goalSum = parseInt(getGoal());
+  let sentence = `Your goal : ${goalSum}`;
+  userGoal.textContent = sentence;
+}
+
 // async function updateJSONFile() {
 //   jsonFile.totalMoney = totalMoney;
 //   const jsonString = JSON.stringify(jsonFile);
