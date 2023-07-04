@@ -86,6 +86,8 @@ function formArray(addedMoney) {
   console.log(transactionsArray);
 }
 
+/// add that transaction be shown on the screen
+
 // async function updateJSONFile() {
 //   jsonFile.totalMoney = totalMoney;
 //   const jsonString = JSON.stringify(jsonFile);
