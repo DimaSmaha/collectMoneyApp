@@ -9,8 +9,10 @@ const getData = async () => {
   jsonFile = data;
   totalMoney = jsonFile.totalMoney;
   goalValue = jsonFile.goalValue;
+  transactionsArray = jsonFile.transactionsList;
   changeMoneyScore();
   setGoal();
+  console.log(transactionsArray);
 };
 
 function changeMoneyScore() {
@@ -78,7 +80,9 @@ class Transactions {
 }
 
 function formArray(addedMoney) {
-  transactionsArray.push(new Transactions(addedMoney));
+  transactionsArray.push(
+    JSON.parse(JSON.stringify(new Transactions(addedMoney)))
+  );
   console.log(transactionsArray);
 }
 
