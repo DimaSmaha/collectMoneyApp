@@ -1,11 +1,14 @@
 let jsonFile;
 let totalMoney;
+let goalValue;
 const getData = async () => {
   const response = await fetch("/data.json");
   const data = await response.json();
   jsonFile = data;
   totalMoney = jsonFile.totalMoney;
+  goalValue = jsonFile.goalValue;
   changeMoneyScore();
+  setGoal();
 };
 
 function changeMoneyScore() {
@@ -42,14 +45,16 @@ function addMoney() {
 }
 
 function getGoal() {
-  const getGoal = prompt("Add Your Goal");
-  return getGoal;
+  goalValue = prompt("Add Your Goal");
+  return goalValue;
 }
 
 function setGoal() {
-  const userGoal = document.getElementById("yourGoal");
-  const goalSum = parseInt(getGoal());
-  let sentence = `Your goal : ${goalSum}`;
+  let userGoal = document.getElementById("yourGoal");
+  if (goalValue == 0 || goalValue == undefined) {
+    goalValue = parseInt(getGoal());
+  }
+  let sentence = `Your goal : ${goalValue}`;
   userGoal.textContent = sentence;
 }
 
