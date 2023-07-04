@@ -70,8 +70,15 @@ function checkGoal() {
   }
 }
 
+class Transactions {
+  constructor(sum) {
+    this.transactionSum = sum;
+    this.date = new Date();
+  }
+}
+
 function formArray(addedMoney) {
-  transactionsArray.push(addedMoney);
+  transactionsArray.push(new Transactions(addedMoney));
   console.log(transactionsArray);
 }
 
