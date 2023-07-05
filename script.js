@@ -14,7 +14,7 @@ const getData = async () => {
   transactionsArray = jsonFile.transactionsList;
   changeMoneyScore();
   setGoal();
-  formTransactionDIV();
+  renderTransactions();
   console.log(transactionsArray);
 };
 
@@ -52,6 +52,7 @@ function addMoney() {
   if (totalMoney < goalValue || !isGoalReached) {
     checkGoal();
   }
+  addTransactionDIV();
   return totalMoney;
 }
 
@@ -92,18 +93,66 @@ function formArray(addedMoney) {
   console.log(transactionsArray);
 }
 
-function formTransactionDIV() {
-  const transactionDIV = document.getElementById("transaction_1_Box");
-  const transactionText = document.getElementById("transaction_1_Text");
-  // for (let i = 0; i < transactionsArray.length; i++) {
-  //   transactionText.value = transactionsArray[i];
-  // }
-  getTransaction = JSON.parse(JSON.stringify(transactionsArray[0]));
+function addTransactionDIV() {
+  const getLastElementOfArray = transactionsArray.length - 1;
+  console.log(getLastElementOfArray);
+  const transactionBoxes = document.getElementById("transactionBoxes");
+  transactionBoxes.insertAdjacentHTML(
+    "afterbegin",
+    `<div
+      id="transaction_${getLastElementOfArray}_Box"
+      style="
+    width: 250px;
+    height: 55px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+  "
+    >
+      <p id="transaction_${getLastElementOfArray}_Text"></p>
+    </div>`
+  );
+  const transactionText = document.getElementById(
+    `transaction_${getLastElementOfArray}_Text`
+  );
+  getTransaction = JSON.parse(
+    JSON.stringify(transactionsArray[getLastElementOfArray])
+  );
   formatDate = new Date(getTransaction.date);
   transactionText.innerHTML = `Transaction sum: ${
     getTransaction.transactionSum
   } </br>
   Date: ${formatDate.toLocaleString()}`;
+}
+
+function renderTransactions() {
+  const transactionBoxes = document.getElementById("transactionBoxes");
+  for (let i = 0; i < transactionsArray.length; i++) {
+    transactionBoxes.insertAdjacentHTML(
+      "afterbegin",
+      `<div
+        id="transaction_${i}_Box"
+        style="
+      width: 250px;
+      height: 55px;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      margin-top: 16px;
+    "
+      >
+        <p id="transaction_${i}_Text"></p>
+      </div>`
+    );
+    const transactionText = document.getElementById(`transaction_${i}_Text`);
+    getTransaction = JSON.parse(JSON.stringify(transactionsArray[i]));
+    formatDate = new Date(getTransaction.date);
+    transactionText.innerHTML = `Transaction sum: ${
+      getTransaction.transactionSum
+    } </br>
+    Date: ${formatDate.toLocaleString()}`;
+  }
 }
 
 /// add that transaction be shown on the screen
