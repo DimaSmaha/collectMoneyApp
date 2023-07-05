@@ -12,6 +12,7 @@ const getData = async () => {
   transactionsArray = jsonFile.transactionsList;
   changeMoneyScore();
   setGoal();
+  formTransactionDIV();
   console.log(transactionsArray);
 };
 
@@ -84,6 +85,20 @@ function formArray(addedMoney) {
     JSON.parse(JSON.stringify(new Transactions(addedMoney)))
   );
   console.log(transactionsArray);
+}
+
+function formTransactionDIV() {
+  const transactionDIV = document.getElementById("transaction_1_Box");
+  const transactionText = document.getElementById("transaction_1_Text");
+  // for (let i = 0; i < transactionsArray.length; i++) {
+  //   transactionText.value = transactionsArray[i];
+  // }
+  getTransaction = JSON.parse(JSON.stringify(transactionsArray[0]));
+  formatDate = new Date(getTransaction.date);
+  transactionText.innerHTML = `Transaction sum: ${
+    getTransaction.transactionSum
+  } </br>
+  Date: ${formatDate.toLocaleString()}`;
 }
 
 /// add that transaction be shown on the screen
