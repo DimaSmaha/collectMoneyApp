@@ -1,6 +1,7 @@
 let jsonFile;
 let totalMoney;
 let goalValue;
+let isGoalReached;
 let transactionsArray = [];
 
 const getData = async () => {
@@ -9,6 +10,7 @@ const getData = async () => {
   jsonFile = data;
   totalMoney = jsonFile.totalMoney;
   goalValue = jsonFile.goalValue;
+  isGoalReached = jsonFile.isGoalReached;
   transactionsArray = jsonFile.transactionsList;
   changeMoneyScore();
   setGoal();
@@ -47,7 +49,9 @@ function addMoney() {
   moneyInput.value = "";
   // updateJSONFile();
   formArray(moneyToBeAdded);
-  checkGoal();
+  if (totalMoney < goalValue || !isGoalReached) {
+    checkGoal();
+  }
   return totalMoney;
 }
 
@@ -70,6 +74,7 @@ function checkGoal() {
     setTimeout(function () {
       alert("congrats");
     }, 500);
+    isGoalReached = true;
   }
 }
 
