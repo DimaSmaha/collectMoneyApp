@@ -104,7 +104,9 @@ function addTransactionDIV() {
       class="transactionBox"
     >
       <p class="transactionText" id="transaction_${getLastElementOfArray}_Text"></p>
-      <button class="cancelTransactionBtn"><b>X</b></button>
+      <button class="cancelTransactionBtn" 
+        id="cancel_transaction_${getLastElementOfArray}" 
+        onclick="deleteTransaction()"><b>X</b></button>
       </div>`
   );
   const transactionText = document.getElementById(
@@ -129,7 +131,9 @@ function renderTransactions() {
         id="transaction_${i}_Box"
         class="transactionBox">
         <p class="transactionText" id="transaction_${i}_Text"></p>
-        <button class="cancelTransactionBtn"><b>X</b></button>
+        <button class="cancelTransactionBtn" 
+          id="cancel_transaction_${i}" 
+          onclick="deleteTransaction()"><b>X</b></button>
       </div>`
     );
     const transactionText = document.getElementById(`transaction_${i}_Text`);
@@ -141,6 +145,11 @@ function renderTransactions() {
     Date: ${formatDate.toLocaleString()}`;
   }
 }
+
+// function deleteTransaction() {
+//   const transactionBox = document.getElementById("transaction_0_Box");
+//   transactionBox.remove();
+// }
 
 /// add that transaction be shown on the screen
 
