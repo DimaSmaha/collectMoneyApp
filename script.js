@@ -106,7 +106,7 @@ function addTransactionDIV() {
       <p class="transactionText" id="transaction_${getLastElementOfArray}_Text"></p>
       <button class="cancelTransactionBtn" 
         id="cancel_transaction_${getLastElementOfArray}" 
-        onclick="deleteTransaction()"><b>X</b></button>
+        onclick="deleteTransaction(${getLastElementOfArray})"><b>X</b></button>
       </div>`
   );
   const transactionText = document.getElementById(
@@ -133,7 +133,7 @@ function renderTransactions() {
         <p class="transactionText" id="transaction_${i}_Text"></p>
         <button class="cancelTransactionBtn" 
           id="cancel_transaction_${i}" 
-          onclick="deleteTransaction()"><b>X</b></button>
+          onclick="deleteTransaction(${i})"><b>X</b></button>
       </div>`
     );
     const transactionText = document.getElementById(`transaction_${i}_Text`);
@@ -146,10 +146,12 @@ function renderTransactions() {
   }
 }
 
-// function deleteTransaction() {
-//   const transactionBox = document.getElementById("transaction_0_Box");
-//   transactionBox.remove();
-// }
+function deleteTransaction(transaction_id) {
+  const transactionBox = document.getElementById(`transaction_${transaction_id}_Box`);
+  transactionBox.remove();
+  totalMoney -= transactionsArray[transaction_id].transactionSum;
+  changeMoneyScore();
+}
 
 /// add that transaction be shown on the screen
 
