@@ -103,8 +103,9 @@ function addTransactionDIV() {
       id="transaction_${getLastElementOfArray}_Box"
       class="transactionBox"
     >
-      <p class="transaction" id="transaction_${getLastElementOfArray}_Text"></p>
-    </div>`
+      <p class="transactionText" id="transaction_${getLastElementOfArray}_Text"></p>
+      <button class="cancelTransactionBtn"><b>X</b></button>
+      </div>`
   );
   const transactionText = document.getElementById(
     `transaction_${getLastElementOfArray}_Text`
@@ -127,7 +128,8 @@ function renderTransactions() {
       `<div
         id="transaction_${i}_Box"
         class="transactionBox">
-        <p class="transaction" id="transaction_${i}_Text"></p>
+        <p class="transactionText" id="transaction_${i}_Text"></p>
+        <button class="cancelTransactionBtn"><b>X</b></button>
       </div>`
     );
     const transactionText = document.getElementById(`transaction_${i}_Text`);
