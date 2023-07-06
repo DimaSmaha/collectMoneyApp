@@ -101,16 +101,9 @@ function addTransactionDIV() {
     "afterbegin",
     `<div
       id="transaction_${getLastElementOfArray}_Box"
-      style="
-    width: 250px;
-    height: 55px;
-    border: 1px solid;
-    display: flex;
-    align-items: center;
-    margin-top: 16px;
-  "
+      class="transactionBox"
     >
-      <p id="transaction_${getLastElementOfArray}_Text"></p>
+      <p class="transaction" id="transaction_${getLastElementOfArray}_Text"></p>
     </div>`
   );
   const transactionText = document.getElementById(
@@ -133,16 +126,8 @@ function renderTransactions() {
       "afterbegin",
       `<div
         id="transaction_${i}_Box"
-        style="
-      width: 250px;
-      height: 55px;
-      border: 1px solid;
-      display: flex;
-      align-items: center;
-      margin-top: 16px;
-    "
-      >
-        <p id="transaction_${i}_Text"></p>
+        class="transactionBox">
+        <p class="transaction" id="transaction_${i}_Text"></p>
       </div>`
     );
     const transactionText = document.getElementById(`transaction_${i}_Text`);
