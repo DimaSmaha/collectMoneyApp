@@ -147,7 +147,9 @@ function renderTransactions() {
 }
 
 function deleteTransaction(transaction_id) {
-  const transactionBox = document.getElementById(`transaction_${transaction_id}_Box`);
+  const transactionBox = document.getElementById(
+    `transaction_${transaction_id}_Box`
+  );
   transactionBox.remove();
   totalMoney -= transactionsArray[transaction_id].transactionSum;
   changeMoneyScore();
