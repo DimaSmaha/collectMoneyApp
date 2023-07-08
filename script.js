@@ -153,6 +153,11 @@ function deleteTransaction(transaction_id) {
   transactionBox.remove();
   totalMoney -= transactionsArray[transaction_id].transactionSum;
   changeMoneyScore();
+  transactionsArray.splice(transaction_id, 1);
+  const transactionBoxes = document.getElementById("transactionBoxes");
+  transactionBoxes.replaceChildren();
+  renderTransactions();
+  console.log(transactionsArray);
 }
 
 /// add that transaction be shown on the screen
