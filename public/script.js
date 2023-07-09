@@ -5,7 +5,7 @@ let isGoalReached;
 let transactionsArray = [];
 
 const getData = async () => {
-  const response = await fetch("/data.json");
+  const response = await fetch("/public/data.json");
   const data = await response.json();
   jsonFile = data;
   totalMoney = jsonFile.totalMoney;
