@@ -8,10 +8,15 @@ const getData = async () => {
   const response = await fetch("/public/data.json");
   const data = await response.json();
   jsonFile = data;
-  totalMoney = jsonFile.totalMoney;
+  totalMoney = 0;
   goalValue = jsonFile.goalValue;
   isGoalReached = jsonFile.isGoalReached;
   transactionsArray = jsonFile.transactionsList;
+  if (jsonFile.hasOwnProperty("transactionsList")) {
+    for (i = 0; i < transactionsArray.length; i++) {
+      totalMoney += transactionsArray[i].transactionSum;
+    }
+  }
   changeMoneyScore();
   setGoal();
   renderTransactions();
