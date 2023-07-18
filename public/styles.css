@@ -16,3 +16,7 @@
   background-color: rgb(218, 30, 30);
   border: solid 2px;
 }
+.acceptEditTransactionBtn {
+  background-color: lawngreen;
+  border: solid 2px;
+}

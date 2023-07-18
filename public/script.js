@@ -109,6 +109,9 @@ function addTransactionDIV() {
       class="transactionBox"
     >
       <p class="transactionText" id="transaction_${getLastElementOfArray}_Text"></p>
+      <button class="editTransactionBtn" 
+        id="edit_transaction_${i}" 
+        onclick="editTransaction(${i})"><b>Edit</b></button>
       <button class="cancelTransactionBtn" 
         id="cancel_transaction_${getLastElementOfArray}" 
         onclick="deleteTransaction(${getLastElementOfArray})"><b>X</b></button>
@@ -136,6 +139,9 @@ function renderTransactions() {
         id="transaction_${i}_Box"
         class="transactionBox">
         <p class="transactionText" id="transaction_${i}_Text"></p>
+        <button class="editTransactionBtn" 
+          id="edit_transaction_${i}" 
+          onclick="editTransaction(${i})"><b>Edit</b></button>
         <button class="cancelTransactionBtn" 
           id="cancel_transaction_${i}" 
           onclick="deleteTransaction(${i})"><b>X</b></button>
@@ -163,6 +169,57 @@ function deleteTransaction(transaction_id) {
   transactionBoxes.replaceChildren();
   renderTransactions();
   console.log(transactionsArray);
+}
+
+function editTransaction(transaction_id) {
+  const transactionBox = document.getElementById(
+    `transaction_${transaction_id}_Box`
+  );
+  setTransactionBoxChildsDisplay(transaction_id, "none");
+
+  transactionBox.insertAdjacentHTML(
+    "afterbegin",
+    `<input type="number" id="editMoneyInput_${transaction_id}"/>
+    <button class="acceptEditTransactionBtn" 
+      id="accept_edit_transaction_${transaction_id}" 
+      onclick="deleteTransaction(${transaction_id})"><b>V</b></button>
+    <button class="cancelTransactionBtn" 
+      id="decline_edit_transaction_${transaction_id}" 
+      onclick="setTransactionBoxChildsDisplay(${transaction_id},'flex'); 
+      setTransactionBoxEditElementsDisplay(${transaction_id},'none')"><b>X</b></button>`
+  );
+}
+
+function setTransactionBoxChildsDisplay(transaction_id, display) {
+  const transactionText = document.getElementById(
+    `transaction_${transaction_id}_Text`
+  );
+  const transactionEdit = document.getElementById(
+    `edit_transaction_${transaction_id}`
+  );
+  const transactionCancel = document.getElementById(
+    `cancel_transaction_${transaction_id}`
+  );
+
+  transactionText.style.display = display;
+  transactionEdit.style.display = display;
+  transactionCancel.style.display = display;
+}
+
+function setTransactionBoxEditElementsDisplay(transaction_id, display) {
+  const transactionEditInput = document.getElementById(
+    `editMoneyInput_${transaction_id}`
+  );
+  const transactionEditAccept = document.getElementById(
+    `accept_edit_transaction_${transaction_id}`
+  );
+  const transactionEditDecline = document.getElementById(
+    `decline_edit_transaction_${transaction_id}`
+  );
+
+  transactionEditInput.style.display = display;
+  transactionEditAccept.style.display = display;
+  transactionEditDecline.style.display = display;
 }
 
 /// add that transaction be shown on the screen
