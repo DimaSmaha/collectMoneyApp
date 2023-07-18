@@ -23,6 +23,13 @@ const getData = async () => {
   console.log(transactionsArray);
 };
 
+function recalculateMoneyScore() {
+  totalMoney = 0;
+  for (i = 0; i < transactionsArray.length; i++) {
+    totalMoney += transactionsArray[i].transactionSum;
+  }
+}
+
 function changeMoneyScore() {
   let yourMoneyScore = document.getElementById("yourMoneyScore");
   let sentence = `Your money : ${totalMoney}`;
@@ -182,7 +189,7 @@ function editTransaction(transaction_id) {
     `<input type="number" id="editMoneyInput_${transaction_id}"/>
     <button class="acceptEditTransactionBtn" 
       id="accept_edit_transaction_${transaction_id}" 
-      onclick="deleteTransaction(${transaction_id})"><b>V</b></button>
+      onclick="acceptEditTransaction(${transaction_id})"><b>V</b></button>
     <button class="cancelTransactionBtn" 
       id="decline_edit_transaction_${transaction_id}" 
       onclick="setTransactionBoxChildsDisplay(${transaction_id},'flex'); 
@@ -220,6 +227,20 @@ function setTransactionBoxEditElementsDisplay(transaction_id, display) {
   transactionEditInput.style.display = display;
   transactionEditAccept.style.display = display;
   transactionEditDecline.style.display = display;
+}
+
+function acceptEditTransaction(transaction_id) {
+  const transactionEditInput = document.getElementById(
+    `editMoneyInput_${transaction_id}`
+  );
+
+  const editedSum = parseInt(transactionEditInput.value);
+  transactionsArray[transaction_id].transactionSum = editedSum;
+  const transactionBoxes = document.getElementById("transactionBoxes");
+  transactionBoxes.replaceChildren();
+  renderTransactions();
+  recalculateMoneyScore();
+  changeMoneyScore();
 }
 
 /// add that transaction be shown on the screen
