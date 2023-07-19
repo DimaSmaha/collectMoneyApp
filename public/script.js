@@ -189,7 +189,7 @@ function editTransaction(transaction_id) {
 
   transactionBox.insertAdjacentHTML(
     "afterbegin",
-    `<input type="number" id="editMoneyInput_${transaction_id}"/>
+    `<input type="number" id="editMoneyInput_${transaction_id}" placeholder="edit your transaction"/>
     <button class="acceptEditTransactionBtn" 
       id="accept_edit_transaction_${transaction_id}" 
       onclick="acceptEditTransaction(${transaction_id})"><b>V</b></button>
@@ -265,7 +265,7 @@ function editGoal() {
   editGoalBtn.style.display = "none";
   goalBox.insertAdjacentHTML(
     "beforeend",
-    `<input type="number" id="editGoalInput"/>
+    `<input type="number" id="editGoalInput" placeholder="edit your goal"/>
     <button class="acceptEditTransactionBtn" 
       id="accept_edit_goal" 
       onclick="acceptEditGoal"><b>V</b></button>
