@@ -20,3 +20,13 @@
   background-color: lawngreen;
   border: solid 2px;
 }
+#progressBarParent {
+  width: 250px;
+  height: 20px;
+  border: 1px solid;
+}
+#progressBar {
+  width: 250px;
+  height: 20px;
+  background-color: lawngreen;
+}

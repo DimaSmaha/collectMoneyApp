@@ -20,6 +20,7 @@ const getData = async () => {
   changeMoneyScore();
   setGoal();
   renderTransactions();
+  setProgressBar();
   console.log(transactionsArray);
 };
 
@@ -65,6 +66,7 @@ function addMoney() {
     checkGoal();
   }
   addTransactionDIV();
+  setProgressBar();
   return totalMoney;
 }
 
@@ -175,6 +177,7 @@ function deleteTransaction(transaction_id) {
   const transactionBoxes = document.getElementById("transactionBoxes");
   transactionBoxes.replaceChildren();
   renderTransactions();
+  setProgressBar();
   console.log(transactionsArray);
 }
 
@@ -241,6 +244,18 @@ function acceptEditTransaction(transaction_id) {
   renderTransactions();
   recalculateMoneyScore();
   changeMoneyScore();
+  setProgressBar();
+}
+
+function setProgressBar() {
+  const progressBar = document.getElementById("progressBar");
+  const progressBarPercentage = (totalMoney / goalValue) * 100;
+  if (totalMoney <= goalValue) {
+    progressBar.style.width = `${progressBarPercentage}%`;
+  }
+  if (totalMoney >= goalValue) {
+    progressBar.style.width = "100%";
+  }
 }
 
 /// add that transaction be shown on the screen
