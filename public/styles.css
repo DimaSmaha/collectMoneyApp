@@ -30,3 +30,11 @@
   height: 20px;
   background-color: lawngreen;
 }
+#goalBox {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+#yourGoal {
+  margin-right: 16px;
+}
