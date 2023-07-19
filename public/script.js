@@ -236,15 +236,16 @@ function acceptEditTransaction(transaction_id) {
   const transactionEditInput = document.getElementById(
     `editMoneyInput_${transaction_id}`
   );
-
   const editedSum = parseInt(transactionEditInput.value);
-  transactionsArray[transaction_id].transactionSum = editedSum;
-  const transactionBoxes = document.getElementById("transactionBoxes");
-  transactionBoxes.replaceChildren();
-  renderTransactions();
-  recalculateMoneyScore();
-  changeMoneyScore();
-  setProgressBar();
+  if (isNaN(editedSum) == false) {
+    transactionsArray[transaction_id].transactionSum = editedSum;
+    const transactionBoxes = document.getElementById("transactionBoxes");
+    transactionBoxes.replaceChildren();
+    renderTransactions();
+    recalculateMoneyScore();
+    changeMoneyScore();
+    setProgressBar();
+  }
 }
 
 function setProgressBar() {
