@@ -117,8 +117,8 @@ function addTransactionDIV() {
     >
       <p class="transactionText" id="transaction_${getLastElementOfArray}_Text"></p>
       <button class="editTransactionBtn" 
-        id="edit_transaction_${i}" 
-        onclick="editTransaction(${i})"><b>Edit</b></button>
+        id="edit_transaction_${getLastElementOfArray}" 
+        onclick="editTransaction(${getLastElementOfArray})"><b>Edit</b></button>
       <button class="cancelTransactionBtn" 
         id="cancel_transaction_${getLastElementOfArray}" 
         onclick="deleteTransaction(${getLastElementOfArray})"><b>X</b></button>
