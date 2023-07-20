@@ -237,7 +237,7 @@ function acceptEditTransaction(transaction_id) {
     `editMoneyInput_${transaction_id}`
   );
   const editedSum = parseInt(transactionEditInput.value);
-  if (isNaN(editedSum) == false) {
+  if (isNaN(editedSum) == false && editedSum > 0) {
     transactionsArray[transaction_id].transactionSum = editedSum;
     const transactionBoxes = document.getElementById("transactionBoxes");
     transactionBoxes.replaceChildren();
@@ -252,6 +252,7 @@ function acceptEditTransaction(transaction_id) {
       isGoalReached = false;
     }
   }
+  transactionEditInput.value = "";
 }
 
 function setProgressBar() {
