@@ -12,11 +12,11 @@
 .transactionText {
   align-items: center;
 }
-.cancelTransactionBtn {
+.cancelBtn {
   background-color: rgb(218, 30, 30);
   border: solid 2px;
 }
-.acceptEditTransactionBtn {
+.acceptBtn {
   background-color: lawngreen;
   border: solid 2px;
 }
