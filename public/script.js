@@ -245,6 +245,12 @@ function acceptEditTransaction(transaction_id) {
     recalculateMoneyScore();
     changeMoneyScore();
     setProgressBar();
+    if (totalMoney < goalValue || !isGoalReached) {
+      checkGoal();
+    }
+    if (totalMoney < goalValue) {
+      isGoalReached = false;
+    }
   }
 }
 
