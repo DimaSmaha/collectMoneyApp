@@ -186,7 +186,6 @@ function editTransaction(transaction_id) {
     `transaction_${transaction_id}_Box`
   );
   setTransactionBoxChildsDisplay(transaction_id, "none");
-
   transactionBox.insertAdjacentHTML(
     "afterbegin",
     `<input type="number" id="editMoneyInput_${transaction_id}" placeholder="edit your transaction"/>
@@ -275,7 +274,7 @@ function editGoal() {
     `<input type="number" id="editGoalInput" placeholder="edit your goal"/>
     <button class="acceptBtn" 
       id="accept_edit_goal" 
-      onclick="acceptEditGoal"><b>V</b></button>
+      onclick="acceptEditGoal()"><b>V</b></button>
     <button class="cancelBtn" 
       id="cancel_edit_goal" 
       onclick="setEditGoalBtnDisplay('flex'); 
@@ -296,6 +295,19 @@ function removeEditGoalElementsDisplay() {
   editGoalInput.remove();
   acceptEditGoal.remove();
   cancelEditGoal.remove();
+}
+
+function acceptEditGoal() {
+  const editGoalInput = document.getElementById("editGoalInput");
+  const editedGoal = parseInt(editGoalInput.value);
+  if (isNaN(editedGoal) == false && editedGoal > 0) {
+    goalValue = editedGoal;
+    removeEditGoalElementsDisplay();
+    setEditGoalBtnDisplay("flex");
+    setProgressBar();
+    setGoal();
+  }
+  editGoalInput.value = "";
 }
 
 /// add that transaction be shown on the screen
