@@ -186,7 +186,6 @@ function editTransaction(transaction_id) {
     `transaction_${transaction_id}_Box`
   );
   setTransactionBoxChildsDisplay(transaction_id, "none");
-
   transactionBox.insertAdjacentHTML(
     "afterbegin",
     `<input type="number" id="editMoneyInput_${transaction_id}" placeholder="edit your transaction"/>
@@ -290,8 +289,6 @@ function removeEditGoalElementsDisplay() {
   acceptEditGoal.remove();
   cancelEditGoal.remove();
 }
-
-/// add that transaction be shown on the screen
 
 // async function updateJSONFile() {
 //   jsonFile.totalMoney = totalMoney;
