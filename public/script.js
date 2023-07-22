@@ -121,7 +121,7 @@ function addTransactionDIV() {
       <button class="editTransactionBtn" 
         id="edit_transaction_${getLastElementOfArray}" 
         onclick="editTransaction(${getLastElementOfArray})"><b>Edit</b></button>
-      <button class="cancelTransactionBtn" 
+      <button class="cancelBtn" 
         id="cancel_transaction_${getLastElementOfArray}" 
         onclick="deleteTransaction(${getLastElementOfArray})"><b>X</b></button>
       </div>`
@@ -151,7 +151,7 @@ function renderTransactions() {
         <button class="editTransactionBtn" 
           id="edit_transaction_${i}" 
           onclick="editTransaction(${i})"><b>Edit</b></button>
-        <button class="cancelTransactionBtn" 
+        <button class="cancelBtn" 
           id="cancel_transaction_${i}" 
           onclick="deleteTransaction(${i})"><b>X</b></button>
       </div>`
@@ -189,10 +189,10 @@ function editTransaction(transaction_id) {
   transactionBox.insertAdjacentHTML(
     "afterbegin",
     `<input type="number" id="editMoneyInput_${transaction_id}" placeholder="edit your transaction"/>
-    <button class="acceptEditTransactionBtn" 
+    <button class="acceptBtn" 
       id="accept_edit_transaction_${transaction_id}" 
       onclick="acceptEditTransaction(${transaction_id})"><b>V</b></button>
-    <button class="cancelTransactionBtn" 
+    <button class="cancelBtn" 
       id="decline_edit_transaction_${transaction_id}" 
       onclick="setTransactionBoxChildsDisplay(${transaction_id},'flex'); 
       setTransactionBoxEditElementsDisplay(${transaction_id},'none')"><b>X</b></button>`
@@ -236,7 +236,7 @@ function acceptEditTransaction(transaction_id) {
     `editMoneyInput_${transaction_id}`
   );
   const editedSum = parseInt(transactionEditInput.value);
-  if (isNaN(editedSum) == false) {
+  if (isNaN(editedSum) == false && editedSum > 0) {
     transactionsArray[transaction_id].transactionSum = editedSum;
     const transactionBoxes = document.getElementById("transactionBoxes");
     transactionBoxes.replaceChildren();
@@ -244,7 +244,14 @@ function acceptEditTransaction(transaction_id) {
     recalculateMoneyScore();
     changeMoneyScore();
     setProgressBar();
+    if (totalMoney < goalValue || !isGoalReached) {
+      checkGoal();
+    }
+    if (totalMoney < goalValue) {
+      isGoalReached = false;
+    }
   }
+  transactionEditInput.value = "";
 }
 
 function setProgressBar() {
@@ -265,10 +272,10 @@ function editGoal() {
   goalBox.insertAdjacentHTML(
     "beforeend",
     `<input type="number" id="editGoalInput" placeholder="edit your goal"/>
-    <button class="acceptEditTransactionBtn" 
+    <button class="acceptBtn" 
       id="accept_edit_goal" 
-      onclick="acceptEditGoal"><b>V</b></button>
-    <button class="cancelTransactionBtn" 
+      onclick="acceptEditGoal()"><b>V</b></button>
+    <button class="cancelBtn" 
       id="cancel_edit_goal" 
       onclick="setEditGoalBtnDisplay('flex'); 
       removeEditGoalElementsDisplay()"><b>X</b></button>`
@@ -289,6 +296,8 @@ function removeEditGoalElementsDisplay() {
   acceptEditGoal.remove();
   cancelEditGoal.remove();
 }
+
+/// add that transaction be shown on the screen
 
 // async function updateJSONFile() {
 //   jsonFile.totalMoney = totalMoney;
