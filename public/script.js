@@ -297,6 +297,19 @@ function removeEditGoalElementsDisplay() {
   cancelEditGoal.remove();
 }
 
+function acceptEditGoal() {
+  const editGoalInput = document.getElementById("editGoalInput");
+  const editedGoal = parseInt(editGoalInput.value);
+  if (isNaN(editedGoal) == false && editedGoal > 0) {
+    goalValue = editedGoal;
+    removeEditGoalElementsDisplay();
+    setEditGoalBtnDisplay("flex");
+    setProgressBar();
+    setGoal();
+  }
+  editGoalInput.value = "";
+}
+
 // async function updateJSONFile() {
 //   jsonFile.totalMoney = totalMoney;
 //   const jsonString = JSON.stringify(jsonFile);
