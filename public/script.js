@@ -321,9 +321,6 @@ function checkAchievements() {
     const achievementOne = document.getElementById("achievement_1");
     achievementOne.style.display = "block";
     achievementOneComplete = true;
-    return setTimeout(function () {
-      achievementOne.style.display = "none";
-    }, 3000);
   }
 }
 

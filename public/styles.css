@@ -71,7 +71,17 @@
     opacity: 1;
   }
 }
-#achievement_1 {
+@keyframes smooth-disappear {
+  from {
+    bottom: 20px;
+    opacity: 1;
+  }
+  to {
+    bottom: -100%;
+    opacity: 0;
+  }
+}
+.achievement {
   display: none;
   background-color: white;
   padding: 20px;
@@ -81,5 +91,9 @@
   left: 50%;
   transform: translateX(-50%);
   border-radius: 10px;
-  animation: smooth-appear 0.7s ease forwards;
+  animation: smooth-appear 1s ease forwards,
+    smooth-disappear 1s ease forwards 3s;
+}
+#achievement_1 {
+  display: none;
 }
