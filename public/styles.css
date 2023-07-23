@@ -47,3 +47,39 @@
 #cancel_edit_goal {
   margin-right: 8px;
 }
+.achievement {
+  width: 250px;
+  height: 55px;
+  border: 1px solid;
+  align-items: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-top: 16px;
+}
+.achievement_name {
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.achievement_text {
+  margin-top: 4px;
+  align-items: center;
+}
+@keyframes smooth-appear {
+  to {
+    bottom: 20px;
+    opacity: 1;
+  }
+}
+#achievement_1 {
+  display: none;
+  background-color: white;
+  padding: 20px;
+  position: fixed;
+  bottom: -100%;
+  opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  animation: smooth-appear 0.7s ease forwards;
+}

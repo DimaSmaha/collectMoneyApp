@@ -67,6 +67,7 @@ function addMoney() {
   }
   addTransactionDIV();
   setProgressBar();
+  checkAchievements();
   return totalMoney;
 }
 
@@ -308,6 +309,22 @@ function acceptEditGoal() {
     setGoal();
   }
   editGoalInput.value = "";
+}
+
+let achievementOneComplete = false;
+function checkAchievements() {
+  //Achievement One, the user made 777 transaction
+  if (
+    transactionsArray[transactionsArray.length - 1].transactionSum == 777 &&
+    achievementOneComplete == false
+  ) {
+    const achievementOne = document.getElementById("achievement_1");
+    achievementOne.style.display = "block";
+    achievementOneComplete = true;
+    return setTimeout(function () {
+      achievementOne.style.display = "none";
+    }, 3000);
+  }
 }
 
 // async function updateJSONFile() {
