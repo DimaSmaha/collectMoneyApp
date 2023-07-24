@@ -84,7 +84,7 @@
 .achievement {
   display: none;
   background-color: white;
-  padding: 20px;
+  padding: 16px;
   position: fixed;
   bottom: -100%;
   opacity: 0;
@@ -93,4 +93,8 @@
   border-radius: 10px;
   animation: smooth-appear 1s ease forwards,
     smooth-disappear 1s ease forwards 3s;
+}
+.achievementWithMoreText {
+  padding-top: 8px;
+  padding-bottom: 24px;
 }
