@@ -17,8 +17,11 @@ const getData = async () => {
       totalMoney += transactionsArray[i].transactionSum;
     }
   }
+  checkTitleAndDescriptionExistence();
   changeMoneyScore();
-  setGoal();
+  if (goalValue > 0) {
+    setGoal();
+  }
   renderTransactions();
   setProgressBar();
   console.log(transactionsArray);
@@ -72,14 +75,15 @@ function addMoney() {
 }
 
 function getGoal() {
-  goalValue = prompt("Add Your Goal");
+  const goalSumValue = parseInt(document.getElementById("inputField3").value);
+  goalValue = goalSumValue;
   return goalValue;
 }
 
 function setGoal() {
   let userGoal = document.getElementById("yourGoal");
   if (goalValue == 0 || goalValue == undefined) {
-    goalValue = parseInt(getGoal());
+    goalValue = getGoal();
   }
   let sentence = `Your goal : ${goalValue}`;
   userGoal.textContent = sentence;
@@ -332,6 +336,40 @@ function checkAchievements() {
     achievementTwo.style.display = "block";
     achievementTwoComplete = true;
   }
+}
+function checkTitleAndDescriptionExistence() {
+  const sloikTitle = document.getElementById("sloikTitle");
+  const sloikDescription = document.getElementById("sloikDescription");
+  if (
+    sloikTitle.textContent.trim().length > 0 &&
+    sloikDescription.textContent.trim().length > 0
+  ) {
+    hidePopup();
+  }
+}
+
+function submitForm() {
+  const sloikTitle = document.getElementById("sloikTitle");
+  const sloikDescription = document.getElementById("sloikDescription");
+  const titleValue = document.getElementById("inputField1").value;
+  const descriptionValue = document.getElementById("inputField2").value;
+  const goalSumValue = document.getElementById("inputField3").value;
+  if (
+    titleValue != "" &&
+    descriptionValue != "" &&
+    isNaN(goalSumValue) == false &&
+    goalSumValue > 0
+  ) {
+    sloikTitle.textContent = titleValue;
+    sloikDescription.textContent = descriptionValue;
+    setGoal();
+    hidePopup();
+  }
+}
+
+function hidePopup() {
+  const popup = document.getElementById("popupContainer");
+  popup.style.display = "none";
 }
 
 // async function updateJSONFile() {

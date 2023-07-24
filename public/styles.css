@@ -98,3 +98,40 @@
   padding-top: 8px;
   padding-bottom: 24px;
 }
+
+#popupContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popupContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#inputField1,
+#inputField2,
+#inputField3 {
+  width: max-content;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#submitBtn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: max-content;
+  padding: 10px;
+  margin-bottom: 10px;
+}

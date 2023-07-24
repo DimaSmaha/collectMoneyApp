@@ -9,9 +9,18 @@
     <script src="/public/script.js"></script>
   </head>
   <body onload="getData();">
+    <div id="popupContainer" style="display: block">
+      <div class="popupContent">
+        <h2>Create a sloik</h2>
+        <input type="text" id="inputField1" placeholder="Title*" />
+        <input type="text" id="inputField2" placeholder="Description*" />
+        <input type="number" id="inputField3" placeholder="Goal sum*" />
+        <button id="submitBtn" onclick="submitForm()">Submit</button>
+      </div>
+    </div>
     <div>
-      <h2 id="saveMoneyGoal"></h2>
-      <p id="saveMoneyGoalDescription"></p>
+      <h2 id="sloikTitle">House</h2>
+      <p id="sloikDescription">Collecting for a house</p>
     </div>
     <div>
       <h1 id="yourMoneyScore">Your money :</h1>
