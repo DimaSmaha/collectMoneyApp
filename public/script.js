@@ -17,7 +17,7 @@ const getData = async () => {
       totalMoney += transactionsArray[i].transactionSum;
     }
   }
-  checkTitleAndDescriptionExistence();
+  checkTitleDescriptionAndGoalExistence();
   changeMoneyScore();
   if (goalValue > 0) {
     setGoal();
@@ -337,14 +337,15 @@ function checkAchievements() {
     achievementTwoComplete = true;
   }
 }
-function checkTitleAndDescriptionExistence() {
+function checkTitleDescriptionAndGoalExistence() {
   const sloikTitle = document.getElementById("sloikTitle");
   const sloikDescription = document.getElementById("sloikDescription");
   if (
-    sloikTitle.textContent.trim().length > 0 &&
-    sloikDescription.textContent.trim().length > 0
+    sloikTitle.textContent.trim().length == 0 ||
+    sloikDescription.textContent.trim().length == 0 ||
+    goalValue == 0
   ) {
-    hidePopup();
+    showPopup();
   }
 }
 
@@ -365,6 +366,11 @@ function submitForm() {
     setGoal();
     hidePopup();
   }
+}
+
+function showPopup() {
+  const popup = document.getElementById("popupContainer");
+  popup.style.display = "block";
 }
 
 function hidePopup() {
