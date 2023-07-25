@@ -406,7 +406,7 @@ function showRandomCommendation() {
     "Patient and determined in saving for the future.",
     "Your commitment to your goals is inspiring.",
     "Inspiring others with your saving habits.",
-    "Keep pushing forward – your efforts will pay off.",
+    "Keep pushing forward - your efforts will pay off.",
     "Your efforts are making a difference, keep going!",
     "Setting a great example of financial wisdom.",
     "You've got this! Stay focused and stay positive.",
