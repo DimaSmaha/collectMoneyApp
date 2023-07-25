@@ -134,3 +134,7 @@
 #commendation {
   display: none;
 }
+.navbutton {
+  position: absolute;
+  left: 75%;
+}
