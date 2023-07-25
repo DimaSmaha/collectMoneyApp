@@ -18,6 +18,7 @@ const getData = async () => {
     }
   }
   checkTitleDescriptionAndGoalExistence();
+  checkGoalSumExistence();
   changeMoneyScore();
   if (goalValue > 0) {
     setGoal();
@@ -337,15 +338,22 @@ function checkAchievements() {
     achievementTwoComplete = true;
   }
 }
+
 function checkTitleDescriptionAndGoalExistence() {
   const sloikTitle = document.getElementById("sloikTitle");
   const sloikDescription = document.getElementById("sloikDescription");
   if (
     sloikTitle.textContent.trim().length == 0 ||
-    sloikDescription.textContent.trim().length == 0 ||
-    goalValue == 0
+    sloikDescription.textContent.trim().length == 0
   ) {
     showPopup();
+  }
+}
+
+function checkGoalSumExistence() {
+  const goalSumInput = document.getElementById("inputField3");
+  if (goalValue != 0 || goalValue == undefined) {
+    goalSumInput.remove();
   }
 }
 
@@ -354,16 +362,24 @@ function submitForm() {
   const sloikDescription = document.getElementById("sloikDescription");
   const titleValue = document.getElementById("inputField1").value;
   const descriptionValue = document.getElementById("inputField2").value;
-  const goalSumValue = document.getElementById("inputField3").value;
-  if (
-    titleValue != "" &&
-    descriptionValue != "" &&
-    isNaN(goalSumValue) == false &&
-    goalSumValue > 0
-  ) {
+  const goalSum = document.getElementById("inputField3");
+  if (goalSum != null) {
+    const goalSumValue = document.getElementById("inputField3").value;
+    if (
+      titleValue != "" &&
+      descriptionValue != "" &&
+      isNaN(goalSumValue) == false &&
+      goalSumValue > 0
+    ) {
+      sloikTitle.textContent = titleValue;
+      sloikDescription.textContent = descriptionValue;
+      setGoal();
+      setProgressBar();
+      hidePopup();
+    }
+  } else {
     sloikTitle.textContent = titleValue;
     sloikDescription.textContent = descriptionValue;
-    setGoal();
     hidePopup();
   }
 }
