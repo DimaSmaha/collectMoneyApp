@@ -98,7 +98,6 @@
   padding-top: 8px;
   padding-bottom: 24px;
 }
-
 #popupContainer {
   display: none;
   justify-content: center;
@@ -110,13 +109,11 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .popupContent {
   background-color: white;
   padding: 20px;
   border-radius: 5px;
 }
-
 #inputField1,
 #inputField2,
 #inputField3 {
@@ -124,7 +121,6 @@
   padding: 10px;
   margin-bottom: 10px;
 }
-
 #submitBtn {
   background-color: #4caf50;
   color: white;
@@ -134,4 +130,7 @@
   width: max-content;
   padding: 10px;
   margin-bottom: 10px;
+}
+#commendation {
+  display: none;
 }

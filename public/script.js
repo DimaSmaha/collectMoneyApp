@@ -25,6 +25,7 @@ const getData = async () => {
   }
   renderTransactions();
   setProgressBar();
+  showRandomCommendation();
   console.log(transactionsArray);
 };
 
@@ -72,6 +73,7 @@ function addMoney() {
   addTransactionDIV();
   setProgressBar();
   checkAchievements();
+  showRandomCommendation();
   return totalMoney;
 }
 
@@ -392,6 +394,34 @@ function showPopup() {
 function hidePopup() {
   const popup = document.getElementById("popupContainer");
   popup.style.display = "none";
+}
+
+function showRandomCommendation() {
+  const commendation = document.getElementById("commendation");
+  const commendationText = document.getElementById("commendation_text");
+  const commendationsList = [
+    "Your dedication to collecting money is commendable.",
+    "I admire your perseverance despite the challenges.",
+    "I'm impressed by your perseverance despite the challenges.",
+    "Patient and determined in saving for the future.",
+    "Your commitment to your goals is inspiring.",
+    "Inspiring others with your saving habits.",
+    "Keep pushing forward – your efforts will pay off.",
+    "Your efforts are making a difference, keep going!",
+    "Setting a great example of financial wisdom.",
+    "You've got this! Stay focused and stay positive.",
+  ];
+  let getRandomChar = Math.floor(Math.random() * commendationsList.length);
+  commendation.style.display = "block";
+  commendationText.textContent = commendationsList[getRandomChar];
+  if (transactionsArray.length == 0) {
+    commendation.style.display = "none";
+  }
+  if (transactionsArray.length == 1) {
+    commendation.style.display = "block";
+    commendationText.textContent =
+      "Its your first transaction. Great job you have started your journey";
+  }
 }
 
 // async function updateJSONFile() {
