@@ -114,6 +114,7 @@
   padding: 20px;
   border-radius: 5px;
 }
+
 #inputField1,
 #inputField2,
 #inputField3 {
@@ -121,6 +122,7 @@
   padding: 10px;
   margin-bottom: 10px;
 }
+
 #submitBtn {
   background-color: #4caf50;
   color: white;
@@ -131,9 +133,11 @@
   padding: 10px;
   margin-bottom: 10px;
 }
+
 #commendation {
   display: none;
 }
+
 .navbutton {
   position: absolute;
   left: 75%;
