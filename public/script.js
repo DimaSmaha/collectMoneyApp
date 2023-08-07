@@ -4,15 +4,63 @@ let goalValue;
 let isGoalReached;
 let transactionsArray = [];
 
+function setLocalStorageItems() {
+  localStorage.setItem("totalMoney", JSON.stringify(totalMoney));
+  localStorage.setItem("goalValue", JSON.stringify(goalValue));
+  localStorage.setItem("isGoalReached", JSON.stringify(isGoalReached));
+  localStorage.setItem("transactionsList", JSON.stringify(transactionsArray));
+}
+
+function setTestingData() {
+  localStorage.setItem("totalMoney", JSON.stringify(876));
+  localStorage.setItem("goalValue", JSON.stringify(5000));
+  localStorage.setItem("isGoalReached", JSON.stringify(false));
+  localStorage.setItem(
+    "transactionsList",
+    JSON.stringify([
+      { transactionSum: 654, date: "2023-07-04T18:03:44.492Z" },
+      { transactionSum: 213, date: "2023-07-04T18:04:44.492Z" },
+    ])
+  );
+}
+
+// const getData = async () => {
+//   const response = await fetch("/public/data.json");
+//   const data = await response.json();
+//   jsonFile = data;
+//   totalMoney = 0;
+//   goalValue = jsonFile.goalValue;
+//   isGoalReached = jsonFile.isGoalReached;
+//   transactionsArray = jsonFile.transactionsList;
+//   if (jsonFile.hasOwnProperty("transactionsList")) {
+//     for (i = 0; i < transactionsArray.length; i++) {
+//       totalMoney += transactionsArray[i].transactionSum;
+//     }
+//   }
+//   checkTitleDescriptionAndGoalExistence();
+//   checkGoalSumExistence();
+//   changeMoneyScore();
+//   if (goalValue > 0) {
+//     setGoal();
+//   }
+//   renderTransactions();
+//   setProgressBar();
+//   showRandomCommendation();
+//   console.log(transactionsArray);
+// };
+
 const getData = async () => {
-  const response = await fetch("/public/data.json");
-  const data = await response.json();
-  jsonFile = data;
+  localStorage.clear();
   totalMoney = 0;
-  goalValue = jsonFile.goalValue;
-  isGoalReached = jsonFile.isGoalReached;
-  transactionsArray = jsonFile.transactionsList;
-  if (jsonFile.hasOwnProperty("transactionsList")) {
+  goalValue = 0;
+  isGoalReached = false;
+  setTestingData();
+  if (localStorage.length != 0) {
+    goalValue = JSON.parse(localStorage.getItem("goalValue"));
+    isGoalReached = JSON.parse(localStorage.getItem("isGoalReached"));
+    transactionsArray = JSON.parse(localStorage.getItem("transactionsList"));
+  }
+  if (transactionsArray != null) {
     for (i = 0; i < transactionsArray.length; i++) {
       totalMoney += transactionsArray[i].transactionSum;
     }
@@ -27,6 +75,7 @@ const getData = async () => {
   setProgressBar();
   showRandomCommendation();
   console.log(transactionsArray);
+  setLocalStorageItems();
 };
 
 function recalculateMoneyScore() {
@@ -74,6 +123,7 @@ function addMoney() {
   setProgressBar();
   checkAchievements();
   showRandomCommendation();
+  setLocalStorageItems();
   return totalMoney;
 }
 
@@ -85,8 +135,9 @@ function getGoal() {
 
 function setGoal() {
   let userGoal = document.getElementById("yourGoal");
-  if (goalValue == 0 || goalValue == undefined) {
+  if (goalValue == 0 || goalValue == undefined || goalValue == null) {
     goalValue = getGoal();
+    setLocalStorageItems();
   }
   let sentence = `Your goal : ${goalValue}`;
   userGoal.textContent = sentence;
@@ -112,6 +163,7 @@ function formArray(addedMoney) {
   transactionsArray.push(
     JSON.parse(JSON.stringify(new Transactions(addedMoney)))
   );
+  setLocalStorageItems();
   console.log(transactionsArray);
 }
 
@@ -186,6 +238,7 @@ function deleteTransaction(transaction_id) {
   transactionBoxes.replaceChildren();
   renderTransactions();
   setProgressBar();
+  setLocalStorageItems();
   console.log(transactionsArray);
 }
 
@@ -252,6 +305,7 @@ function acceptEditTransaction(transaction_id) {
     recalculateMoneyScore();
     changeMoneyScore();
     setProgressBar();
+    setLocalStorageItems();
     if (totalMoney < goalValue || !isGoalReached) {
       checkGoal();
     }
@@ -314,6 +368,7 @@ function acceptEditGoal() {
     setEditGoalBtnDisplay("flex");
     setProgressBar();
     setGoal();
+    setLocalStorageItems();
   }
   editGoalInput.value = "";
 }
@@ -378,6 +433,7 @@ function submitForm() {
       setGoal();
       setProgressBar();
       hidePopup();
+      setLocalStorageItems();
     }
   } else {
     sloikTitle.textContent = titleValue;
