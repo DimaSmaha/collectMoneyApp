@@ -1,10 +1,21 @@
 let jsonFile;
-let totalMoney;
-let goalValue;
-let isGoalReached;
+let totalMoney = 0;
+let goalValue = 0;
+let isGoalReached = false;
 let transactionsArray = [];
 
+function setLocalStorageSloikDescription() {
+  const sloikTitle = document.getElementById("sloikTitle");
+  const sloikDescription = document.getElementById("sloikDescription");
+  localStorage.setItem("sloikTitle", JSON.stringify(sloikTitle.textContent));
+  localStorage.setItem(
+    "sloikDescription",
+    JSON.stringify(sloikDescription.textContent)
+  );
+}
+
 function setLocalStorageItems() {
+  setLocalStorageSloikDescription();
   localStorage.setItem("totalMoney", JSON.stringify(totalMoney));
   localStorage.setItem("goalValue", JSON.stringify(goalValue));
   localStorage.setItem("isGoalReached", JSON.stringify(isGoalReached));
@@ -12,6 +23,11 @@ function setLocalStorageItems() {
 }
 
 function setTestingData() {
+  localStorage.setItem("sloikTitle", JSON.stringify("House"));
+  localStorage.setItem(
+    "sloikDescription",
+    JSON.stringify("Collecting for a house")
+  );
   localStorage.setItem("totalMoney", JSON.stringify(876));
   localStorage.setItem("goalValue", JSON.stringify(5000));
   localStorage.setItem("isGoalReached", JSON.stringify(false));
@@ -50,12 +66,15 @@ function setTestingData() {
 // };
 
 const getData = async () => {
-  localStorage.clear();
-  totalMoney = 0;
-  goalValue = 0;
-  isGoalReached = false;
-  setTestingData();
+  // localStorage.clear();
+  // setTestingData();
   if (localStorage.length != 0) {
+    document.getElementById("sloikTitle").textContent = JSON.parse(
+      localStorage.getItem("sloikTitle")
+    );
+    document.getElementById("sloikDescription").textContent = JSON.parse(
+      localStorage.getItem("sloikDescription")
+    );
     goalValue = JSON.parse(localStorage.getItem("goalValue"));
     isGoalReached = JSON.parse(localStorage.getItem("isGoalReached"));
     transactionsArray = JSON.parse(localStorage.getItem("transactionsList"));
