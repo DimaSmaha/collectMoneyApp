@@ -507,14 +507,15 @@ function addSloikData() {
     descriptionInput.value = "";
     goalSumInput.value = "";
     hidePopup();
-    setupSloikCookies();
     renderSloik();
+    setupSloikCookies(numberOfChildren);
   }
 }
 
+let numberOfChildren;
 function renderSloik() {
   const sloiksList = document.getElementById("sloiksList");
-  let numberOfChildren = sloiksList.children.length;
+  numberOfChildren = sloiksList.children.length;
   sloiksList.insertAdjacentHTML(
     "beforeend",
     `<div>
@@ -527,20 +528,34 @@ function renderSloik() {
   );
 }
 
-function setupSloikCookies() {
+function setupSloikCookies(numberOfChildren) {
   const goalSumValue = document.getElementById("inputField3").value;
-  Cookies.set("sloikTitle", JSON.stringify(sloikTitle), {
+  Cookies.set(`sloikTitle_${numberOfChildren}`, JSON.stringify(sloikTitle), {
     expires: 365,
   });
-  Cookies.set("sloikDescription", JSON.stringify(sloikDescription), {
+  Cookies.set(
+    `sloikDescription_${numberOfChildren}`,
+    JSON.stringify(sloikDescription),
+    {
+      expires: 365,
+    }
+  );
+  Cookies.set(`totalMoney_${numberOfChildren}`, JSON.stringify(totalMoney), {
     expires: 365,
   });
-  Cookies.set("totalMoney", JSON.stringify(totalMoney), { expires: 365 });
-  Cookies.set("goalValue", JSON.stringify(goalSumValue), { expires: 365 });
-  Cookies.set("isGoalReached", JSON.stringify(isGoalReached), { expires: 365 });
-  Cookies.set("transactionsList", JSON.stringify(transactionsArray), {
+  Cookies.set(`goalValue_${numberOfChildren}`, JSON.stringify(goalSumValue), {
     expires: 365,
   });
+  Cookies.set(
+    `isGoalReached_${numberOfChildren}`,
+    JSON.stringify(isGoalReached),
+    { expires: 365 }
+  );
+  Cookies.set(
+    `transactionsList_${numberOfChildren}`,
+    JSON.stringify(transactionsArray),
+    { expires: 365 }
+  );
 }
 
 // const getData = async () => {
