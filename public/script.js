@@ -4,6 +4,7 @@ let goalValue = 0;
 let isGoalReached = false;
 let transactionsArray = [];
 let sloikID;
+sloikID = localStorage.getItem("currentSloikID");
 
 function setTestingCookies() {
   Cookies.set("sloikTitle", JSON.stringify("House"), { expires: 365 });
@@ -25,23 +26,33 @@ function setTestingCookies() {
   );
 }
 
-function updateCookies() {
+function updateCookies(sloikID) {
   const sloikTitle = document.getElementById("sloikTitle");
   const sloikDescription = document.getElementById("sloikDescription");
-  Cookies.set("sloikTitle", JSON.stringify(sloikTitle.textContent), {
+  Cookies.set(`sloikTitle_${sloikID}`, JSON.stringify(sloikTitle.textContent), {
     expires: 365,
   });
   Cookies.set(
-    "sloikDescription",
+    `sloikDescription_${sloikID}`,
     JSON.stringify(sloikDescription.textContent),
     { expires: 365 }
   );
-  Cookies.set("totalMoney", JSON.stringify(totalMoney), { expires: 365 });
-  Cookies.set("goalValue", JSON.stringify(goalValue), { expires: 365 });
-  Cookies.set("isGoalReached", JSON.stringify(isGoalReached), { expires: 365 });
-  Cookies.set("transactionsList", JSON.stringify(transactionsArray), {
+  Cookies.set(`totalMoney_${sloikID}`, JSON.stringify(totalMoney), {
     expires: 365,
   });
+  Cookies.set(`goalValue_${sloikID}`, JSON.stringify(goalValue), {
+    expires: 365,
+  });
+  Cookies.set(`isGoalReached_${sloikID}`, JSON.stringify(isGoalReached), {
+    expires: 365,
+  });
+  Cookies.set(
+    `transactionsList_${sloikID}`,
+    JSON.stringify(transactionsArray),
+    {
+      expires: 365,
+    }
+  );
 }
 
 function removeCookies() {
@@ -56,7 +67,6 @@ function removeCookies() {
 const getData = async () => {
   // removeCookies();
   // setTestingCookies();
-  console.log(sloikID);
   if (document.cookie.length != 0) {
     getCookiesByID(sloikID);
   }
@@ -75,7 +85,7 @@ const getData = async () => {
   setProgressBar();
   showRandomCommendation();
   console.log(transactionsArray);
-  updateCookies();
+  updateCookies(sloikID);
 };
 
 function recalculateMoneyScore() {
@@ -123,7 +133,7 @@ function addMoney() {
   setProgressBar();
   checkAchievements();
   showRandomCommendation();
-  updateCookies();
+  updateCookies(sloikID);
   return totalMoney;
 }
 
@@ -137,7 +147,7 @@ function setGoal() {
   let userGoal = document.getElementById("yourGoal");
   if (goalValue == 0 || goalValue == undefined || goalValue == null) {
     goalValue = getGoal();
-    updateCookies();
+    updateCookies(sloikID);
   }
   let sentence = `Your goal : ${goalValue}`;
   userGoal.textContent = sentence;
@@ -163,7 +173,7 @@ function formArray(addedMoney) {
   transactionsArray.push(
     JSON.parse(JSON.stringify(new Transactions(addedMoney)))
   );
-  updateCookies();
+  updateCookies(sloikID);
   console.log(transactionsArray);
 }
 
@@ -238,7 +248,7 @@ function deleteTransaction(transaction_id) {
   transactionBoxes.replaceChildren();
   renderTransactions();
   setProgressBar();
-  updateCookies();
+  updateCookies(sloikID);
   console.log(transactionsArray);
 }
 
@@ -305,7 +315,7 @@ function acceptEditTransaction(transaction_id) {
     recalculateMoneyScore();
     changeMoneyScore();
     setProgressBar();
-    updateCookies();
+    updateCookies(sloikID);
     if (totalMoney < goalValue || !isGoalReached) {
       checkGoal();
     }
@@ -368,7 +378,7 @@ function acceptEditGoal() {
     setEditGoalBtnDisplay("flex");
     setProgressBar();
     setGoal();
-    updateCookies();
+    updateCookies(sloikID);
   }
   editGoalInput.value = "";
 }
@@ -433,7 +443,7 @@ function submitForm() {
       setGoal();
       setProgressBar();
       hidePopup();
-      updateCookies();
+      updateCookies(sloikID);
     }
   } else {
     sloikTitle.textContent = titleValue;
@@ -553,8 +563,7 @@ function setupSloikCookies(numberOfChildren) {
 }
 function getSloikID(sloikNumber) {
   sloikID = sloikNumber;
-  console.log(sloikID);
-  return sloikID;
+  localStorage.setItem("currentSloikID", JSON.stringify(sloikID));
 }
 
 function getCookiesByID(sloikNumber) {
