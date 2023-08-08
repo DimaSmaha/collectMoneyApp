@@ -486,6 +486,63 @@ function showRandomCommendation() {
   }
 }
 
+let sloikTitle = "";
+let sloikDescription = "";
+function addSloikData() {
+  let titleValue = document.getElementById("inputField1").value;
+  let descriptionValue = document.getElementById("inputField2").value;
+  let goalSumValue = document.getElementById("inputField3").value;
+  let titleInput = document.getElementById("inputField1");
+  let descriptionInput = document.getElementById("inputField2");
+  let goalSumInput = document.getElementById("inputField3");
+  if (
+    titleValue != "" &&
+    descriptionValue != "" &&
+    isNaN(goalSumValue) == false &&
+    goalSumValue > 0
+  ) {
+    sloikTitle = titleValue;
+    sloikDescription = descriptionValue;
+    titleInput.value = "";
+    descriptionInput.value = "";
+    goalSumInput.value = "";
+    hidePopup();
+    setupSloikCookies();
+    renderSloik();
+  }
+}
+
+function renderSloik() {
+  const sloiksList = document.getElementById("sloiksList");
+  let numberOfChildren = sloiksList.children.length;
+  sloiksList.insertAdjacentHTML(
+    "beforeend",
+    `<div>
+      <nav>
+        <a id="sloik_${numberOfChildren}" href="/public/index.html">Sloik_${
+      numberOfChildren + 1
+    }</a>
+      </nav>
+    </div>`
+  );
+}
+
+function setupSloikCookies() {
+  const goalSumValue = document.getElementById("inputField3").value;
+  Cookies.set("sloikTitle", JSON.stringify(sloikTitle), {
+    expires: 365,
+  });
+  Cookies.set("sloikDescription", JSON.stringify(sloikDescription), {
+    expires: 365,
+  });
+  Cookies.set("totalMoney", JSON.stringify(totalMoney), { expires: 365 });
+  Cookies.set("goalValue", JSON.stringify(goalSumValue), { expires: 365 });
+  Cookies.set("isGoalReached", JSON.stringify(isGoalReached), { expires: 365 });
+  Cookies.set("transactionsList", JSON.stringify(transactionsArray), {
+    expires: 365,
+  });
+}
+
 // const getData = async () => {
 //   const response = await fetch("/public/data.json");
 //   const data = await response.json();

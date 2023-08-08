@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SloikApp</title>
+    <link rel="stylesheet" type="text/css" href="/public/styles.css" />
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    /> -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="/public/script.js"></script>
+  </head>
+  <body>
+    <div id="popupContainer">
+      <div class="popupContent">
+        <h2>Create a sloik</h2>
+        <input type="text" id="inputField1" placeholder="Title*" />
+        <input type="text" id="inputField2" placeholder="Description*" />
+        <input type="number" id="inputField3" placeholder="Goal sum*" />
+        <button id="submitBtn" onclick="addSloikData()">Submit</button>
+      </div>
+    </div>
+    <div id="sloiksList"></div>
+    <div>
+      <button id="add_sloik" onclick="showPopup()">+</button>
+    </div>
+  </body>
+</html>
