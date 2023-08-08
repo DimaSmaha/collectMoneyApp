@@ -3,6 +3,7 @@ let totalMoney = 0;
 let goalValue = 0;
 let isGoalReached = false;
 let transactionsArray = [];
+let sloikID;
 
 function setTestingCookies() {
   Cookies.set("sloikTitle", JSON.stringify("House"), { expires: 365 });
@@ -55,16 +56,9 @@ function removeCookies() {
 const getData = async () => {
   // removeCookies();
   // setTestingCookies();
+  console.log(sloikID);
   if (document.cookie.length != 0) {
-    document.getElementById("sloikTitle").textContent = JSON.parse(
-      Cookies.get("sloikTitle")
-    );
-    document.getElementById("sloikDescription").textContent = JSON.parse(
-      Cookies.get("sloikDescription")
-    );
-    goalValue = JSON.parse(Cookies.get("goalValue"));
-    isGoalReached = JSON.parse(Cookies.get("isGoalReached"));
-    transactionsArray = JSON.parse(Cookies.get("transactionsList"));
+    getCookiesByID(sloikID);
   }
   if (transactionsArray != null) {
     for (i = 0; i < transactionsArray.length; i++) {
@@ -503,12 +497,12 @@ function addSloikData() {
   ) {
     sloikTitle = titleValue;
     sloikDescription = descriptionValue;
-    titleInput.value = "";
-    descriptionInput.value = "";
-    goalSumInput.value = "";
     hidePopup();
     renderSloik();
     setupSloikCookies(numberOfChildren);
+    titleInput.value = "";
+    descriptionInput.value = "";
+    goalSumInput.value = "";
   }
 }
 
@@ -520,9 +514,9 @@ function renderSloik() {
     "beforeend",
     `<div>
       <nav>
-        <a id="sloik_${numberOfChildren}" href="/public/index.html">Sloik_${
-      numberOfChildren + 1
-    }</a>
+      <a id="sloik_${numberOfChildren}" class="sloikNavigation"
+      href="/public/index.html" onclick="getSloikID(${numberOfChildren});">
+      Sloik_${numberOfChildren + 1}</a>
       </nav>
     </div>`
   );
@@ -557,7 +551,25 @@ function setupSloikCookies(numberOfChildren) {
     { expires: 365 }
   );
 }
+function getSloikID(sloikNumber) {
+  sloikID = sloikNumber;
+  console.log(sloikID);
+  return sloikID;
+}
 
+function getCookiesByID(sloikNumber) {
+  document.getElementById("sloikTitle").textContent = JSON.parse(
+    Cookies.get(`sloikTitle_${sloikNumber}`)
+  );
+  document.getElementById("sloikDescription").textContent = JSON.parse(
+    Cookies.get(`sloikDescription_${sloikNumber}`)
+  );
+  goalValue = JSON.parse(Cookies.get(`goalValue_${sloikNumber}`));
+  isGoalReached = JSON.parse(Cookies.get(`isGoalReached_${sloikNumber}`));
+  transactionsArray = JSON.parse(
+    Cookies.get(`transactionsList_${sloikNumber}`)
+  );
+}
 // const getData = async () => {
 //   const response = await fetch("/public/data.json");
 //   const data = await response.json();
