@@ -4,42 +4,6 @@ let goalValue = 0;
 let isGoalReached = false;
 let transactionsArray = [];
 
-// function setLocalStorageSloikDescription() {
-//   const sloikTitle = document.getElementById("sloikTitle");
-//   const sloikDescription = document.getElementById("sloikDescription");
-//   localStorage.setItem("sloikTitle", JSON.stringify(sloikTitle.textContent));
-//   localStorage.setItem(
-//     "sloikDescription",
-//     JSON.stringify(sloikDescription.textContent)
-//   );
-// }
-
-// function setLocalStorageItems() {
-//   setLocalStorageSloikDescription();
-//   localStorage.setItem("totalMoney", JSON.stringify(totalMoney));
-//   localStorage.setItem("goalValue", JSON.stringify(goalValue));
-//   localStorage.setItem("isGoalReached", JSON.stringify(isGoalReached));
-//   localStorage.setItem("transactionsList", JSON.stringify(transactionsArray));
-// }
-
-// function setTestingData() {
-//   localStorage.setItem("sloikTitle", JSON.stringify("House"));
-//   localStorage.setItem(
-//     "sloikDescription",
-//     JSON.stringify("Collecting for a house")
-//   );
-//   localStorage.setItem("totalMoney", JSON.stringify(876));
-//   localStorage.setItem("goalValue", JSON.stringify(5000));
-//   localStorage.setItem("isGoalReached", JSON.stringify(false));
-//   localStorage.setItem(
-//     "transactionsList",
-//     JSON.stringify([
-//       { transactionSum: 654, date: "2023-07-04T18:03:44.492Z" },
-//       { transactionSum: 213, date: "2023-07-04T18:04:44.492Z" },
-//     ])
-//   );
-// }
-
 function setTestingCookies() {
   Cookies.set("sloikTitle", JSON.stringify("House"), { expires: 365 });
   Cookies.set("sloikDescription", JSON.stringify("Collecting for a house"), {
@@ -87,31 +51,6 @@ function removeCookies() {
   Cookies.remove("isGoalReached");
   Cookies.remove("transactionsList");
 }
-
-// const getData = async () => {
-//   const response = await fetch("/public/data.json");
-//   const data = await response.json();
-//   jsonFile = data;
-//   totalMoney = 0;
-//   goalValue = jsonFile.goalValue;
-//   isGoalReached = jsonFile.isGoalReached;
-//   transactionsArray = jsonFile.transactionsList;
-//   if (jsonFile.hasOwnProperty("transactionsList")) {
-//     for (i = 0; i < transactionsArray.length; i++) {
-//       totalMoney += transactionsArray[i].transactionSum;
-//     }
-//   }
-//   checkTitleDescriptionAndGoalExistence();
-//   checkGoalSumExistence();
-//   changeMoneyScore();
-//   if (goalValue > 0) {
-//     setGoal();
-//   }
-//   renderTransactions();
-//   setProgressBar();
-//   showRandomCommendation();
-//   console.log(transactionsArray);
-// };
 
 const getData = async () => {
   // removeCookies();
@@ -546,6 +485,67 @@ function showRandomCommendation() {
       "Its your first transaction. Great job you have started your journey";
   }
 }
+
+// const getData = async () => {
+//   const response = await fetch("/public/data.json");
+//   const data = await response.json();
+//   jsonFile = data;
+//   totalMoney = 0;
+//   goalValue = jsonFile.goalValue;
+//   isGoalReached = jsonFile.isGoalReached;
+//   transactionsArray = jsonFile.transactionsList;
+//   if (jsonFile.hasOwnProperty("transactionsList")) {
+//     for (i = 0; i < transactionsArray.length; i++) {
+//       totalMoney += transactionsArray[i].transactionSum;
+//     }
+//   }
+//   checkTitleDescriptionAndGoalExistence();
+//   checkGoalSumExistence();
+//   changeMoneyScore();
+//   if (goalValue > 0) {
+//     setGoal();
+//   }
+//   renderTransactions();
+//   setProgressBar();
+//   showRandomCommendation();
+//   console.log(transactionsArray);
+// };
+
+// function setLocalStorageSloikDescription() {
+//   const sloikTitle = document.getElementById("sloikTitle");
+//   const sloikDescription = document.getElementById("sloikDescription");
+//   localStorage.setItem("sloikTitle", JSON.stringify(sloikTitle.textContent));
+//   localStorage.setItem(
+//     "sloikDescription",
+//     JSON.stringify(sloikDescription.textContent)
+//   );
+// }
+
+// function setLocalStorageItems() {
+//   setLocalStorageSloikDescription();
+//   localStorage.setItem("totalMoney", JSON.stringify(totalMoney));
+//   localStorage.setItem("goalValue", JSON.stringify(goalValue));
+//   localStorage.setItem("isGoalReached", JSON.stringify(isGoalReached));
+//   localStorage.setItem("transactionsList", JSON.stringify(transactionsArray));
+// }
+
+// function setTestingData() {
+//   localStorage.setItem("sloikTitle", JSON.stringify("House"));
+//   localStorage.setItem(
+//     "sloikDescription",
+//     JSON.stringify("Collecting for a house")
+//   );
+//   localStorage.setItem("totalMoney", JSON.stringify(876));
+//   localStorage.setItem("goalValue", JSON.stringify(5000));
+//   localStorage.setItem("isGoalReached", JSON.stringify(false));
+//   localStorage.setItem(
+//     "transactionsList",
+//     JSON.stringify([
+//       { transactionSum: 654, date: "2023-07-04T18:03:44.492Z" },
+//       { transactionSum: 213, date: "2023-07-04T18:04:44.492Z" },
+//     ])
+//   );
+// }
 
 // async function updateJSONFile() {
 //   jsonFile.totalMoney = totalMoney;
