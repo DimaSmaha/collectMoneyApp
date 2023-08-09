@@ -517,9 +517,12 @@ function addSloikData() {
 }
 
 let numberOfChildren;
+let sloikCounter = 0;
 function renderSloik() {
   const sloiksList = document.getElementById("sloiksList");
   numberOfChildren = sloiksList.children.length;
+  sloikCounter++;
+  Cookies.set("sloiksCounter", JSON.stringify(sloikCounter), { expires: 365 });
   sloiksList.insertAdjacentHTML(
     "beforeend",
     `<div>
@@ -530,6 +533,23 @@ function renderSloik() {
       </nav>
     </div>`
   );
+}
+
+function renderExistingSloiks() {
+  let sloikCounter = Cookies.get("sloiksCounter");
+  const sloiksList = document.getElementById("sloiksList");
+  for (i = 0; i < sloikCounter; i++) {
+    sloiksList.insertAdjacentHTML(
+      "beforeend",
+      `<div>
+      <nav>
+      <a id="sloik_${i}" class="sloikNavigation"
+      href="/public/index.html" onclick="getSloikID(${i});">
+      Sloik_${i + 1}</a>
+      </nav>
+    </div>`
+    );
+  }
 }
 
 function setupSloikCookies(numberOfChildren) {
