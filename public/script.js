@@ -531,7 +531,7 @@ function renderSloik() {
     `<div>
       <nav>
       <a id="sloik_${numberOfChildren}" class="sloikNavigation"
-      href="/public/index.html" onclick="getSloikID(${numberOfChildren});">
+      href="/public/sloik.html" onclick="getSloikID(${numberOfChildren});">
       Sloik_${numberOfChildren + 1}</a>
       </nav>
     </div>`
@@ -547,7 +547,7 @@ function renderExistingSloiks() {
       `<div>
       <nav>
       <a id="sloik_${i}" class="sloikNavigation"
-      href="/public/index.html" onclick="getSloikID(${i});">
+      href="/public/sloik.html" onclick="getSloikID(${i});">
       Sloik_${i + 1}</a>
       </nav>
     </div>`
