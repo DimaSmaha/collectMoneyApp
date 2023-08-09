@@ -579,6 +579,7 @@ function getCookiesByID(sloikNumber) {
     Cookies.get(`transactionsList_${sloikNumber}`)
   );
 }
+
 // const getData = async () => {
 //   const response = await fetch("/public/data.json");
 //   const data = await response.json();
