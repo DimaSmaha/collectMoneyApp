@@ -519,6 +519,9 @@ function addSloikData() {
 let numberOfChildren;
 let sloikCounter = 0;
 function renderSloik() {
+  if (Cookies.get("sloiksCounter") != undefined) {
+    sloikCounter = Cookies.get("sloiksCounter");
+  }
   const sloiksList = document.getElementById("sloiksList");
   numberOfChildren = sloiksList.children.length;
   sloikCounter++;
