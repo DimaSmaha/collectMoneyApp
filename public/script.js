@@ -328,12 +328,15 @@ function acceptEditTransaction(transaction_id) {
 
 function setProgressBar() {
   const progressBar = document.getElementById("progressBar");
+  const progressBarText = document.getElementById("progressBarText");
   const progressBarPercentage = (totalMoney / goalValue) * 100;
   if (totalMoney <= goalValue) {
     progressBar.style.width = `${progressBarPercentage}%`;
+    progressBarText.textContent = `${Math.round(progressBarPercentage)}%`;
   }
   if (totalMoney >= goalValue) {
     progressBar.style.width = "100%";
+    progressBarText.textContent = `${Math.round(progressBarPercentage)}%`;
   }
 }
 
