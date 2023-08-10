@@ -532,7 +532,7 @@ function renderSloik() {
       <nav>
       <a id="sloik_${numberOfChildren}" class="sloikNavigation"
       href="/public/sloik.html" onclick="getSloikID(${numberOfChildren});">
-      Sloik_${numberOfChildren + 1}</a>
+      ${sloikTitle} Sloik</a>
       </nav>
     </div>`
   );
@@ -548,7 +548,7 @@ function renderExistingSloiks() {
       <nav>
       <a id="sloik_${i}" class="sloikNavigation"
       href="/public/sloik.html" onclick="getSloikID(${i});">
-      Sloik_${i + 1}</a>
+      ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
       </nav>
     </div>`
     );
@@ -584,6 +584,7 @@ function setupSloikCookies(numberOfChildren) {
     { expires: 365 }
   );
 }
+
 function getSloikID(sloikNumber) {
   sloikID = sloikNumber;
   localStorage.setItem("currentSloikID", JSON.stringify(sloikID));
