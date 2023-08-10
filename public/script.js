@@ -156,7 +156,9 @@ function setGoal() {
 function checkGoal() {
   if (totalMoney >= goalValue) {
     setTimeout(function () {
-      alert("congrats");
+      alert(
+        "Congrats you have reached your goal, you have made a great job. I'm proud of you 💚"
+      );
     }, 500);
     isGoalReached = true;
   }
