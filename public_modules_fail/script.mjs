@@ -612,7 +612,6 @@ function submitForm() {
 import {
   renderExistingSloiks,
   addSloikData,
-  getSloikID,
 } from "./modules/sloikGeneration.mjs";
 import { showPopup, hidePopup } from "./modules/popup.mjs";
 import { getData } from "./modules/insideSloik.mjs";
@@ -636,6 +635,19 @@ submitPopupBtn.onclick = function () {
     addSloikData(totalMoney, isGoalReached, transactionsArray);
   }
 };
+
+// const getSloikNavigatorButtons =
+//   document.getElementsByClassName("sloikNavigation");
+// for (let i = 0; i < getSloikNavigatorButtons.length; i++) {
+//   getSloikNavigatorButtons[i].onclick = function () {
+//     let someSloikBtn = getSloikNavigatorButtons[i];
+//     console.log(someSloikBtn);
+
+//     someSloikBtn.addEventListener("click", function () {
+//       getSloikID(i);
+//     });
+//   };
+// }
 
 // const getData = async () => {
 //   const response = await fetch("/public/data.json");
