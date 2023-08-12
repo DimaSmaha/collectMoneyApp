@@ -3,7 +3,11 @@ import { setupSloikCookies } from "./cookies.mjs";
 
 let sloikTitle = "";
 let sloikDescription = "";
-function addSloikData() {
+function addSloikData(
+  cookiesTotalMoney,
+  cookiesIsGoalReached,
+  cookiesTransactionsArray
+) {
   let titleValue = document.getElementById("inputField1").value;
   let descriptionValue = document.getElementById("inputField2").value;
   let goalSumValue = document.getElementById("inputField3").value;
@@ -20,7 +24,14 @@ function addSloikData() {
     sloikDescription = descriptionValue;
     hidePopup();
     renderSloik();
-    setupSloikCookies(numberOfChildren, sloikTitle, sloikDescription);
+    setupSloikCookies(
+      numberOfChildren,
+      sloikTitle,
+      sloikDescription,
+      cookiesTotalMoney,
+      cookiesIsGoalReached,
+      cookiesTransactionsArray
+    );
     titleInput.value = "";
     descriptionInput.value = "";
     goalSumInput.value = "";

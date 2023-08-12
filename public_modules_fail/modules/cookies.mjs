@@ -1,4 +1,11 @@
-function setupSloikCookies(numberOfChildren, sloikTitle, sloikDescription) {
+function setupSloikCookies(
+  numberOfChildren,
+  sloikTitle,
+  sloikDescription,
+  totalMoney,
+  isGoalReached,
+  transactionsArray
+) {
   const goalSumValue = document.getElementById("inputField3").value;
   Cookies.set(`sloikTitle_${numberOfChildren}`, JSON.stringify(sloikTitle), {
     expires: 365,

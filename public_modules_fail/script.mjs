@@ -627,7 +627,7 @@ addSloikBtn.onclick = function () {
 const submitPopupBtn = document.getElementById("submitBtn");
 submitPopupBtn.onclick = function () {
   if (document.title == "SloikApp Home") {
-    addSloikData();
+    addSloikData(totalMoney, isGoalReached, transactionsArray);
   }
 };
 
