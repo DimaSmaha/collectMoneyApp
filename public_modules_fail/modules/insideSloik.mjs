@@ -1,16 +1,15 @@
 let sloikID;
 sloikID = localStorage.getItem("currentSloikID");
+let totalMoney = 0;
+let goalValue = 0;
+let isGoalReached = false;
+let transactionsArray = [];
 
-const getData = async (
-  totalMoney,
-  goalValue,
-  isGoalReached,
-  transactionsArray
-) => {
+const getData = async () => {
   // removeCookies();
   // setTestingCookies();
   if (document.cookie.length != 0) {
-    getCookiesByID(sloikID, goalValue, isGoalReached, transactionsArray);
+    getCookiesByID(sloikID);
   }
   if (transactionsArray != null) {
     for (let i = 0; i < transactionsArray.length; i++) {
@@ -18,30 +17,19 @@ const getData = async (
     }
   }
   checkTitleDescriptionAndGoalExistence();
-  checkGoalSumExistence(goalValue);
-  changeMoneyScore(totalMoney);
+  checkGoalSumExistence();
+  changeMoneyScore();
   if (goalValue > 0) {
     setGoal();
   }
-  renderTransactions(transactionsArray);
-  setProgressBar(totalMoney, goalValue);
-  showRandomCommendation(transactionsArray);
+  renderTransactions();
+  setProgressBar();
+  showRandomCommendation();
   console.log(transactionsArray);
-  updateCookies(
-    sloikID,
-    totalMoney,
-    goalValue,
-    isGoalReached,
-    transactionsArray
-  );
+  updateCookies(sloikID);
 };
 
-function getCookiesByID(
-  sloikNumber,
-  goalValue,
-  isGoalReached,
-  transactionsArray
-) {
+function getCookiesByID(sloikNumber) {
   document.getElementById("sloikTitle").textContent = JSON.parse(
     Cookies.get(`sloikTitle_${sloikNumber}`)
   );
@@ -53,6 +41,7 @@ function getCookiesByID(
   transactionsArray = JSON.parse(
     Cookies.get(`transactionsList_${sloikNumber}`)
   );
+  return goalValue, isGoalReached, transactionsArray;
 }
 
 function checkTitleDescriptionAndGoalExistence() {
@@ -66,14 +55,14 @@ function checkTitleDescriptionAndGoalExistence() {
   }
 }
 
-function checkGoalSumExistence(goalValue) {
+function checkGoalSumExistence() {
   const goalSumInput = document.getElementById("inputField3");
   if (goalValue != 0 || goalValue == undefined) {
     goalSumInput.remove();
   }
 }
 
-function changeMoneyScore(totalMoney) {
+function changeMoneyScore() {
   let yourMoneyScore = document.getElementById("yourMoneyScore");
   let sentence = `Your money : ${totalMoney}`;
   yourMoneyScore.textContent = sentence;
@@ -95,7 +84,7 @@ function setGoal() {
   userGoal.textContent = sentence;
 }
 
-function renderTransactions(transactionsArray) {
+function renderTransactions() {
   const transactionBoxes = document.getElementById("transactionBoxes");
   for (let i = 0; i < transactionsArray.length; i++) {
     transactionBoxes.insertAdjacentHTML(
@@ -122,7 +111,7 @@ function renderTransactions(transactionsArray) {
   }
 }
 
-function setProgressBar(totalMoney, goalValue) {
+function setProgressBar() {
   const progressBar = document.getElementById("progressBar");
   const progressBarText = document.getElementById("progressBarText");
   const progressBarPercentage = (totalMoney / goalValue) * 100;
@@ -136,7 +125,7 @@ function setProgressBar(totalMoney, goalValue) {
   }
 }
 
-function showRandomCommendation(transactionsArray) {
+function showRandomCommendation() {
   const commendation = document.getElementById("commendation");
   const commendationText = document.getElementById("commendation_text");
   const commendationsList = [
@@ -164,13 +153,7 @@ function showRandomCommendation(transactionsArray) {
   }
 }
 
-function updateCookies(
-  sloikID,
-  totalMoney,
-  goalValue,
-  isGoalReached,
-  transactionsArray
-) {
+function updateCookies(sloikID) {
   const sloikTitle = document.getElementById("sloikTitle");
   const sloikDescription = document.getElementById("sloikDescription");
   Cookies.set(`sloikTitle_${sloikID}`, JSON.stringify(sloikTitle.textContent), {

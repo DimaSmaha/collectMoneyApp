@@ -1,11 +1,3 @@
-let jsonFile;
-let totalMoney = 0;
-let goalValue = 0;
-let isGoalReached = false;
-let transactionsArray = [];
-// let sloikID;
-// sloikID = localStorage.getItem("currentSloikID");
-
 function setTestingCookies() {
   Cookies.set("sloikTitle", JSON.stringify("House"), { expires: 365 });
   Cookies.set("sloikDescription", JSON.stringify("Collecting for a house"), {
@@ -620,7 +612,7 @@ window.onload = function () {
     renderExistingSloiks();
   }
   if (document.title == "SloikApp Sloik") {
-    getData(totalMoney, goalValue, isGoalReached, transactionsArray);
+    getData();
   }
 };
 const addSloikBtn = document.getElementById("add_sloik");
