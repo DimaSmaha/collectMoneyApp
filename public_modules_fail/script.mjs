@@ -609,10 +609,12 @@ function getCookiesByID(sloikNumber) {
   );
 }
 
-import renderSloiks from "./modules/sloikGeneration.mjs";
-const { renderExistingSloiks, addSloikData } = renderSloiks;
-import popupFunctions from "./modules/popup.mjs";
-const { showPopup, hidePopup } = popupFunctions;
+import {
+  renderExistingSloiks,
+  addSloikData,
+} from "./modules/sloikGeneration.mjs";
+import { showPopup, hidePopup } from "./modules/popup.mjs";
+
 window.onload = function () {
   if (document.title == "SloikApp Home") {
     renderExistingSloiks();

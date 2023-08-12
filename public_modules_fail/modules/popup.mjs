@@ -8,4 +8,4 @@ function hidePopup() {
   popup.style.display = "none";
 }
 
-export default { showPopup, hidePopup };
+export { showPopup, hidePopup };

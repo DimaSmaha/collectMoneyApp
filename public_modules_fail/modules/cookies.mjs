@@ -28,4 +28,4 @@ function setupSloikCookies(numberOfChildren, sloikTitle, sloikDescription) {
   );
 }
 
-export default { setupSloikCookies };
+export { setupSloikCookies };

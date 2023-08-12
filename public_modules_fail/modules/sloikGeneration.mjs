@@ -1,7 +1,5 @@
-import popupFunctions from "./popup.mjs";
-const { showPopup, hidePopup } = popupFunctions;
-import cookies from "./cookies.mjs";
-const { setupSloikCookies } = cookies;
+import { showPopup, hidePopup } from "./popup.mjs";
+import { setupSloikCookies } from "./cookies.mjs";
 
 let sloikTitle = "";
 let sloikDescription = "";
@@ -73,4 +71,4 @@ function getSloikID(sloikNumber) {
   localStorage.setItem("currentSloikID", JSON.stringify(sloikID));
 }
 
-export default { renderExistingSloiks, addSloikData };
+export { renderExistingSloiks, addSloikData };
