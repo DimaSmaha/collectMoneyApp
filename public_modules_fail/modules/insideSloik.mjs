@@ -1,3 +1,5 @@
+import { showPopup, hidePopup } from "./popup.mjs";
+
 let sloikID;
 sloikID = localStorage.getItem("currentSloikID");
 let totalMoney = 0;
@@ -180,6 +182,110 @@ function updateCookies(sloikID) {
       expires: 365,
     }
   );
+}
+
+function recalculateMoneyScore() {
+  totalMoney = 0;
+  for (i = 0; i < transactionsArray.length; i++) {
+    totalMoney += transactionsArray[i].transactionSum;
+  }
+}
+
+function addMoney() {
+  const errorNegative = document.getElementById("errorNegativeNumber");
+  const errorNotNumber = document.getElementById("errorNotNumber");
+  const moneyInput = document.getElementById("addMoneyInput");
+  const addedMoney = moneyInput.value;
+  const moneyToBeAdded = parseInt(addedMoney);
+  if (isNaN(moneyToBeAdded)) {
+    moneyInput.value = "";
+    errorNotNumber.style.display = "flex";
+    return setTimeout(function () {
+      errorNotNumber.style.display = "none";
+    }, 2000);
+  }
+  if (moneyToBeAdded <= 0) {
+    moneyInput.value = "";
+    errorNegative.style.display = "flex";
+    return setTimeout(function () {
+      errorNegative.style.display = "none";
+    }, 2000);
+  }
+  totalMoney += moneyToBeAdded;
+  console.log(totalMoney);
+  moneyInput.value = "";
+  // updateJSONFile();
+  formArray(moneyToBeAdded);
+  if (totalMoney < goalValue || !isGoalReached) {
+    checkGoal();
+  }
+  addTransactionDIV();
+  setProgressBar();
+  checkAchievements();
+  showRandomCommendation();
+  updateCookies(sloikID);
+  return totalMoney;
+}
+
+function checkGoal() {
+  if (totalMoney >= goalValue) {
+    setTimeout(function () {
+      alert(
+        "Congrats you have reached your goal, you have made a great job. I'm proud of you 💚"
+      );
+    }, 500);
+    isGoalReached = true;
+  }
+}
+
+function formArray(addedMoney) {
+  transactionsArray.push(
+    JSON.parse(JSON.stringify(new Transactions(addedMoney)))
+  );
+  updateCookies(sloikID);
+  console.log(transactionsArray);
+}
+
+function acceptEditGoal() {
+  const editGoalInput = document.getElementById("editGoalInput");
+  const editedGoal = parseInt(editGoalInput.value);
+  if (isNaN(editedGoal) == false && editedGoal > 0) {
+    goalValue = editedGoal;
+    removeEditGoalElementsDisplay();
+    setEditGoalBtnDisplay("flex");
+    setProgressBar();
+    setGoal();
+    updateCookies(sloikID);
+  }
+  editGoalInput.value = "";
+}
+
+function submitForm() {
+  const sloikTitle = document.getElementById("sloikTitle");
+  const sloikDescription = document.getElementById("sloikDescription");
+  const titleValue = document.getElementById("inputField1").value;
+  const descriptionValue = document.getElementById("inputField2").value;
+  const goalSum = document.getElementById("inputField3");
+  if (goalSum != null) {
+    const goalSumValue = document.getElementById("inputField3").value;
+    if (
+      titleValue != "" &&
+      descriptionValue != "" &&
+      isNaN(goalSumValue) == false &&
+      goalSumValue > 0
+    ) {
+      sloikTitle.textContent = titleValue;
+      sloikDescription.textContent = descriptionValue;
+      setGoal();
+      setProgressBar();
+      hidePopup();
+      updateCookies(sloikID);
+    }
+  } else {
+    sloikTitle.textContent = titleValue;
+    sloikDescription.textContent = descriptionValue;
+    hidePopup();
+  }
 }
 
 export { getData };
