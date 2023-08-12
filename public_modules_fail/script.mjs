@@ -612,6 +612,7 @@ function showRandomCommendation() {
 import {
   renderExistingSloiks,
   addSloikData,
+  getSloikID,
 } from "./modules/sloikGeneration.mjs";
 import { showPopup, hidePopup } from "./modules/popup.mjs";
 

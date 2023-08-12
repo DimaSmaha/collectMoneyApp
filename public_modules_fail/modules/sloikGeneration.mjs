@@ -53,7 +53,7 @@ function renderSloik() {
     `<div>
       <nav>
       <a id="sloik_${numberOfChildren}" class="sloikNavigation"
-      href="/public/sloik.html" onclick="getSloikID(${numberOfChildren});">
+      href="/public_modules_fail/sloik.html" onclick="getSloikID(${numberOfChildren});">
       ${sloikTitle} Sloik</a>
       </nav>
     </div>`
@@ -82,4 +82,4 @@ function getSloikID(sloikNumber) {
   localStorage.setItem("currentSloikID", JSON.stringify(sloikID));
 }
 
-export { renderExistingSloiks, addSloikData };
+export { renderExistingSloiks, addSloikData, getSloikID };
