@@ -69,7 +69,7 @@ function renderExistingSloiks() {
       `<div>
       <nav>
       <a id="sloik_${i}" class="sloikNavigation"
-      href="/public/sloik.html" onclick="getSloikID(${i});">
+      href="/public_modules_fail/sloik.html" onclick="getSloikID(${i});">
       ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
       </nav>
     </div>`
