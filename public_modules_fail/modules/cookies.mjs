@@ -35,4 +35,33 @@ function setupSloikCookies(
   );
 }
 
+function setTestingCookies() {
+  Cookies.set("sloikTitle", JSON.stringify("House"), { expires: 365 });
+  Cookies.set("sloikDescription", JSON.stringify("Collecting for a house"), {
+    expires: 365,
+  });
+  Cookies.set("totalMoney", JSON.stringify(876), { expires: 365 });
+  Cookies.set("goalValue", JSON.stringify(5000), { expires: 365 });
+  Cookies.set("isGoalReached", JSON.stringify(false), { expires: 365 });
+  Cookies.set(
+    "transactionsList",
+    JSON.stringify(
+      [
+        { transactionSum: 654, date: "2023-07-04T18:03:44.492Z" },
+        { transactionSum: 213, date: "2023-07-04T18:04:44.492Z" },
+      ],
+      { expires: 365 }
+    )
+  );
+}
+
+function removeCookies() {
+  Cookies.remove("sloikTitle");
+  Cookies.remove("sloikDescription");
+  Cookies.remove("totalMoney");
+  Cookies.remove("goalValue");
+  Cookies.remove("isGoalReached");
+  Cookies.remove("transactionsList");
+}
+
 export { setupSloikCookies };
