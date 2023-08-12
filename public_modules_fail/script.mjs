@@ -467,33 +467,33 @@ function submitForm() {
 //   popup.style.display = "none";
 // }
 
-function showRandomCommendation() {
-  const commendation = document.getElementById("commendation");
-  const commendationText = document.getElementById("commendation_text");
-  const commendationsList = [
-    "Your dedication to collecting money is commendable.",
-    "I admire your perseverance despite the challenges.",
-    "I'm impressed by your perseverance despite the challenges.",
-    "Patient and determined in saving for the future.",
-    "Your commitment to your goals is inspiring.",
-    "Inspiring others with your saving habits.",
-    "Keep pushing forward - your efforts will pay off.",
-    "Your efforts are making a difference, keep going!",
-    "Setting a great example of financial wisdom.",
-    "You've got this! Stay focused and stay positive.",
-  ];
-  let getRandomChar = Math.floor(Math.random() * commendationsList.length);
-  commendation.style.display = "block";
-  commendationText.textContent = commendationsList[getRandomChar];
-  if (transactionsArray.length == 0) {
-    commendation.style.display = "none";
-  }
-  if (transactionsArray.length == 1) {
-    commendation.style.display = "block";
-    commendationText.textContent =
-      "Its your first transaction. Great job you have started your journey";
-  }
-}
+// function showRandomCommendation() {
+//   const commendation = document.getElementById("commendation");
+//   const commendationText = document.getElementById("commendation_text");
+//   const commendationsList = [
+//     "Your dedication to collecting money is commendable.",
+//     "I admire your perseverance despite the challenges.",
+//     "I'm impressed by your perseverance despite the challenges.",
+//     "Patient and determined in saving for the future.",
+//     "Your commitment to your goals is inspiring.",
+//     "Inspiring others with your saving habits.",
+//     "Keep pushing forward - your efforts will pay off.",
+//     "Your efforts are making a difference, keep going!",
+//     "Setting a great example of financial wisdom.",
+//     "You've got this! Stay focused and stay positive.",
+//   ];
+//   let getRandomChar = Math.floor(Math.random() * commendationsList.length);
+//   commendation.style.display = "block";
+//   commendationText.textContent = commendationsList[getRandomChar];
+//   if (transactionsArray.length == 0) {
+//     commendation.style.display = "none";
+//   }
+//   if (transactionsArray.length == 1) {
+//     commendation.style.display = "block";
+//     commendationText.textContent =
+//       "Its your first transaction. Great job you have started your journey";
+//   }
+// }
 
 // let sloikTitle = "";
 // let sloikDescription = "";
@@ -615,16 +615,21 @@ import {
   getSloikID,
 } from "./modules/sloikGeneration.mjs";
 import { showPopup, hidePopup } from "./modules/popup.mjs";
-
+import { getData } from "./modules/insideSloik.mjs";
 window.onload = function () {
   if (document.title == "SloikApp Home") {
     renderExistingSloiks();
   }
+  if (document.title == "SloikApp Sloik") {
+    getData(totalMoney, goalValue, isGoalReached, transactionsArray);
+  }
 };
 const addSloikBtn = document.getElementById("add_sloik");
-addSloikBtn.onclick = function () {
-  showPopup();
-};
+if (document.title == "SloikApp Home") {
+  addSloikBtn.onclick = function () {
+    showPopup();
+  };
+}
 const submitPopupBtn = document.getElementById("submitBtn");
 submitPopupBtn.onclick = function () {
   if (document.title == "SloikApp Home") {
