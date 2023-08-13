@@ -14,7 +14,7 @@ function addTransactionDIV(transactionsArray) {
           onclick="editTransaction(${getLastElementOfArray})"><b>Edit</b></button>
         <button class="cancelBtn" 
           id="cancel_transaction_${getLastElementOfArray}" 
-          onclick="deleteTransaction(${getLastElementOfArray})"><b>X</b></button>
+          onclick="deleteSomeTransaction(${getLastElementOfArray})"><b>X</b></button>
         </div>`
   );
   const transactionText = document.getElementById(
@@ -55,22 +55,6 @@ function renderTransactions(transactionsArray) {
     } </br>
       Date: ${formatDate.toLocaleString()}`;
   }
-}
-
-function deleteTransaction(transaction_id, transactionsArray) {
-  const transactionBox = document.getElementById(
-    `transaction_${transaction_id}_Box`
-  );
-  transactionBox.remove();
-  totalMoney -= transactionsArray[transaction_id].transactionSum;
-  changeMoneyScore();
-  transactionsArray.splice(transaction_id, 1);
-  const transactionBoxes = document.getElementById("transactionBoxes");
-  transactionBoxes.replaceChildren();
-  renderTransactions();
-  setProgressBar();
-  updateCookies(sloikID);
-  console.log(transactionsArray);
 }
 
 function editTransaction(transaction_id) {

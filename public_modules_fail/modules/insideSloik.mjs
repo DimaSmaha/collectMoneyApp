@@ -268,4 +268,17 @@ function submitForm() {
   }
 }
 
-export { getData, addMoney, acceptEditGoal };
+function deleteTransaction() {
+  let transaction_id = localStorage.getItem("deletedTransactionId");
+  totalMoney -= transactionsArray[transaction_id].transactionSum;
+  changeMoneyScore();
+  transactionsArray.splice(transaction_id, 1);
+  const transactionBoxes = document.getElementById("transactionBoxes");
+  transactionBoxes.replaceChildren();
+  renderTransactions();
+  setProgressBar();
+  updateCookies(sloikID);
+  console.log(transactionsArray);
+}
+
+export { getData, addMoney, acceptEditGoal, deleteTransaction };

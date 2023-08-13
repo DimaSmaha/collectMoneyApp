@@ -3,7 +3,12 @@ import {
   addSloikData,
 } from "./modules/sloikGeneration.mjs";
 import { showPopup, hidePopup } from "./modules/popup.mjs";
-import { getData, addMoney, acceptEditGoal } from "./modules/insideSloik.mjs";
+import {
+  getData,
+  addMoney,
+  acceptEditGoal,
+  deleteTransaction,
+} from "./modules/insideSloik.mjs";
 import {
   editGoal,
   setEditGoalBtnDisplay,
