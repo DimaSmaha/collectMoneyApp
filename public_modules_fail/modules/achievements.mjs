@@ -1,6 +1,6 @@
 let achievementOneComplete = false;
 let achievementTwoComplete = false;
-function checkAchievements() {
+function checkAchievements(transactionsArray) {
   //Achievement One, the user made 777 transaction
   if (
     transactionsArray[transactionsArray.length - 1].transactionSum == 777 &&
@@ -20,3 +20,5 @@ function checkAchievements() {
     achievementTwoComplete = true;
   }
 }
+
+export { checkAchievements };

@@ -3,7 +3,7 @@ import {
   addSloikData,
 } from "./modules/sloikGeneration.mjs";
 import { showPopup, hidePopup } from "./modules/popup.mjs";
-import { getData } from "./modules/insideSloik.mjs";
+import { getData, addMoney } from "./modules/insideSloik.mjs";
 
 window.onload = function () {
   if (document.title == "SloikApp Home") {
@@ -30,3 +30,10 @@ submitPopupBtn.onclick = function () {
     addSloikData(totalMoney, isGoalReached, transactionsArray);
   }
 };
+
+const addMoneyBtn = document.getElementById("addMoneyBtn");
+if (document.title == "SloikApp Sloik") {
+  addMoneyBtn.onclick = function () {
+    addMoney();
+  };
+}

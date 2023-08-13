@@ -1,4 +1,6 @@
 import { showPopup, hidePopup } from "./popup.mjs";
+import { Transactions } from "./transactionsClass.mjs";
+import { addTransactionDIV, renderTransactions } from "./transactions.mjs";
 
 let sloikID;
 sloikID = localStorage.getItem("currentSloikID");
@@ -24,7 +26,7 @@ const getData = async () => {
   if (goalValue > 0) {
     setGoal();
   }
-  renderTransactions();
+  renderTransactions(transactionsArray);
   setProgressBar();
   showRandomCommendation();
   console.log(transactionsArray);
@@ -84,33 +86,6 @@ function setGoal() {
   }
   let sentence = `Your goal : ${goalValue}`;
   userGoal.textContent = sentence;
-}
-
-function renderTransactions() {
-  const transactionBoxes = document.getElementById("transactionBoxes");
-  for (let i = 0; i < transactionsArray.length; i++) {
-    transactionBoxes.insertAdjacentHTML(
-      "afterbegin",
-      `<div
-        id="transaction_${i}_Box"
-        class="transactionBox">
-        <p class="transactionText" id="transaction_${i}_Text"></p>
-        <button class="editTransactionBtn" 
-          id="edit_transaction_${i}" 
-          onclick="editTransaction(${i})"><b>Edit</b></button>
-        <button class="cancelBtn" 
-          id="cancel_transaction_${i}" 
-          onclick="deleteTransaction(${i})"><b>X</b></button>
-      </div>`
-    );
-    const transactionText = document.getElementById(`transaction_${i}_Text`);
-    getTransaction = JSON.parse(JSON.stringify(transactionsArray[i]));
-    formatDate = new Date(getTransaction.date);
-    transactionText.innerHTML = `Transaction sum: ${
-      getTransaction.transactionSum
-    } </br>
-    Date: ${formatDate.toLocaleString()}`;
-  }
 }
 
 function setProgressBar() {
@@ -190,7 +165,7 @@ function recalculateMoneyScore() {
     totalMoney += transactionsArray[i].transactionSum;
   }
 }
-
+import { checkAchievements } from "./achievements.mjs";
 function addMoney() {
   const errorNegative = document.getElementById("errorNegativeNumber");
   const errorNotNumber = document.getElementById("errorNotNumber");
@@ -215,13 +190,14 @@ function addMoney() {
   console.log(totalMoney);
   moneyInput.value = "";
   // updateJSONFile();
+  changeMoneyScore();
   formArray(moneyToBeAdded);
   if (totalMoney < goalValue || !isGoalReached) {
     checkGoal();
   }
-  addTransactionDIV();
+  addTransactionDIV(transactionsArray);
   setProgressBar();
-  checkAchievements();
+  checkAchievements(transactionsArray);
   showRandomCommendation();
   updateCookies(sloikID);
   return totalMoney;
@@ -288,4 +264,4 @@ function submitForm() {
   }
 }
 
-export { getData };
+export { getData, addMoney };

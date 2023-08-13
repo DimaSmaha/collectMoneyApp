@@ -20,10 +20,10 @@ function addTransactionDIV(transactionsArray) {
   const transactionText = document.getElementById(
     `transaction_${getLastElementOfArray}_Text`
   );
-  getTransaction = JSON.parse(
+  let getTransaction = JSON.parse(
     JSON.stringify(transactionsArray[getLastElementOfArray])
   );
-  formatDate = new Date(getTransaction.date);
+  let formatDate = new Date(getTransaction.date);
   transactionText.innerHTML = `Transaction sum: ${
     getTransaction.transactionSum
   } </br>
@@ -48,8 +48,8 @@ function renderTransactions(transactionsArray) {
         </div>`
     );
     const transactionText = document.getElementById(`transaction_${i}_Text`);
-    getTransaction = JSON.parse(JSON.stringify(transactionsArray[i]));
-    formatDate = new Date(getTransaction.date);
+    let getTransaction = JSON.parse(JSON.stringify(transactionsArray[i]));
+    let formatDate = new Date(getTransaction.date);
     transactionText.innerHTML = `Transaction sum: ${
       getTransaction.transactionSum
     } </br>
@@ -146,3 +146,5 @@ function acceptEditTransaction(transaction_id, transactionsArray) {
   }
   transactionEditInput.value = "";
 }
+
+export { addTransactionDIV, renderTransactions };
