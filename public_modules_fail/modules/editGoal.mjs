@@ -6,12 +6,9 @@ function editGoal() {
     "beforeend",
     `<input type="number" id="editGoalInput" placeholder="edit your goal"/>
       <button class="acceptBtn" 
-        id="accept_edit_goal" 
-        onclick="acceptEditGoal()"><b>V</b></button>
+        id="accept_edit_goal"><b>V</b></button>
       <button class="cancelBtn" 
-        id="cancel_edit_goal" 
-        onclick="setEditGoalBtnDisplay('flex'); 
-        removeEditGoalElementsDisplay()"><b>X</b></button>`
+        id="cancel_edit_goal"><b>X</b></button>`
   );
 }
 
@@ -29,3 +26,5 @@ function removeEditGoalElementsDisplay() {
   acceptEditGoal.remove();
   cancelEditGoal.remove();
 }
+
+export { editGoal, setEditGoalBtnDisplay, removeEditGoalElementsDisplay };

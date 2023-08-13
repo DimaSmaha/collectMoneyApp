@@ -1,6 +1,10 @@
 import { showPopup, hidePopup } from "./popup.mjs";
 import { Transactions } from "./transactionsClass.mjs";
 import { addTransactionDIV, renderTransactions } from "./transactions.mjs";
+import {
+  removeEditGoalElementsDisplay,
+  setEditGoalBtnDisplay,
+} from "./editGoal.mjs";
 
 let sloikID;
 sloikID = localStorage.getItem("currentSloikID");
@@ -264,4 +268,4 @@ function submitForm() {
   }
 }
 
-export { getData, addMoney };
+export { getData, addMoney, acceptEditGoal };
