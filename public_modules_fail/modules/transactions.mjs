@@ -150,9 +150,7 @@ function deleteSomeTransaction(transaction_id) {
     `transaction_${transaction_id}_Box`
   );
   transactionBox.remove();
-  localStorage.setItem("deletedTransactionId", JSON.stringify(transaction_id));
-  console.log(1);
-  deleteTransaction();
+  deleteTransaction(transaction_id);
 }
 
 export { addTransactionDIV, renderTransactions };

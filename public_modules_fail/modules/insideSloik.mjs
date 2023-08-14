@@ -268,9 +268,7 @@ function submitForm() {
   }
 }
 
-function deleteTransaction() {
-  console.log(2);
-  let transaction_id = localStorage.getItem("deletedTransactionId");
+function deleteTransaction(transaction_id) {
   totalMoney -= transactionsArray[transaction_id].transactionSum;
   changeMoneyScore();
   transactionsArray.splice(transaction_id, 1);
