@@ -1,3 +1,5 @@
+import { deleteTransaction } from "./insideSloik.mjs";
+
 function addTransactionDIV(transactionsArray) {
   const getLastElementOfArray = transactionsArray.length - 1;
   console.log(getLastElementOfArray);
@@ -28,6 +30,12 @@ function addTransactionDIV(transactionsArray) {
     getTransaction.transactionSum
   } </br>
     Date: ${formatDate.toLocaleString()}`;
+  let cancelBtns = document.getElementById(
+    `cancel_transaction_${getLastElementOfArray}`
+  );
+  cancelBtns.onclick = function () {
+    deleteSomeTransaction(getLastElementOfArray);
+  };
 }
 
 function renderTransactions(transactionsArray) {
@@ -54,6 +62,12 @@ function renderTransactions(transactionsArray) {
       getTransaction.transactionSum
     } </br>
       Date: ${formatDate.toLocaleString()}`;
+  }
+  for (let i = 0; i < transactionsArray.length; i++) {
+    let cancelBtns = document.getElementById(`cancel_transaction_${i}`);
+    cancelBtns.onclick = function () {
+      deleteSomeTransaction(i);
+    };
   }
 }
 
@@ -129,6 +143,16 @@ function acceptEditTransaction(transaction_id, transactionsArray) {
     }
   }
   transactionEditInput.value = "";
+}
+
+function deleteSomeTransaction(transaction_id) {
+  const transactionBox = document.getElementById(
+    `transaction_${transaction_id}_Box`
+  );
+  transactionBox.remove();
+  localStorage.setItem("deletedTransactionId", JSON.stringify(transaction_id));
+  console.log(1);
+  deleteTransaction();
 }
 
 export { addTransactionDIV, renderTransactions };
