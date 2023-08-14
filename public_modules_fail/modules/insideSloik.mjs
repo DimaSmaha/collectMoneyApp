@@ -269,6 +269,10 @@ function submitForm() {
 }
 
 function deleteTransaction(transaction_id) {
+  const transactionBox = document.getElementById(
+    `transaction_${transaction_id}_Box`
+  );
+  transactionBox.remove();
   totalMoney -= transactionsArray[transaction_id].transactionSum;
   changeMoneyScore();
   transactionsArray.splice(transaction_id, 1);

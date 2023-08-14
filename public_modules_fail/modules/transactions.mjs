@@ -16,7 +16,7 @@ function addTransactionDIV(transactionsArray) {
           onclick="editTransaction(${getLastElementOfArray})"><b>Edit</b></button>
         <button class="cancelBtn" 
           id="cancel_transaction_${getLastElementOfArray}" 
-          onclick="deleteSomeTransaction(${getLastElementOfArray})"><b>X</b></button>
+          onclick="deleteTransaction(${getLastElementOfArray})"><b>X</b></button>
         </div>`
   );
   const transactionText = document.getElementById(
@@ -34,7 +34,7 @@ function addTransactionDIV(transactionsArray) {
     `cancel_transaction_${getLastElementOfArray}`
   );
   cancelBtns.onclick = function () {
-    deleteSomeTransaction(getLastElementOfArray);
+    deleteTransaction(getLastElementOfArray);
   };
 }
 
@@ -49,10 +49,10 @@ function renderTransactions(transactionsArray) {
           <p class="transactionText" id="transaction_${i}_Text"></p>
           <button class="editTransactionBtn" 
             id="edit_transaction_${i}" 
-            onclick="deleteSomeTransaction(${i})"><b>Edit</b></button>
+            onclick="deleteTransaction(${i})"><b>Edit</b></button>
           <button class="cancelBtn" 
             id="cancel_transaction_${i}" 
-            onclick="deleteSomeTransaction(${i})"><b>X</b></button>
+            onclick="deleteTransaction(${i})"><b>X</b></button>
         </div>`
     );
     const transactionText = document.getElementById(`transaction_${i}_Text`);
@@ -66,7 +66,7 @@ function renderTransactions(transactionsArray) {
   for (let i = 0; i < transactionsArray.length; i++) {
     let cancelBtns = document.getElementById(`cancel_transaction_${i}`);
     cancelBtns.onclick = function () {
-      deleteSomeTransaction(i);
+      deleteTransaction(i);
     };
   }
 }
@@ -143,14 +143,6 @@ function acceptEditTransaction(transaction_id, transactionsArray) {
     }
   }
   transactionEditInput.value = "";
-}
-
-function deleteSomeTransaction(transaction_id) {
-  const transactionBox = document.getElementById(
-    `transaction_${transaction_id}_Box`
-  );
-  transactionBox.remove();
-  deleteTransaction(transaction_id);
 }
 
 export { addTransactionDIV, renderTransactions };
