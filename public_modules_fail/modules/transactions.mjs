@@ -1,4 +1,4 @@
-import { deleteTransaction } from "./insideSloik.mjs";
+import { deleteTransaction, acceptEditTransaction } from "./insideSloik.mjs";
 
 function addTransactionDIV(transactionsArray) {
   const getLastElementOfArray = transactionsArray.length - 1;
@@ -36,6 +36,12 @@ function addTransactionDIV(transactionsArray) {
   cancelBtns.onclick = function () {
     deleteTransaction(getLastElementOfArray);
   };
+  let editBtns = document.getElementById(
+    `edit_transaction_${getLastElementOfArray}`
+  );
+  editBtns.onclick = function () {
+    editTransaction(getLastElementOfArray);
+  };
 }
 
 function renderTransactions(transactionsArray) {
@@ -49,7 +55,7 @@ function renderTransactions(transactionsArray) {
           <p class="transactionText" id="transaction_${i}_Text"></p>
           <button class="editTransactionBtn" 
             id="edit_transaction_${i}" 
-            onclick="deleteTransaction(${i})"><b>Edit</b></button>
+            onclick="editTransaction(${i})"><b>Edit</b></button>
           <button class="cancelBtn" 
             id="cancel_transaction_${i}" 
             onclick="deleteTransaction(${i})"><b>X</b></button>
@@ -67,6 +73,10 @@ function renderTransactions(transactionsArray) {
     let cancelBtns = document.getElementById(`cancel_transaction_${i}`);
     cancelBtns.onclick = function () {
       deleteTransaction(i);
+    };
+    let editBtns = document.getElementById(`edit_transaction_${i}`);
+    editBtns.onclick = function () {
+      editTransaction(i);
     };
   }
 }
@@ -87,6 +97,19 @@ function editTransaction(transaction_id) {
         onclick="setTransactionBoxChildsDisplay(${transaction_id},'flex'); 
         setTransactionBoxEditElementsDisplay(${transaction_id},'none')"><b>X</b></button>`
   );
+  let acceptEditBtn = document.getElementById(
+    `accept_edit_transaction_${transaction_id}`
+  );
+  acceptEditBtn.onclick = function () {
+    acceptEditTransaction(transaction_id);
+  };
+  let cancelEditTransactionBtn = document.getElementById(
+    `decline_edit_transaction_${transaction_id}`
+  );
+  cancelEditTransactionBtn.onclick = function () {
+    setTransactionBoxChildsDisplay(transaction_id, "flex");
+    setTransactionBoxEditElementsDisplay(transaction_id, "none");
+  };
 }
 
 function setTransactionBoxChildsDisplay(transaction_id, display) {
@@ -119,30 +142,6 @@ function setTransactionBoxEditElementsDisplay(transaction_id, display) {
   transactionEditInput.style.display = display;
   transactionEditAccept.style.display = display;
   transactionEditDecline.style.display = display;
-}
-
-function acceptEditTransaction(transaction_id, transactionsArray) {
-  const transactionEditInput = document.getElementById(
-    `editMoneyInput_${transaction_id}`
-  );
-  const editedSum = parseInt(transactionEditInput.value);
-  if (isNaN(editedSum) == false && editedSum > 0) {
-    transactionsArray[transaction_id].transactionSum = editedSum;
-    const transactionBoxes = document.getElementById("transactionBoxes");
-    transactionBoxes.replaceChildren();
-    renderTransactions();
-    recalculateMoneyScore();
-    changeMoneyScore();
-    setProgressBar();
-    updateCookies(sloikID);
-    if (totalMoney < goalValue || !isGoalReached) {
-      checkGoal();
-    }
-    if (totalMoney < goalValue) {
-      isGoalReached = false;
-    }
-  }
-  transactionEditInput.value = "";
 }
 
 export { addTransactionDIV, renderTransactions };

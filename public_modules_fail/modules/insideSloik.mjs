@@ -5,6 +5,7 @@ import {
   removeEditGoalElementsDisplay,
   setEditGoalBtnDisplay,
 } from "./editGoal.mjs";
+import { checkAchievements } from "./achievements.mjs";
 
 let sloikID;
 sloikID = localStorage.getItem("currentSloikID");
@@ -165,11 +166,11 @@ function updateCookies(sloikID) {
 
 function recalculateMoneyScore() {
   totalMoney = 0;
-  for (i = 0; i < transactionsArray.length; i++) {
+  for (let i = 0; i < transactionsArray.length; i++) {
     totalMoney += transactionsArray[i].transactionSum;
   }
 }
-import { checkAchievements } from "./achievements.mjs";
+
 function addMoney() {
   const errorNegative = document.getElementById("errorNegativeNumber");
   const errorNotNumber = document.getElementById("errorNotNumber");
@@ -284,4 +285,34 @@ function deleteTransaction(transaction_id) {
   console.log(transactionsArray);
 }
 
-export { getData, addMoney, acceptEditGoal, deleteTransaction };
+function acceptEditTransaction(transaction_id) {
+  const transactionEditInput = document.getElementById(
+    `editMoneyInput_${transaction_id}`
+  );
+  const editedSum = parseInt(transactionEditInput.value);
+  if (isNaN(editedSum) == false && editedSum > 0) {
+    transactionsArray[transaction_id].transactionSum = editedSum;
+    const transactionBoxes = document.getElementById("transactionBoxes");
+    transactionBoxes.replaceChildren();
+    renderTransactions(transactionsArray);
+    recalculateMoneyScore();
+    changeMoneyScore();
+    setProgressBar();
+    updateCookies(sloikID);
+    if (totalMoney < goalValue || !isGoalReached) {
+      checkGoal();
+    }
+    if (totalMoney < goalValue) {
+      isGoalReached = false;
+    }
+  }
+  transactionEditInput.value = "";
+}
+
+export {
+  getData,
+  addMoney,
+  acceptEditGoal,
+  deleteTransaction,
+  acceptEditTransaction,
+};
