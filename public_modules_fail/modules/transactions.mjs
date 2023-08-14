@@ -41,10 +41,10 @@ function renderTransactions(transactionsArray) {
           <p class="transactionText" id="transaction_${i}_Text"></p>
           <button class="editTransactionBtn" 
             id="edit_transaction_${i}" 
-            onclick="editTransaction(${i})"><b>Edit</b></button>
+            onclick="deleteSomeTransaction(${i})"><b>Edit</b></button>
           <button class="cancelBtn" 
             id="cancel_transaction_${i}" 
-            onclick="deleteTransaction(${i})"><b>X</b></button>
+            onclick="deleteSomeTransaction(${i})"><b>X</b></button>
         </div>`
     );
     const transactionText = document.getElementById(`transaction_${i}_Text`);

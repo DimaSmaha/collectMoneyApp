@@ -269,13 +269,14 @@ function submitForm() {
 }
 
 function deleteTransaction() {
+  console.log(2);
   let transaction_id = localStorage.getItem("deletedTransactionId");
   totalMoney -= transactionsArray[transaction_id].transactionSum;
   changeMoneyScore();
   transactionsArray.splice(transaction_id, 1);
   const transactionBoxes = document.getElementById("transactionBoxes");
   transactionBoxes.replaceChildren();
-  renderTransactions();
+  renderTransactions(transactionsArray);
   setProgressBar();
   updateCookies(sloikID);
   console.log(transactionsArray);

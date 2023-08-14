@@ -4,4 +4,5 @@ function deleteSomeTransaction(transaction_id) {
   );
   transactionBox.remove();
   localStorage.setItem("deletedTransactionId", JSON.stringify(transaction_id));
+  console.log(1);
 }
