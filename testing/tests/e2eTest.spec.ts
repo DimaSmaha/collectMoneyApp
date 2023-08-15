@@ -4,10 +4,10 @@ import { SloikSloikPage } from "../pages/sloikSloikPage.page";
 
 test.describe("Login page tests", () => {
   test.beforeEach(async ({ page }) => {
-    let redmineHomePage = new SloikHomePage(page);
-    await redmineHomePage.goto();
+    let sloikHomePage = new SloikHomePage(page);
+    await sloikHomePage.goto();
     await page.waitForLoadState();
-    await redmineHomePage.checkPageUrl();
+    await page.
   });
 
   test("Should sing in to created account", async ({ page }) => {
