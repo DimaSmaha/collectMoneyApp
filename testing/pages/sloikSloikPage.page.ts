@@ -2,7 +2,7 @@ import { Helper } from "./helper.page";
 // playwright-dev-page.ts
 import { expect, Locator, Page } from "@playwright/test";
 
-export class RedmineRegisterPage extends Helper {
+export class SloikSloikPage extends Helper {
   readonly page: Page;
   readonly loginInput: Locator;
   readonly passwordInput: Locator;
