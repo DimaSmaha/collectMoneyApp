@@ -11,6 +11,15 @@ export class SloikSloikPage extends Helper {
   readonly lastnameInput: Locator;
   readonly emailInput: Locator;
   readonly submitButton: Locator;
+  readonly homeButton: Locator;
+  readonly achievementsButton: Locator;
+  readonly addMoneyInput: Locator;
+  readonly addMoneyButton: Locator;
+  readonly sloikTitle: Locator;
+  readonly sloikDescription: Locator;
+  readonly yourMoneyScore: Locator;
+  readonly yourGoal: Locator;
+  readonly progressBarText: Locator;
 
   constructor(page: Page) {
     super();
@@ -24,6 +33,13 @@ export class SloikSloikPage extends Helper {
     this.lastnameInput = page.locator('input[name="user\\[lastname\\]"]');
     this.emailInput = page.locator('input[name="user\\[mail\\]"]');
     this.submitButton = page.locator("text=Submit");
+    this.homeButton = page.locator('//a[text()="Home"]');
+    this.achievementsButton = page.locator('//a[text()="Achievements"]');
+    this.sloikTitle = page.locator('[id="sloikTitle"]');
+    this.sloikDescription = page.locator('[id="sloikDescription"]');
+    this.yourMoneyScore = page.locator('[id="yourMoneyScore"]');
+    this.yourGoal = page.locator('[id="yourGoal"]');
+    this.progressBarText = page.locator('[id="progressBarParent"]');
   }
 
   async checkPageUrl() {
@@ -51,5 +67,33 @@ export class SloikSloikPage extends Helper {
 
   async clickSubmitBtn() {
     await this.submitButton.click();
+  }
+
+  async clickHomeBtn() {
+    await this.homeButton.click();
+  }
+
+  async clickAchievementsBtn() {
+    await this.achievementsButton.click();
+  }
+
+  async assertSloikTitleValue(sloikTitle: string) {
+    expect(await this.sloikTitle.textContent()).toBe(sloikTitle);
+  }
+
+  async assertSloikDesriptionValue(sloikDescription: string) {
+    expect(await this.sloikDescription.textContent()).toBe(sloikDescription);
+  }
+
+  async assertMoneyScoreValue(moneyScore: string) {
+    expect(await this.yourMoneyScore.textContent()).toBe(moneyScore);
+  }
+
+  async assertYourGoalValue(yourGoal: string) {
+    expect(await this.yourGoal.textContent()).toBe(yourGoal);
+  }
+
+  async assertProgressBarValue(progressBar: string) {
+    expect(await this.progressBarText.innerText()).toBe(progressBar);
   }
 }
