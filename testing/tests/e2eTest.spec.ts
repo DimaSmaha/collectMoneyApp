@@ -25,6 +25,11 @@ test.describe("E2E", () => {
     await sloikHomePage.fillSloikDescriptionInput(sloikOneDescription);
     await sloikHomePage.fillSLoikGoalSumInput(sloikOneGoalSum);
     await sloikHomePage.clickSloikSumbitBtn();
+    await sloikHomePage.clickAddSloikBtn();
+    await sloikHomePage.fillSloikTitleInput(sloikTwoTitle);
+    await sloikHomePage.fillSloikDescriptionInput(sloikTwoDescription);
+    await sloikHomePage.fillSLoikGoalSumInput(sloikTwoGoalSum);
+    await sloikHomePage.clickSloikSumbitBtn();
     await sloikHomePage.clickSloikOneBtn();
   });
 });
