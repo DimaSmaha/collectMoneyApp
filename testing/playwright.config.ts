@@ -17,6 +17,9 @@ const config: PlaywrightTestConfig = {
     // baseURL: "http://127.0.0.1:5500/public_modules_fail/home.html",
     baseURL: "http://127.0.0.1:5500/public/home.html",
     browserName: "chromium",
+    launchOptions: {
+      slowMo: 500,
+    },
     locale: "en-GB",
     actionTimeout: 0,
     trace: "on",
