@@ -32,7 +32,7 @@ test.describe("E2E", () => {
     await page.waitForLoadState();
   });
 
-  test("Should make e2e test", async ({ page }) => {
+  test("Should create 2 sloiks", async ({ page }) => {
     let sloikHomePage = new SloikHomePage(page);
     let sloikSloikPage = new SloikSloikPage(page);
 
