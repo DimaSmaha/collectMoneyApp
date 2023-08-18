@@ -20,6 +20,7 @@ export class SloikSloikPage extends Helper {
   readonly yourMoneyScore: Locator;
   readonly yourGoal: Locator;
   readonly progressBarText: Locator;
+  readonly transactionBox: Locator;
 
   constructor(page: Page) {
     super();
@@ -40,6 +41,8 @@ export class SloikSloikPage extends Helper {
     this.yourMoneyScore = page.locator('[id="yourMoneyScore"]');
     this.yourGoal = page.locator('[id="yourGoal"]');
     this.progressBarText = page.locator('[id="progressBarParent"]');
+    this.addMoneyInput = page.locator("#addMoneyInput");
+    this.addMoneyButton = page.locator("#addMoneyBtn");
   }
 
   async checkPageUrl() {
@@ -95,5 +98,54 @@ export class SloikSloikPage extends Helper {
 
   async assertProgressBarValue(progressBar: string) {
     expect(await this.progressBarText.innerText()).toBe(progressBar);
+  }
+
+  async fillAddMoneyInput(title: string) {
+    await this.addMoneyInput.type(title);
+  }
+
+  async clickAddMoneyButton() {
+    await this.addMoneyButton.click();
+  }
+
+  // async getTransactionBoxLocatorsId(transactionBoxId: number) {
+  //   this.page.locator(`transaction_${transactionBoxId}_Box`);
+  //   this.page.locator(`transaction_${transactionBoxId}_Text`);
+  //   this.page.locator(`edit_transaction_${transactionBoxId}`);
+  //   this.page.locator(`cancel_transaction_${transactionBoxId}`);
+  // }
+
+  async assertTransactionByNumber(
+    transactionBoxId: number,
+    transactionSum: number,
+    date: Date
+  ) {
+    const transactionBox = this.page.locator(
+      `#transaction_${transactionBoxId}_Box`
+    );
+    const transactionText = this.page.locator(
+      `#transaction_${transactionBoxId}_Text`
+    );
+    const editTransaction = this.page.locator(
+      `#edit_transaction_${transactionBoxId}`
+    );
+    const cancelTransaction = this.page.locator(
+      `#cancel_transaction_${transactionBoxId}`
+    );
+    console.log(transactionText.innerHTML);
+    await expect(transactionBox).toBeVisible();
+    await expect(transactionText).toBeVisible();
+    expect(await transactionText.innerText()).toContain("Transaction sum:");
+    expect(await transactionText.innerText()).toContain(
+      transactionSum.toString()
+    );
+    expect(await transactionText.innerText()).toContain("Date:");
+    let expectedDate = date
+      .toLocaleString()
+      .replace(".", "/")
+      .replace(".", "/");
+    expect(await transactionText.innerText()).toContain(expectedDate);
+    await expect(editTransaction).toBeVisible();
+    await expect(cancelTransaction).toBeVisible();
   }
 }
