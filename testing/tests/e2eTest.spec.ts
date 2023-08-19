@@ -187,5 +187,35 @@ test.describe("E2E", () => {
       editedTransaction1 + transaction2,
       sloikOneGoalSum
     );
+    await sloikSloikPage.assertTransactionTransactionSumById(
+      0,
+      editedTransaction1
+    );
+  });
+
+  test("Should delete the existing transaction", async ({ page }) => {
+    let sloikSloikPage = new SloikSloikPage(page);
+    const transaction1 = 15000;
+    const transaction2 = 10000;
+
+    await createAndOpenSloik(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      sloikOneGoalSum
+    );
+    await assertSloikValues(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      "0",
+      sloikOneGoalSum.toString(),
+      "0%"
+    );
+    await addMoneyToSloik({ page }, transaction1);
+    await addMoneyToSloik({ page }, transaction2);
+    await sloikSloikPage.deleteTransactionById(1);
+    await assertMoneyScore({ page }, transaction1);
+    await assertProgressBar({ page }, transaction1, sloikOneGoalSum);
   });
 });

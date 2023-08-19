@@ -175,4 +175,26 @@ export class SloikSloikPage extends Helper {
 
     await acceptEditTransactionBtn.click();
   }
+
+  async assertTransactionTransactionSumById(
+    transactionBoxId: number,
+    transactionSum: number
+  ) {
+    const transactionText = this.page.locator(
+      `#transaction_${transactionBoxId}_Text`
+    );
+    await expect(transactionText).toBeVisible();
+    expect(await transactionText.innerText()).toContain("Transaction sum:");
+    expect(await transactionText.innerText()).toContain(
+      transactionSum.toString()
+    );
+  }
+
+  async deleteTransactionById(transactionId: number) {
+    const deleteTransactionBtn = this.page.locator(
+      `#cancel_transaction_${transactionId}`
+    );
+
+    await deleteTransactionBtn.click();
+  }
 }
