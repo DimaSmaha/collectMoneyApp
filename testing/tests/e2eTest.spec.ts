@@ -74,6 +74,8 @@ test.describe("E2E", () => {
     editedSum: number
   ) {
     let sloikSloikPage = new SloikSloikPage(page);
+
+    expect(page.locator(`#editMoneyInput_${transactionId}`)).toBeVisible();
     await sloikSloikPage.clickEditTransactionBtnById(transactionId);
     await sloikSloikPage.fillEditTransactionInputById(transactionId, editedSum);
     await sloikSloikPage.clickAcceptEditTransactionBtnById(transactionId);
@@ -180,6 +182,12 @@ test.describe("E2E", () => {
       transaction1 + transaction2,
       sloikOneGoalSum
     );
+    await sloikSloikPage.clickEditTransactionBtnById(0);
+    expect(page.locator(`#transaction_${0}_Text`)).not.toBeVisible();
+    await sloikSloikPage.clickCancelEditTransactionBtnById(0);
+    expect(page.locator(`#transaction_${0}_Text`)).toBeVisible();
+    expect(page.locator(`#edit_transaction_${0}`)).toBeVisible();
+    expect(page.locator(`#editMoneyInput_${0}`)).not.toBeVisible();
     await editTransactionById({ page }, 0, editedTransaction1);
     await assertMoneyScore({ page }, editedTransaction1 + transaction2);
     await assertProgressBar(
@@ -217,5 +225,37 @@ test.describe("E2E", () => {
     await sloikSloikPage.deleteTransactionById(1);
     await assertMoneyScore({ page }, transaction1);
     await assertProgressBar({ page }, transaction1, sloikOneGoalSum);
+  });
+
+  test("Should edit the existing goal", async ({ page }) => {
+    let sloikSloikPage = new SloikSloikPage(page);
+    const transaction1 = 15000;
+    const editedGoalSum = 100000;
+
+    await createAndOpenSloik(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      sloikOneGoalSum
+    );
+    await assertSloikValues(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      "0",
+      sloikOneGoalSum.toString(),
+      "0%"
+    );
+    await addMoneyToSloik({ page }, transaction1);
+    await sloikSloikPage.clickEditGoalBtn();
+    await expect(sloikSloikPage.editGoalButton).not.toBeVisible();
+    await sloikSloikPage.clickCancelEditGoalBtn();
+    await expect(sloikSloikPage.acceptEditGoalButton).not.toBeVisible();
+    await expect(sloikSloikPage.cancelEditGoalButton).not.toBeVisible();
+    await expect(sloikSloikPage.editGoalInput).not.toBeVisible();
+    await sloikSloikPage.clickEditGoalBtn();
+    await sloikSloikPage.fillEditGoalInput(editedGoalSum);
+    await sloikSloikPage.clickAcceptEditGoalBtn();
+    await assertProgressBar({ page }, transaction1, editedGoalSum);
   });
 });

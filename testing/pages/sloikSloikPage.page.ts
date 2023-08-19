@@ -21,6 +21,10 @@ export class SloikSloikPage extends Helper {
   readonly yourGoal: Locator;
   readonly progressBarText: Locator;
   readonly transactionBox: Locator;
+  readonly editGoalButton: Locator;
+  readonly editGoalInput: Locator;
+  readonly acceptEditGoalButton: Locator;
+  readonly cancelEditGoalButton: Locator;
 
   constructor(page: Page) {
     super();
@@ -43,6 +47,10 @@ export class SloikSloikPage extends Helper {
     this.progressBarText = page.locator('[id="progressBarParent"]');
     this.addMoneyInput = page.locator("#addMoneyInput");
     this.addMoneyButton = page.locator("#addMoneyBtn");
+    this.editGoalButton = page.locator("#edit_goal_button");
+    this.editGoalInput = page.locator("#editGoalInput");
+    this.acceptEditGoalButton = page.locator("#accept_edit_goal");
+    this.cancelEditGoalButton = page.locator("#cancel_edit_goal");
   }
 
   async checkPageUrl() {
@@ -157,6 +165,14 @@ export class SloikSloikPage extends Helper {
     await transactionEditBtn.click();
   }
 
+  async clickCancelEditTransactionBtnById(transactionId: number) {
+    const cancelEditTransactionButton = this.page.locator(
+      `#decline_edit_transaction_${transactionId}`
+    );
+
+    await cancelEditTransactionButton.click();
+  }
+
   async fillEditTransactionInputById(
     transactionId: number,
     editedTransaction: number
@@ -196,5 +212,21 @@ export class SloikSloikPage extends Helper {
     );
 
     await deleteTransactionBtn.click();
+  }
+
+  async clickEditGoalBtn() {
+    await this.editGoalButton.click();
+  }
+
+  async fillEditGoalInput(editedGoal: number) {
+    await this.editGoalInput.fill(editedGoal.toString());
+  }
+
+  async clickAcceptEditGoalBtn() {
+    await this.acceptEditGoalButton.click();
+  }
+
+  async clickCancelEditGoalBtn() {
+    await this.cancelEditGoalButton.click();
   }
 }
