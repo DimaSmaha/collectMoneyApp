@@ -148,4 +148,31 @@ export class SloikSloikPage extends Helper {
     await expect(editTransaction).toBeVisible();
     await expect(cancelTransaction).toBeVisible();
   }
+
+  async clickEditTransactionBtnById(transactionId: number) {
+    const transactionEditBtn = this.page.locator(
+      `#edit_transaction_${transactionId}`
+    );
+
+    await transactionEditBtn.click();
+  }
+
+  async fillEditTransactionInputById(
+    transactionId: number,
+    editedTransaction: number
+  ) {
+    const transactionEditInput = this.page.locator(
+      `#editMoneyInput_${transactionId}`
+    );
+
+    transactionEditInput.fill(editedTransaction.toString());
+  }
+
+  async clickAcceptEditTransactionBtnById(transactionId: number) {
+    const acceptEditTransactionBtn = this.page.locator(
+      `#accept_edit_transaction_${transactionId}`
+    );
+
+    await acceptEditTransactionBtn.click();
+  }
 }

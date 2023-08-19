@@ -41,6 +41,44 @@ test.describe("E2E", () => {
     await sloikHomePage.clickSloikOneBtn();
   }
 
+  async function addMoneyToSloik({ page }, addMoneySum: number) {
+    let sloikSloikPage = new SloikSloikPage(page);
+
+    await sloikSloikPage.fillAddMoneyInput(addMoneySum.toString());
+    await sloikSloikPage.clickAddMoneyButton();
+  }
+
+  async function assertProgressBar(
+    { page },
+    addMoneySum: number,
+    sloikGoal: number
+  ) {
+    let sloikSloikPage = new SloikSloikPage(page);
+
+    await sloikSloikPage.assertProgressBarValue(
+      `${Math.round((addMoneySum / sloikGoal) * 100)}%`
+    );
+  }
+
+  async function assertMoneyScore({ page }, moneyScore: number) {
+    let sloikSloikPage = new SloikSloikPage(page);
+
+    await sloikSloikPage.assertMoneyScoreValue(
+      `Your money : ${moneyScore.toString()}`
+    );
+  }
+
+  async function editTransactionById(
+    { page },
+    transactionId: number,
+    editedSum: number
+  ) {
+    let sloikSloikPage = new SloikSloikPage(page);
+    await sloikSloikPage.clickEditTransactionBtnById(transactionId);
+    await sloikSloikPage.fillEditTransactionInputById(transactionId, editedSum);
+    await sloikSloikPage.clickAcceptEditTransactionBtnById(transactionId);
+  }
+
   test.beforeEach(async ({ page }) => {
     let sloikHomePage = new SloikHomePage(page);
     await sloikHomePage.goto();
@@ -105,9 +143,49 @@ test.describe("E2E", () => {
     await sloikSloikPage.assertMoneyScoreValue(
       `Your money : ${addMoneySum.toString()}`
     );
-    await sloikSloikPage.assertProgressBarValue(
-      `${Math.round((addMoneySum / sloikOneGoalSum) * 100)}%`
-    );
+    await assertProgressBar({ page }, addMoneySum, sloikOneGoalSum);
     await sloikSloikPage.assertTransactionByNumber(0, addMoneySum, new Date());
+  });
+
+  test("Should edit the existing transaction", async ({ page }) => {
+    let sloikSloikPage = new SloikSloikPage(page);
+    const transaction1 = 15000;
+    const transaction2 = 10000;
+    const editedTransaction1 = 25000;
+
+    await createAndOpenSloik(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      sloikOneGoalSum
+    );
+    await assertSloikValues(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      "0",
+      sloikOneGoalSum.toString(),
+      "0%"
+    );
+    await addMoneyToSloik({ page }, transaction1);
+    await sloikSloikPage.assertMoneyScoreValue(
+      `Your money : ${transaction1.toString()}`
+    );
+    await addMoneyToSloik({ page }, transaction2);
+    await sloikSloikPage.assertMoneyScoreValue(
+      `Your money : ${(transaction1 + transaction2).toString()}`
+    );
+    await assertProgressBar(
+      { page },
+      transaction1 + transaction2,
+      sloikOneGoalSum
+    );
+    await editTransactionById({ page }, 0, editedTransaction1);
+    await assertMoneyScore({ page }, editedTransaction1 + transaction2);
+    await assertProgressBar(
+      { page },
+      editedTransaction1 + transaction2,
+      sloikOneGoalSum
+    );
   });
 });
