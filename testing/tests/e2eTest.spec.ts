@@ -89,8 +89,8 @@ test.describe("E2E", () => {
   ) {
     let sloikSloikPage = new SloikSloikPage(page);
 
-    expect(page.locator(`#editMoneyInput_${transactionId}`)).toBeVisible();
     await sloikSloikPage.clickEditTransactionBtnById(transactionId);
+    expect(page.locator(`#editMoneyInput_${transactionId}`)).toBeVisible();
     await sloikSloikPage.fillEditTransactionInputById(transactionId, editedSum);
     await sloikSloikPage.clickAcceptEditTransactionBtnById(transactionId);
   }
