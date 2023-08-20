@@ -17,8 +17,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install live-server
+        run: npm install -g live-server
+
       - name: Launch live-server
-        run: bash -c "live-server --port=5050"
+        run: live-server --port=5050
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
