@@ -17,6 +17,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install @playwright/test
+        run: npm install -D @playwright/test
+
       - name: Install live-server
         run: npm install -g live-server
 
