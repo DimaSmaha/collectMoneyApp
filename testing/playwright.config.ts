@@ -7,18 +7,18 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 5000,
   },
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
 
   use: {
-    // baseURL: "http://127.0.0.1:5500/public_modules_fail/home.html",
-    baseURL: "http://127.0.0.1:5500/public/home.html",
+    baseURL: "http://127.0.0.1:5500/public_modules_fail/home.html",
+    // baseURL: "http://127.0.0.1:5500/public/home.html",
     browserName: "chromium",
     launchOptions: {
-      slowMo: 300,
+      slowMo: 0,
     },
     locale: "en-GB",
     actionTimeout: 0,
