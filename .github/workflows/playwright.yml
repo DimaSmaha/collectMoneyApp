@@ -24,7 +24,7 @@ jobs:
         run: npm install -g live-server
 
       - name: Launch live-server
-        run: live-server --port=5050  &
+        run: live-server --port=5500  &
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
