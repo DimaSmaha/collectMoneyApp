@@ -25,6 +25,7 @@ export class SloikSloikPage extends Helper {
   readonly editGoalInput: Locator;
   readonly acceptEditGoalButton: Locator;
   readonly cancelEditGoalButton: Locator;
+  readonly achievementOne: Locator;
 
   constructor(page: Page) {
     super();
@@ -51,6 +52,7 @@ export class SloikSloikPage extends Helper {
     this.editGoalInput = page.locator("#editGoalInput");
     this.acceptEditGoalButton = page.locator("#accept_edit_goal");
     this.cancelEditGoalButton = page.locator("#cancel_edit_goal");
+    this.achievementOne = page.locator("#achievement_1");
   }
 
   async checkPageUrl() {

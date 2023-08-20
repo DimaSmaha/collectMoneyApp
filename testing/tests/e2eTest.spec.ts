@@ -258,4 +258,55 @@ test.describe("E2E", () => {
     await sloikSloikPage.clickAcceptEditGoalBtn();
     await assertProgressBar({ page }, transaction1, editedGoalSum);
   });
+
+  test("Should show an achievement", async ({ page }) => {
+    let sloikSloikPage = new SloikSloikPage(page);
+    const transaction1 = 777;
+
+    await createAndOpenSloik(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      sloikOneGoalSum
+    );
+    await assertSloikValues(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      "0",
+      sloikOneGoalSum.toString(),
+      "0%"
+    );
+    await addMoneyToSloik({ page }, transaction1);
+    await expect(sloikSloikPage.achievementOne).toBeInViewport();
+    await expect(sloikSloikPage.achievementOne).toBeVisible();
+    await expect(sloikSloikPage.achievementOne).toHaveCSS("display", "block");
+  });
+
+  test("Should check the proper save of data for 2 sloiks", async ({
+    page,
+  }) => {
+    let sloikSloikPage = new SloikSloikPage(page);
+    const transaction1 = 10000;
+    const transaction2 = 15000;
+
+    await createAndOpenSloik(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      sloikOneGoalSum
+    );
+    await assertSloikValues(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      "0",
+      sloikOneGoalSum.toString(),
+      "0%"
+    );
+    await addMoneyToSloik({ page }, transaction1);
+    await addMoneyToSloik({ page }, transaction2);
+    await sloikSloikPage.assertTransactionByNumber(0, transaction1, new Date());
+    await sloikSloikPage.assertTransactionByNumber(0, transaction2, new Date());
+  });
 });
