@@ -172,6 +172,14 @@ export class SloikSloikPage extends Helper {
     await expect(cancelTransaction).toBeVisible();
   }
 
+  async isTransactionByIdDisplayed(transactionId: number) {
+    const transactionBox = this.page.locator(
+      `#transaction_${transactionId}_Box`
+    );
+
+    await expect(transactionBox).toBeVisible();
+  }
+
   async clickEditTransactionBtnById(transactionId: number) {
     const transactionEditBtn = this.page.locator(
       `#edit_transaction_${transactionId}`

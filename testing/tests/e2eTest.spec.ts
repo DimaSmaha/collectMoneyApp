@@ -41,6 +41,20 @@ test.describe("E2E", () => {
     await sloikHomePage.clickSloikOneBtn();
   }
 
+  async function createSloik(
+    { page },
+    title: string,
+    description: string,
+    yourGoal: number
+  ) {
+    let sloikHomePage = new SloikHomePage(page);
+    await sloikHomePage.clickAddSloikBtn();
+    await sloikHomePage.fillSloikTitleInput(title);
+    await sloikHomePage.fillSloikDescriptionInput(description);
+    await sloikHomePage.fillSLoikGoalSumInput(yourGoal);
+    await sloikHomePage.clickSloikSumbitBtn();
+  }
+
   async function addMoneyToSloik({ page }, addMoneySum: number) {
     let sloikSloikPage = new SloikSloikPage(page);
 
@@ -287,8 +301,10 @@ test.describe("E2E", () => {
     page,
   }) => {
     let sloikSloikPage = new SloikSloikPage(page);
+    let sloikHomePage = new SloikHomePage(page);
     const transaction1 = 10000;
     const transaction2 = 15000;
+    const transaction3 = 6250;
 
     await createAndOpenSloik(
       { page },
@@ -307,6 +323,46 @@ test.describe("E2E", () => {
     await addMoneyToSloik({ page }, transaction1);
     await addMoneyToSloik({ page }, transaction2);
     await sloikSloikPage.assertTransactionByNumber(0, transaction1, new Date());
-    await sloikSloikPage.assertTransactionByNumber(0, transaction2, new Date());
+    await sloikSloikPage.assertTransactionByNumber(1, transaction2, new Date());
+    await sloikSloikPage.clickHomeBtn();
+    await createSloik(
+      { page },
+      sloikTwoTitle,
+      sloikTwoDescription,
+      sloikTwoGoalSum
+    );
+    await sloikHomePage.clickSloikTwoBtn();
+    await assertSloikValues(
+      { page },
+      sloikTwoTitle,
+      sloikTwoDescription,
+      "0",
+      sloikTwoGoalSum.toString(),
+      "0%"
+    );
+    await addMoneyToSloik({ page }, transaction3);
+    await sloikSloikPage.assertTransactionByNumber(0, transaction3, new Date());
+    await sloikSloikPage.clickHomeBtn();
+    await sloikHomePage.clickSloikOneBtn();
+    await assertSloikValues(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      "25000",
+      sloikOneGoalSum.toString(),
+      "17%"
+    );
+    await sloikSloikPage.isTransactionByIdDisplayed(0);
+    await sloikSloikPage.isTransactionByIdDisplayed(1);
+    await sloikSloikPage.clickHomeBtn();
+    await sloikHomePage.clickSloikTwoBtn();
+    await assertSloikValues(
+      { page },
+      sloikTwoTitle,
+      sloikTwoDescription,
+      "6250",
+      sloikTwoGoalSum.toString(),
+      "46%"
+    );
   });
 });
