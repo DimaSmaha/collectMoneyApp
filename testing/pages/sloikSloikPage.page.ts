@@ -163,10 +163,17 @@ export class SloikSloikPage extends Helper {
     let passZero;
     if (getMonth < 10) {
       passZero = 0;
+    } else {
+      passZero = "";
     }
-
+    let passZeroMin;
+    if (getMinutes < 10) {
+      passZeroMin = 0;
+    } else {
+      passZeroMin = "";
+    }
     expect(await transactionText.innerText()).toContain(
-      `${getDate}/${passZero}${getMonth}/${getYear}, ${getHours}:${getMinutes}:`
+      `${getDate}/${passZero}${getMonth}/${getYear}, ${getHours}:${passZeroMin}${getMinutes}:`
     );
     await expect(editTransaction).toBeVisible();
     await expect(cancelTransaction).toBeVisible();
