@@ -14,7 +14,7 @@ const config: PlaywrightTestConfig = {
   reporter: "html",
 
   use: {
-    baseURL: "http://127.0.0.1:5500/public_modules_fail/home.html",
+    baseURL: "http://127.0.0.1:5500/public_modules/home.html",
     // baseURL: "http://127.0.0.1:5500/public/home.html",
     browserName: "chromium",
     launchOptions: {
