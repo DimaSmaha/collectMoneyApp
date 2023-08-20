@@ -142,6 +142,10 @@ function setTransactionBoxEditElementsDisplay(transaction_id, display) {
   transactionEditInput.style.display = display;
   transactionEditAccept.style.display = display;
   transactionEditDecline.style.display = display;
+
+  transactionEditInput.remove();
+  transactionEditAccept.remove();
+  transactionEditDecline.remove();
 }
 
 export { addTransactionDIV, renderTransactions };
