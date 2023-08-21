@@ -172,8 +172,14 @@ export class SloikSloikPage extends Helper {
     } else {
       passZeroMin = "";
     }
+    let passZeroHrs;
+    if (getHours < 10) {
+      passZeroHrs = 0;
+    } else {
+      passZeroHrs = "";
+    }
     expect(await transactionText.innerText()).toContain(
-      `${getDate}/${passZero}${getMonth}/${getYear}, ${getHours}:${passZeroMin}${getMinutes}:`
+      `${getDate}/${passZero}${getMonth}/${getYear}, ${passZeroHrs}${getHours}:${passZeroMin}${getMinutes}:`
     );
     await expect(editTransaction).toBeVisible();
     await expect(cancelTransaction).toBeVisible();
