@@ -30,7 +30,7 @@ jobs:
         run: sleep 10
 
       - name: Check live-server status code
-        run: curl -s http://localhost:5500/ | grep -q 200
+        run: curl -f -LI http://localhost:5500
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
