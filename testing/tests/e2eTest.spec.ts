@@ -106,7 +106,7 @@ test.describe("E2E", () => {
     let sloikSloikPage = new SloikSloikPage(page);
 
     await sloikHomePage.clickAddSloikBtn();
-    await sloikHomePage.fillSloikTitleInput(sloikOneTitle);
+    await sloikHomePage.fillSloikTitleInput(sloikOneTitle + "fail");
     await sloikHomePage.fillSloikDescriptionInput(sloikOneDescription);
     await sloikHomePage.fillSLoikGoalSumInput(sloikOneGoalSum);
     await sloikHomePage.clickSloikSumbitBtn();
