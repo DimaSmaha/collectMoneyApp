@@ -23,7 +23,7 @@ const config: PlaywrightTestConfig = {
     locale: "en-GB",
     actionTimeout: 0,
     trace: "on",
-    headless: true,
+    headless: false,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
   },
