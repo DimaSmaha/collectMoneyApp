@@ -1,5 +1,5 @@
 node_modules
 testing/node_modules/
 testing/test-results/
-testing/playwright-report/
+# testing/playwright-report/
 testing/playwright/.cache/
