@@ -14,6 +14,7 @@ import {
   setEditGoalBtnDisplay,
   removeEditGoalElementsDisplay,
 } from "./modules/editGoal.mjs";
+import { renderAchievements } from "./modules/achievements.mjs";
 
 window.onload = function () {
   if (document.title == "SloikApp Home") {
@@ -21,6 +22,9 @@ window.onload = function () {
   }
   if (document.title == "SloikApp Sloik") {
     getData();
+  }
+  if (document.title == "SloikApp Achievements") {
+    renderAchievements();
   }
 };
 

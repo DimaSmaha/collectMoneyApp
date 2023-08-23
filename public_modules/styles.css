@@ -58,8 +58,7 @@
 #cancel_edit_goal {
   margin-right: 8px;
 }
-.achievement {
-  width: 250px;
+.achievementList {
   height: 55px;
   border: 1px solid;
   align-items: center;
