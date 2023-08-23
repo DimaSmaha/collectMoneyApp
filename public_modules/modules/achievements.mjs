@@ -1,5 +1,5 @@
-let achievementOneComplete = false;
-let achievementTwoComplete = false;
+let achievement1Complete = false;
+let achievement2Complete = false;
 let achievementCounter = 0;
 
 function checkAchievements(transactionsArray) {
@@ -9,16 +9,19 @@ function checkAchievements(transactionsArray) {
 
 function achievementOne(transactionsArray) {
   //Achievement One, the user made 777 transaction
+  Cookies.set("achievement_1_Complete", JSON.stringify(false), {
+    expires: 365,
+  });
+  achievementCounter++;
   if (transactionsArray != 0) {
-    achievementCounter++;
     if (
       transactionsArray[transactionsArray.length - 1].transactionSum == 777 &&
-      achievementOneComplete == false &&
-      Cookies.get(`achievement_1_Complete`) == undefined
+      achievement1Complete == false &&
+      JSON.parse(Cookies.get(`achievement_1_Complete`)) == false
     ) {
       const achievementOne = document.getElementById("achievement_1");
       achievementOne.style.display = "block";
-      achievementOneComplete = true;
+      achievement1Complete = true;
       Cookies.set("achievement_1_Complete", JSON.stringify(true), {
         expires: 365,
       });
@@ -28,18 +31,21 @@ function achievementOne(transactionsArray) {
 
 function achievementTwo(transactionsArray) {
   //Achievement Two, the user made a transaction on the Christmas 12-25
+  Cookies.set("achievement_2_Complete", JSON.stringify(false), {
+    expires: 365,
+  });
+  achievementCounter++;
   if (transactionsArray != 0) {
-    achievementCounter++;
     if (
       transactionsArray[transactionsArray.length - 1].date.includes(
         "-12-25T"
       ) &&
-      achievementTwoComplete == false &&
-      Cookies.get(`achievement_2_Complete`) == undefined
+      achievement2Complete == false &&
+      JSON.parse(Cookies.get(`achievement_2_Complete`)) == false
     ) {
       const achievementTwo = document.getElementById("achievement_2");
       achievementTwo.style.display = "block";
-      achievementTwoComplete = true;
+      achievement2Complete = true;
       Cookies.set("achievement_2_Complete", JSON.stringify(true), {
         expires: 365,
       });
@@ -47,8 +53,6 @@ function achievementTwo(transactionsArray) {
   }
 }
 
-function renderAchievements() {
-  console.log(achievementCounter);
-}
+function renderAchievements() {}
 
 export { checkAchievements, renderAchievements };
