@@ -1,6 +1,6 @@
 let achievement1Complete = false;
 let achievement2Complete = false;
-let achievementCounter = 0;
+let achievementCounter = 2;
 
 function checkAchievements(transactionsArray) {
   achievementOne(transactionsArray);
@@ -12,7 +12,8 @@ function achievementOne(transactionsArray) {
   Cookies.set("achievement_1_Complete", JSON.stringify(false), {
     expires: 365,
   });
-  achievementCounter++;
+  // achievementCounter++;
+  // Cookies.set("achievementCounter", achievementCounter, { expires: 365 });
   if (transactionsArray != 0) {
     if (
       transactionsArray[transactionsArray.length - 1].transactionSum == 777 &&
@@ -34,7 +35,8 @@ function achievementTwo(transactionsArray) {
   Cookies.set("achievement_2_Complete", JSON.stringify(false), {
     expires: 365,
   });
-  achievementCounter++;
+  // achievementCounter++;
+  // Cookies.set("achievementCounter", achievementCounter, { expires: 365 });
   if (transactionsArray != 0) {
     if (
       transactionsArray[transactionsArray.length - 1].date.includes(
@@ -53,6 +55,23 @@ function achievementTwo(transactionsArray) {
   }
 }
 
-function renderAchievements() {}
+function renderAchievements() {
+  // let achievementCounter = JSON.parse(Cookies.get(`achievementCounter`));
+  console.log(achievementCounter);
+  for (let i = 1; i <= achievementCounter; i++) {
+    let achievementCookie = JSON.parse(
+      Cookies.get(`achievement_${i}_Complete`)
+    );
+    const achievement = document.getElementById(`achievement_${i}`);
+    console.log(achievementCookie);
+    if (!achievementCookie) {
+      achievement.style.display = "none";
+    }
+    if (achievementCookie) {
+      achievement.style.backgroundColor = "limegreen";
+      achievement.style.color = "white";
+    }
+  }
+}
 
 export { checkAchievements, renderAchievements };
