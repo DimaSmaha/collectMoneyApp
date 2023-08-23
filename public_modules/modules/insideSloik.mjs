@@ -36,6 +36,7 @@ const getData = async () => {
   showRandomCommendation();
   console.log(transactionsArray);
   updateCookies(sloikID);
+  checkAchievements(transactionsArray);
 };
 
 function getCookiesByID(sloikNumber) {
