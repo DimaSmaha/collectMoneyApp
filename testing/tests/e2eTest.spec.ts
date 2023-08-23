@@ -274,6 +274,7 @@ test.describe("E2E", () => {
   });
 
   test("Should show an achievement", async ({ page }) => {
+    let sloikHomePage = new SloikHomePage(page);
     let sloikSloikPage = new SloikSloikPage(page);
     const transaction1 = 777;
 
@@ -295,6 +296,11 @@ test.describe("E2E", () => {
     await expect(sloikSloikPage.achievementOne).toBeInViewport();
     await expect(sloikSloikPage.achievementOne).toBeVisible();
     await expect(sloikSloikPage.achievementOne).toHaveCSS("display", "block");
+    await sloikSloikPage.clickHomeBtn();
+    await sloikHomePage.clickSloikOneBtn();
+    await addMoneyToSloik({ page }, transaction1);
+    await page.waitForTimeout(1000);
+    await expect(sloikSloikPage.achievementOne).not.toBeVisible();
   });
 
   test("Should check the proper save of data for 2 sloiks", async ({
