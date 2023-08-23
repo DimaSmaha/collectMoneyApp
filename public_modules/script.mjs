@@ -38,12 +38,14 @@ if (document.title == "SloikApp Home") {
 let totalMoney = 0;
 let isGoalReached = false;
 let transactionsArray = [];
-const submitPopupBtn = document.getElementById("submitBtn");
-submitPopupBtn.onclick = function () {
-  if (document.title == "SloikApp Home") {
-    addSloikData(totalMoney, isGoalReached, transactionsArray);
-  }
-};
+if (document.title == "SloikApp Home") {
+  const submitPopupBtn = document.getElementById("submitBtn");
+  submitPopupBtn.onclick = function () {
+    if (document.title == "SloikApp Home") {
+      addSloikData(totalMoney, isGoalReached, transactionsArray);
+    }
+  };
+}
 
 const addMoneyBtn = document.getElementById("addMoneyBtn");
 const editGoalBtn = document.getElementById("edit_goal_button");
