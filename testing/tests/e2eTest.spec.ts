@@ -1,11 +1,13 @@
 import { test, expect, request, APIResponse } from "@playwright/test";
 import { SloikHomePage } from "../pages/sloikHomePage.page";
 import { SloikSloikPage } from "../pages/sloikSloikPage.page";
+import {
+  sloikOneTitle,
+  sloikOneDescription,
+  sloikOneGoalSum,
+} from "../fixtures/fixtures";
 
 test.describe("E2E", () => {
-  const sloikOneTitle = "Home";
-  const sloikOneDescription = "Home sweet home";
-  const sloikOneGoalSum = 150000;
   const sloikTwoTitle = "Gift";
   const sloikTwoDescription = "Gift for my sweetie";
   const sloikTwoGoalSum = 13500;
