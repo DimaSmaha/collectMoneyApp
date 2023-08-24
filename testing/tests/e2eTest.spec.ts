@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, request, APIResponse } from "@playwright/test";
 import { SloikHomePage } from "../pages/sloikHomePage.page";
 import { SloikSloikPage } from "../pages/sloikSloikPage.page";
 
@@ -95,19 +95,28 @@ test.describe("E2E", () => {
     await sloikSloikPage.clickAcceptEditTransactionBtnById(transactionId);
   }
 
+  async function getRandomDescription({ request }) {
+    const response = await request.get("https://catfact.ninja/fact");
+    expect(await response.status()).toBe(200);
+    const getJSON = JSON.parse(await response.text());
+    const getSentence = getJSON.fact;
+    return getSentence;
+  }
+
   test.beforeEach(async ({ page }) => {
     let sloikHomePage = new SloikHomePage(page);
     await sloikHomePage.goto();
     await page.waitForLoadState();
   });
 
-  test("Should create 2 sloiks", async ({ page }) => {
+  test("Should create 2 sloiks", async ({ page, request }) => {
     let sloikHomePage = new SloikHomePage(page);
     let sloikSloikPage = new SloikSloikPage(page);
+    let getRandomSentence = await getRandomDescription({ request });
 
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(sloikOneTitle);
-    await sloikHomePage.fillSloikDescriptionInput(sloikOneDescription);
+    await sloikHomePage.fillSloikDescriptionInput(getRandomSentence);
     await sloikHomePage.fillSLoikGoalSumInput(sloikOneGoalSum);
     await sloikHomePage.clickSloikSumbitBtn();
     await sloikHomePage.clickAddSloikBtn();
@@ -119,7 +128,7 @@ test.describe("E2E", () => {
     await assertSloikValues(
       { page },
       sloikOneTitle,
-      sloikOneDescription,
+      getRandomSentence,
       "0",
       sloikOneGoalSum.toString(),
       "0%"
