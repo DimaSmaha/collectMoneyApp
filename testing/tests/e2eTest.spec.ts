@@ -22,6 +22,7 @@ test.describe("E2E", () => {
     progressBar: string
   ) {
     let sloikSloikPage = new SloikSloikPage(page);
+    await page.waitForLoadState();
     await sloikSloikPage.assertSloikTitleValue(title);
     await sloikSloikPage.assertSloikDesriptionValue(description);
     await sloikSloikPage.assertMoneyScoreValue(`Your money : ${moneyScore}`);
