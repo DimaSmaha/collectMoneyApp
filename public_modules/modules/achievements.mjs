@@ -12,8 +12,6 @@ function achievementOne(transactionsArray) {
   Cookies.set("achievement_1_Complete", JSON.stringify(false), {
     expires: 365,
   });
-  // achievementCounter++;
-  // Cookies.set("achievementCounter", achievementCounter, { expires: 365 });
   if (transactionsArray != 0) {
     if (
       transactionsArray[transactionsArray.length - 1].transactionSum == 777 &&
@@ -35,8 +33,6 @@ function achievementTwo(transactionsArray) {
   Cookies.set("achievement_2_Complete", JSON.stringify(false), {
     expires: 365,
   });
-  // achievementCounter++;
-  // Cookies.set("achievementCounter", achievementCounter, { expires: 365 });
   if (transactionsArray != 0) {
     if (
       transactionsArray[transactionsArray.length - 1].date.includes(
