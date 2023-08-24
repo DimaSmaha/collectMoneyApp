@@ -58,6 +58,9 @@
 #cancel_edit_goal {
   margin-right: 8px;
 }
+.hiddenAchievement {
+  display: none;
+}
 .achievementList {
   height: 55px;
   border: 1px solid;

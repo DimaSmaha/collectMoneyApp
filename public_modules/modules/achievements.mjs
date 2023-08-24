@@ -72,6 +72,7 @@ function renderAchievements() {
     if (achievementCookie) {
       achievement.style.backgroundColor = "limegreen";
       achievement.style.color = "white";
+      achievement.style.display = "block";
     }
   }
 }
