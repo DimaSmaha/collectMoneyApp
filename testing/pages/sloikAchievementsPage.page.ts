@@ -1,33 +1,24 @@
 // playwright-dev-page.ts
 import { expect, Locator, Page } from "@playwright/test";
 
-export class RedmineLoginPage {
+export class SloikAchievementsPage {
   readonly page: Page;
-  readonly userInput: Locator;
-  readonly passInput: Locator;
-  readonly loginBtn: Locator;
+  readonly homeBtn: Locator;
+  readonly achievementOne: Locator;
+  readonly achievementTwo: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.userInput = page.locator('input[name="username"]');
-    this.passInput = page.locator('input[name="password"]');
-    this.loginBtn = page.locator("text=Login »");
+    this.homeBtn = page.locator('//a[text()="Home"]');
+    this.achievementOne = page.locator("#achievement_1");
+    this.achievementTwo = page.locator("#achievement_2");
   }
 
   async checkPageUrl() {
-    await expect(this.page).toHaveURL("/login");
+    await expect(this.page).toHaveURL("/achievements.html");
   }
 
-  async goto() {
-    await this.page.goto("/login");
-  }
-
-  async fillInputs(username: string, password: string) {
-    await this.userInput.fill(username);
-    await this.passInput.fill(password);
-  }
-
-  async clickLoginBtn() {
-    await this.loginBtn.click();
+  async clickHomeButton() {
+    await this.homeBtn.click();
   }
 }

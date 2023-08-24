@@ -6,6 +6,7 @@ import {
   sloikOneDescription,
   sloikOneGoalSum,
 } from "../fixtures/fixtures";
+import { SloikAchievementsPage } from "../pages/sloikAchievementsPage.page";
 
 test.describe("E2E", () => {
   const sloikTwoTitle = "Gift";
@@ -381,5 +382,43 @@ test.describe("E2E", () => {
       sloikTwoGoalSum.toString(),
       "46%"
     );
+  });
+
+  test("Should properly show achievements", async ({ page }) => {
+    let sloikHomePage = new SloikHomePage(page);
+    let sloikAchievementsPage = new SloikAchievementsPage(page);
+    let sloikSloikPage = new SloikSloikPage(page);
+    const addMoneySum = 777;
+
+    await sloikHomePage.clickAchievementsButton();
+    await expect(sloikAchievementsPage.achievementOne).not.toBeVisible();
+    await expect(sloikAchievementsPage.achievementTwo).not.toBeVisible();
+    await sloikAchievementsPage.clickHomeButton();
+    await createAndOpenSloik(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      sloikOneGoalSum
+    );
+    await assertSloikValues(
+      { page },
+      sloikOneTitle,
+      sloikOneDescription,
+      "0",
+      sloikOneGoalSum.toString(),
+      "0%"
+    );
+    await sloikSloikPage.fillAddMoneyInput(addMoneySum.toString());
+    await sloikSloikPage.clickAddMoneyButton();
+    await sloikSloikPage.assertMoneyScoreValue(
+      `Your money : ${addMoneySum.toString()}`
+    );
+    await expect(sloikSloikPage.achievementOne).toBeInViewport();
+    await expect(sloikSloikPage.achievementOne).toBeVisible();
+    await expect(sloikSloikPage.achievementOne).toHaveCSS("display", "block");
+    await sloikSloikPage.clickHomeBtn();
+    await sloikHomePage.clickAchievementsButton();
+    await expect(sloikAchievementsPage.achievementOne).toBeVisible();
+    await expect(sloikAchievementsPage.achievementTwo).not.toBeVisible();
   });
 });

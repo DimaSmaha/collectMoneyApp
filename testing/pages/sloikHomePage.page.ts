@@ -13,6 +13,7 @@ export class SloikHomePage {
   readonly sloikDescriptionInput: Locator;
   readonly sloikGoalSumInput: Locator;
   readonly sloikSubmitBtn: Locator;
+  readonly achievementsBtn: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -23,6 +24,7 @@ export class SloikHomePage {
     this.sloikDescriptionInput = page.locator('[id="inputField2"]');
     this.sloikGoalSumInput = page.locator('[id="inputField3"]');
     this.sloikSubmitBtn = page.locator('[id="submitBtn"]');
+    this.achievementsBtn = page.locator('//a[text()="Achievements"]');
   }
 
   async goto() {
@@ -55,5 +57,9 @@ export class SloikHomePage {
 
   async clickSloikSumbitBtn() {
     await this.sloikSubmitBtn.click();
+  }
+
+  async clickAchievementsButton() {
+    await this.achievementsBtn.click();
   }
 }
