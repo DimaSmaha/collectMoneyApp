@@ -55,13 +55,13 @@ function setTestingCookies() {
   );
 }
 
-function removeCookies() {
-  Cookies.remove("sloikTitle");
-  Cookies.remove("sloikDescription");
-  Cookies.remove("totalMoney");
-  Cookies.remove("goalValue");
-  Cookies.remove("isGoalReached");
-  Cookies.remove("transactionsList");
+function removeCookiesByID(sloikID) {
+  Cookies.remove(`goalValue_${sloikID}`);
+  Cookies.remove(`isGoalReached_${sloikID}`);
+  Cookies.remove(`sloikDescription_${sloikID}`);
+  Cookies.remove(`sloikTitle_${sloikID}`);
+  Cookies.remove(`totalMoney_${sloikID}`);
+  Cookies.remove(`transactionsList_${sloikID}`);
 }
 
-export { setupSloikCookies };
+export { setupSloikCookies, removeCookiesByID };
