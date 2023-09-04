@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('Checkout') {
+      steps {
+        git(url: 'https://github.com/DimaSmaha/collectMoneyApp', branch: 'main')
+      }
+    }
     stage('Install Dependencies') {
       steps {
         sh '''
