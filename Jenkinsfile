@@ -3,8 +3,10 @@ pipeline {
   stages {
     stage('Install Dependencies') {
       steps {
-        sh 'npm install -g playwright'
-        sh 'npm install -g live-server'  
+        sh '''
+            npm install -g playwright'
+            npm install -g live-server
+        '''  
       }
     }
     stage('Start Server') {
