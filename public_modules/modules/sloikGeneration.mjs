@@ -1,5 +1,6 @@
 import { showPopup, hidePopup } from "./popup.mjs";
 import { setupSloikCookies } from "./cookies.mjs";
+import { deleteSloik } from "./homePage.mjs";
 
 let sloikTitle = "";
 let sloikDescription = "";
@@ -50,14 +51,23 @@ function renderSloik() {
   Cookies.set("sloiksCounter", JSON.stringify(sloikCounter), { expires: 365 });
   sloiksList.insertAdjacentHTML(
     "beforeend",
-    `<div>
+    `<div id="sloikBox_${numberOfChildren}" class="sloikBox">
       <nav>
       <a id="sloik_${numberOfChildren}" class="sloikNavigation"
       href="/public_modules/sloik.html" onclick="getSloikID(${numberOfChildren});">
       ${sloikTitle} Sloik</a>
+      <button id="deleteSloikBtn_${numberOfChildren}" 
+      class="cancelBtn sloikCancelBtn"
+      >X</button>
       </nav>
     </div>`
   );
+  let sloikDeleteBtn = document.getElementById(
+    `deleteSloikBtn_${numberOfChildren}`
+  );
+  sloikDeleteBtn.onclick = function () {
+    deleteSloik(numberOfChildren);
+  };
 }
 
 function renderExistingSloiks() {
@@ -66,14 +76,23 @@ function renderExistingSloiks() {
   for (let i = 0; i < sloikCounter; i++) {
     sloiksList.insertAdjacentHTML(
       "beforeend",
-      `<div>
+      `<div id="sloikBox_${i}" class="sloikBox">
       <nav>
       <a id="sloik_${i}" class="sloikNavigation"
       href="/public_modules/sloik.html" onclick="getSloikID(${i});">
       ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
+      <button id="deleteSloikBtn_${i}" 
+      class="cancelBtn sloikCancelBtn"
+      >X</button>
       </nav>
     </div>`
     );
+  }
+  for (let i = 0; i < sloikCounter; i++) {
+    let sloikDeleteBtns = document.getElementById(`deleteSloikBtn_${i}`);
+    sloikDeleteBtns.onclick = function () {
+      deleteSloik(i);
+    };
   }
 }
 

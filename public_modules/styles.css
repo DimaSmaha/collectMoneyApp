@@ -161,3 +161,15 @@
   left: 1%; */
   margin-left: 4px;
 }
+.sloikBox {
+  margin-bottom: 8px;
+  border: solid 2px;
+  width: 250px;
+}
+.sloikNavigation {
+  color: blue;
+  font-size: 18px;
+}
+.sloikCancelBtn {
+  cursor: pointer;
+}
