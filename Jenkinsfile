@@ -8,12 +8,16 @@ pipeline {
 		}
 		stage('Install Dependencies'){
 				steps{
-					bat 'cd testing && npm install'
+                    dir('testing') {
+                        bat 'npm install'
+                    }
 				}
 		}
 		stage('Run Tests'){
 				steps{
-					bat 'npx playwright test'
+				    dir('testing') {
+					    bat 'npx playwright test'
+				    }
 				}
 		}
 	}
