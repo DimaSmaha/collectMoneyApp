@@ -8,9 +8,7 @@ pipeline {
 		}
 		stage('Install Dependencies'){
 				steps{
-					bat '''
-          cd testing
-          npm install'''
+					bat 'cd testing && npm install'
 				}
 		}
 		stage('Run Tests'){
