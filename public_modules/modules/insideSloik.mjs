@@ -48,7 +48,7 @@ function getCookiesByID(sloikNumber) {
   document.getElementById("sloikDescription").textContent = JSON.parse(
     Cookies.get(`sloikDescription_${sloikNumber}`)
   );
-  goalValue = JSON.parse(Cookies.get(`goalValue_${sloikNumber}`));
+  goalValue = parseInt(JSON.parse(Cookies.get(`goalValue_${sloikNumber}`)));
   isGoalReached = JSON.parse(Cookies.get(`isGoalReached_${sloikNumber}`));
   transactionsArray = JSON.parse(
     Cookies.get(`transactionsList_${sloikNumber}`)
@@ -208,6 +208,7 @@ function addMoney() {
   checkAchievements(transactionsArray);
   showRandomCommendation();
   updateCookies(sloikID);
+  showHowMuchSameTransactionsUserNeed();
   return totalMoney;
 }
 
@@ -310,6 +311,26 @@ function acceptEditTransaction(transaction_id) {
     }
   }
   transactionEditInput.value = "";
+}
+
+function showHowMuchSameTransactionsUserNeed() {
+  const commendationBox = document.getElementById("commendationPopup");
+  getCookiesByID(sloikID);
+
+  if (
+    (transactionsArray[transactionsArray.length - 1].transactionSum /
+      goalValue) *
+      100 >=
+      5 ||
+    transactionsArray[transactionsArray.length - 1].transactionSum >= 1000
+  ) {
+    let numberOfTransactionsToDo = Math.ceil(
+      (goalValue - totalMoney) /
+        transactionsArray[transactionsArray.length - 1].transactionSum
+    );
+    commendationBox.innerText = `Great job! If you make ${numberOfTransactionsToDo} you will achieve your goal. Keep going`;
+    commendationBox.style.display = "block";
+  }
 }
 
 export {
