@@ -315,7 +315,7 @@ function acceptEditTransaction(transaction_id) {
 
 function showHowMuchSameTransactionsUserNeed() {
   const commendationBox = document.getElementById("commendationPopup");
-  getCookiesByID(sloikID);
+  const commendationMainBox = document.getElementById("commendationBox");
 
   if (
     (transactionsArray[transactionsArray.length - 1].transactionSum /
@@ -328,9 +328,16 @@ function showHowMuchSameTransactionsUserNeed() {
       (goalValue - totalMoney) /
         transactionsArray[transactionsArray.length - 1].transactionSum
     );
-    commendationBox.innerText = `Great job! If you make ${numberOfTransactionsToDo} you will achieve your goal. Keep going`;
+    commendationBox.innerHTML = `Great job! If you make <b>${numberOfTransactionsToDo}</b> you will achieve your goal. Keep going`;
     commendationBox.style.display = "block";
   }
+  setTimeout(() => {
+    commendationBox.remove();
+    commendationMainBox.insertAdjacentHTML(
+      "beforeend",
+      `<div id="commendationPopup"></div>`
+    );
+  }, 3100);
 }
 
 export {
