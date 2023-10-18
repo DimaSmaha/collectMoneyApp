@@ -1,15 +1,16 @@
 import { test, expect, request, APIResponse } from "@playwright/test";
 import { SloikHomePage } from "../pages/sloikHomePage.page";
 import { SloikSloikPage } from "../pages/sloikSloikPage.page";
+import { SloikAchievementsPage } from "../pages/sloikAchievementsPage.page";
 import {
   sloikOneTitle,
   sloikOneDescription,
   sloikOneGoalSum,
 } from "../fixtures/fixtures";
-import { SloikAchievementsPage } from "../pages/sloikAchievementsPage.page";
+import { test_data } from "../fixtures/data.json";
 
 test.describe("E2E", () => {
-  const sloikTwoTitle = "Gift";
+  const sloikTwoTitle = test_data.sloikTwoTitle;
   const sloikTwoDescription = "Gift for my sweetie";
   const sloikTwoGoalSum = 13500;
 
