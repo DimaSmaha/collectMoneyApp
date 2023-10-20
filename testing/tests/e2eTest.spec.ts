@@ -109,7 +109,6 @@ test.describe("E2E", () => {
 
   test("Should create 2 sloiks", async ({ page, request }) => {
     let sloikHomePage = new SloikHomePage(page);
-
     let getRandomSentence = await getRandomDescription({ request });
 
     await sloikHomePage.clickAddSloikBtn();
@@ -278,7 +277,6 @@ test.describe("E2E", () => {
 
   test("Should show an achievement", async ({ page }) => {
     let sloikHomePage = new SloikHomePage(page);
-
     const transaction1 = 777;
 
     await createAndOpenSloik(
@@ -377,7 +375,6 @@ test.describe("E2E", () => {
   test("Should properly show achievements", async ({ page }) => {
     let sloikHomePage = new SloikHomePage(page);
     let sloikAchievementsPage = new SloikAchievementsPage(page);
-
     const addMoneySum = 777;
 
     await sloikHomePage.clickAchievementsButton();
