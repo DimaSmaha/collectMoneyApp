@@ -22,7 +22,6 @@ test.describe("E2E", () => {
     yourGoal: string,
     progressBar: string
   ) {
-    let sloikSloikPage = new SloikSloikPage(page);
     await page.waitForLoadState();
     await sloikSloikPage.assertSloikTitleValue(title);
     await sloikSloikPage.assertSloikDesriptionValue(description);
@@ -61,8 +60,6 @@ test.describe("E2E", () => {
   }
 
   async function addMoneyToSloik({ page }, addMoneySum: number) {
-    let sloikSloikPage = new SloikSloikPage(page);
-
     await sloikSloikPage.fillAddMoneyInput(addMoneySum.toString());
     await sloikSloikPage.clickAddMoneyButton();
   }
@@ -72,16 +69,12 @@ test.describe("E2E", () => {
     addMoneySum: number,
     sloikGoal: number
   ) {
-    let sloikSloikPage = new SloikSloikPage(page);
-
     await sloikSloikPage.assertProgressBarValue(
       `${Math.round((addMoneySum / sloikGoal) * 100)}%`
     );
   }
 
   async function assertMoneyScore({ page }, moneyScore: number) {
-    let sloikSloikPage = new SloikSloikPage(page);
-
     await sloikSloikPage.assertMoneyScoreValue(
       `Your money : ${moneyScore.toString()}`
     );
@@ -92,8 +85,6 @@ test.describe("E2E", () => {
     transactionId: number,
     editedSum: number
   ) {
-    let sloikSloikPage = new SloikSloikPage(page);
-
     await sloikSloikPage.clickEditTransactionBtnById(transactionId);
     expect(page.locator(`#editMoneyInput_${transactionId}`)).toBeVisible();
     await sloikSloikPage.fillEditTransactionInputById(transactionId, editedSum);
@@ -108,15 +99,17 @@ test.describe("E2E", () => {
     return getSentence;
   }
 
+  let sloikSloikPage;
   test.beforeEach(async ({ page }) => {
     let sloikHomePage = new SloikHomePage(page);
+    sloikSloikPage = new SloikSloikPage(page);
     await sloikHomePage.goto();
     await page.waitForLoadState();
   });
 
   test("Should create 2 sloiks", async ({ page, request }) => {
     let sloikHomePage = new SloikHomePage(page);
-    let sloikSloikPage = new SloikSloikPage(page);
+
     let getRandomSentence = await getRandomDescription({ request });
 
     await sloikHomePage.clickAddSloikBtn();
@@ -151,7 +144,6 @@ test.describe("E2E", () => {
   });
 
   test("Should add money to sloik", async ({ page }) => {
-    let sloikSloikPage = new SloikSloikPage(page);
     const addMoneySum = 10000;
 
     await createAndOpenSloik(
@@ -178,7 +170,6 @@ test.describe("E2E", () => {
   });
 
   test("Should edit the existing transaction", async ({ page }) => {
-    let sloikSloikPage = new SloikSloikPage(page);
     const transaction1 = 15000;
     const transaction2 = 10000;
     const editedTransaction1 = 25000;
@@ -230,7 +221,6 @@ test.describe("E2E", () => {
   });
 
   test("Should delete the existing transaction", async ({ page }) => {
-    let sloikSloikPage = new SloikSloikPage(page);
     const transaction1 = 15000;
     const transaction2 = 10000;
 
@@ -256,7 +246,6 @@ test.describe("E2E", () => {
   });
 
   test("Should edit the existing goal", async ({ page }) => {
-    let sloikSloikPage = new SloikSloikPage(page);
     const transaction1 = 15000;
     const editedGoalSum = 100000;
 
@@ -289,7 +278,7 @@ test.describe("E2E", () => {
 
   test("Should show an achievement", async ({ page }) => {
     let sloikHomePage = new SloikHomePage(page);
-    let sloikSloikPage = new SloikSloikPage(page);
+
     const transaction1 = 777;
 
     await createAndOpenSloik(
@@ -320,7 +309,6 @@ test.describe("E2E", () => {
   test("Should check the proper save of data for 2 sloiks", async ({
     page,
   }) => {
-    let sloikSloikPage = new SloikSloikPage(page);
     let sloikHomePage = new SloikHomePage(page);
     const transaction1 = 10000;
     const transaction2 = 15000;
@@ -389,7 +377,7 @@ test.describe("E2E", () => {
   test("Should properly show achievements", async ({ page }) => {
     let sloikHomePage = new SloikHomePage(page);
     let sloikAchievementsPage = new SloikAchievementsPage(page);
-    let sloikSloikPage = new SloikSloikPage(page);
+
     const addMoneySum = 777;
 
     await sloikHomePage.clickAchievementsButton();
