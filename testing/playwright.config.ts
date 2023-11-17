@@ -41,8 +41,8 @@ const config: PlaywrightTestConfig = {
     {
       name: "docker",
       use: {
-      // baseURL: "http://172.20.0.1:5500/public/home.html",    // local docker-compose IP
-      baseURL: "http://app:5500/public/home.html",             // local docker-compose IP
+      baseURL: "http://172.20.0.1:5500/public/home.html",    // local docker-compose IP
+      // baseURL: "http://app:5500/public/home.html",             // local docker-compose IP
       },   
     } /*
     {
