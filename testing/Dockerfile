@@ -17,4 +17,4 @@ RUN npm install
 COPY . .
 
 # Set the entry point for the container
-CMD ["npx", "playwright", "test"]
+CMD ["npx", "playwright", "test", "--project=docker"]

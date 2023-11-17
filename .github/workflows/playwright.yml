@@ -36,7 +36,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: cd testing && xvfb-run npx playwright test
+        run: cd testing && xvfb-run npx playwright test --project=gh-actions
 
       - uses: actions/upload-artifact@v3
         if: always()
