@@ -15,8 +15,9 @@ const config: PlaywrightTestConfig = {
 
   use: {
     // baseURL: "http://172.20.0.1:5500/public/home.html",             // local docker-compose IP
-    // baseURL: "http://127.0.0.1:5500/public_modules/home.html",   //local server IP
-    baseURL: "http://127.0.0.1:5500/public/home.html",           //local server IP
+    baseURL: "http://127.0.0.1:5500/public_modules/home.html",   //local server IP
+    // baseURL: "http://127.0.0.1:5500/public/home.html",           //local server IP
+    headless: true,
     browserName: "chromium",
     launchOptions: {
       slowMo: 0,
@@ -24,7 +25,6 @@ const config: PlaywrightTestConfig = {
     locale: "en-GB",
     actionTimeout: 0,
     trace: "on",
-    headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
   },
