@@ -6,3 +6,5 @@ services:
       - 5500:80
   tests:
     build: ./testing
+    depends_on:
+      - app
