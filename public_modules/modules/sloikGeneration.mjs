@@ -54,7 +54,7 @@ function renderSloik() {
     `<div id="sloikBox_${numberOfChildren}" class="sloikBox">
       <nav>
       <a id="sloik_${numberOfChildren}" class="sloikNavigation"
-      href="/public_modules/sloik.html" onclick="getSloikID(${numberOfChildren});">
+      href="./sloik.html" onclick="getSloikID(${numberOfChildren});">
       ${sloikTitle} Sloik</a>
       <button id="deleteSloikBtn_${numberOfChildren}" 
       class="cancelBtn sloikCancelBtn"
@@ -79,7 +79,7 @@ function renderExistingSloiks() {
       `<div id="sloikBox_${i}" class="sloikBox">
       <nav>
       <a id="sloik_${i}" class="sloikNavigation"
-      href="/public_modules/sloik.html" onclick="getSloikID(${i});">
+      href="./sloik.html" onclick="getSloikID(${i});">
       ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
       <button id="deleteSloikBtn_${i}" 
       class="cancelBtn sloikCancelBtn"
