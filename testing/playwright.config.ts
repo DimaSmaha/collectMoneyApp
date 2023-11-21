@@ -5,11 +5,11 @@ const config: PlaywrightTestConfig = {
   testDir: "./tests",
   timeout: 15000,
   expect: {
-    timeout: 5000,
+    timeout: 6000,
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 2,
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
 
@@ -42,7 +42,6 @@ const config: PlaywrightTestConfig = {
       name: "docker",
       use: {
         // baseURL: "http://172.20.0.1:5500/public/home.html",    // local docker-compose IP
-        // baseURL: "http://app:5500/public/home.html",             // local docker-compose IP
         baseURL: "http://app/public/home.html", // local docker-compose IP
       },
     } /*

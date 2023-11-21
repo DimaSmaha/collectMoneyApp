@@ -39,11 +39,12 @@ test.describe("Hone page test suite", () => {
 
   let sloikHomePage;
   let sloikSloikPage;
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context }) => {
     sloikHomePage = new SloikHomePage(page);
     sloikSloikPage = new SloikSloikPage(page);
     await sloikHomePage.goto();
     await page.waitForLoadState();
+    await context.clearCookies();
   });
 
   test("Should create 2 sloiks", async ({ page, request }) => {

@@ -43,12 +43,13 @@ test.describe("Achievements page test suite", () => {
   let sloikHomePage;
   let sloikSloikPage;
   let sloikAchievementsPage;
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context }) => {
     sloikHomePage = new SloikHomePage(page);
     sloikSloikPage = new SloikSloikPage(page);
     sloikAchievementsPage = new SloikAchievementsPage(page);
     await sloikHomePage.goto();
     await page.waitForLoadState();
+    await context.clearCookies();
   });
 
   test("Should properly show achievements", async ({ page }) => {

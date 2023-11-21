@@ -93,11 +93,12 @@ test.describe("Sloik page test suite", () => {
 
   let sloikHomePage;
   let sloikSloikPage;
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context }) => {
     sloikHomePage = new SloikHomePage(page);
     sloikSloikPage = new SloikSloikPage(page);
     await sloikHomePage.goto();
     await page.waitForLoadState();
+    await context.clearCookies();
   });
 
   test("Should add money to sloik", async ({ page }) => {
