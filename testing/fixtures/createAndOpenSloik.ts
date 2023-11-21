@@ -1,24 +1,54 @@
-const { test: base } = require("@playwright/test");
+import { test as base } from "@playwright/test";
 import { SloikHomePage } from "../pages/sloikHomePage.page";
 
-const createAndOpenSloikFixture = base.extend({
+type myFixtures = {
+  title: string;
+  description: string;
+  yourGoal: number;
+};
+
+export const test = base.extend<myFixtures>({
   title: "Home",
   description: "Home sweet home",
   yourGoal: 150000,
 
-  createSloik: async ({ page, title, description, yourGoal }, use) => {
+  page: async ({ page, title, description, yourGoal }, use) => {
     let sloikHomePage = new SloikHomePage(page);
+    await sloikHomePage.goto();
+    await page.waitForLoadState();
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(title);
     await sloikHomePage.fillSloikDescriptionInput(description);
     await sloikHomePage.fillSLoikGoalSumInput(yourGoal);
     await sloikHomePage.clickSloikSumbitBtn();
     await sloikHomePage.clickSloikOneBtn();
-    await use(sloikHomePage); // will run all the time until tests are done/resolved
+    await use(page); // will run all the time until test are done/resolved
   },
 });
 
-export default createAndOpenSloikFixture;
+export { expect } from "@playwright/test";
+
+// const { test: base } = require("@playwright/test");
+// import { SloikHomePage } from "../pages/sloikHomePage.page";
+
+// const createAndOpenSloikFixture = base.extend({
+//   title: "Home",
+//   description: "Home sweet home",
+//   yourGoal: 150000,
+
+//   createSloik: async ({ page, title, description, yourGoal }, use) => {
+//     let sloikHomePage = new SloikHomePage(page);
+//     await sloikHomePage.clickAddSloikBtn();
+//     await sloikHomePage.fillSloikTitleInput(title);
+//     await sloikHomePage.fillSloikDescriptionInput(description);
+//     await sloikHomePage.fillSLoikGoalSumInput(yourGoal);
+//     await sloikHomePage.clickSloikSumbitBtn();
+//     await sloikHomePage.clickSloikOneBtn();
+//     await use(sloikHomePage); // will run all the time until tests are done/resolved
+//   },
+// });
+
+// export default createAndOpenSloikFixture;
 
 // First via introducing a url fixture and then passing it into use {} via your config or in your test:
 // const { test: base } = require('@playwright/test');
