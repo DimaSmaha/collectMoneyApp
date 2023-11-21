@@ -3,8 +3,8 @@
     "@playwright/test": "^1.35.1"
   },
   "scripts": {
-    "pw_test": "npx playwright test --reporter=list",
-    "pw_test_modules": "npx playwright test --reporter=list --project=gh-actions",
-    "pw_open_report": "npx playwright show-report"
+    "pw-test": "npx playwright test --reporter=list",
+    "pw-test-modules": "npx playwright test --reporter=list --project=gh-actions",
+    "pw-open-report": "npx playwright show-report"
   }
 }
