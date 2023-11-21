@@ -4,6 +4,7 @@
   },
   "scripts": {
     "pw_test": "npx playwright test --reporter=list",
+    "pw_test_modules": "npx playwright test --reporter=list --project=gh-actions",
     "pw_open_report": "npx playwright show-report"
   }
 }
