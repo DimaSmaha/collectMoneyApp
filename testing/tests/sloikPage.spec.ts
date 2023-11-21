@@ -9,7 +9,7 @@ import {
 } from "../fixtures/fixtures";
 import { test_data } from "../fixtures/data.json";
 
-test.skip("E2E", () => {
+test.describe("Sloik page test suite", () => {
   const sloikTwoTitle = test_data.sloikTwoTitle;
   const sloikTwoDescription = "Gift for my sweetie";
   const sloikTwoGoalSum = 13500;
@@ -36,7 +36,7 @@ test.skip("E2E", () => {
     description: string,
     yourGoal: number
   ) {
-    let sloikHomePage = new SloikHomePage(page);
+    sloikHomePage = new SloikHomePage(page);
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(title);
     await sloikHomePage.fillSloikDescriptionInput(description);
@@ -51,7 +51,7 @@ test.skip("E2E", () => {
     description: string,
     yourGoal: number
   ) {
-    let sloikHomePage = new SloikHomePage(page);
+    sloikHomePage = new SloikHomePage(page);
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(title);
     await sloikHomePage.fillSloikDescriptionInput(description);
@@ -91,56 +91,13 @@ test.skip("E2E", () => {
     await sloikSloikPage.clickAcceptEditTransactionBtnById(transactionId);
   }
 
-  async function getRandomDescription({ request }) {
-    const response = await request.get("https://catfact.ninja/fact");
-    expect(await response.status()).toBe(200);
-    const getJSON = JSON.parse(await response.text());
-    const getSentence = getJSON.fact;
-    return getSentence;
-  }
-
+  let sloikHomePage;
   let sloikSloikPage;
-  test.beforeEach(async ({ page, context }) => {
-    let sloikHomePage = new SloikHomePage(page);
+  test.beforeEach(async ({ page }) => {
+    sloikHomePage = new SloikHomePage(page);
     sloikSloikPage = new SloikSloikPage(page);
     await sloikHomePage.goto();
     await page.waitForLoadState();
-    await context.clearCookies();
-  });
-
-  test("Should create 2 sloiks", async ({ page, request }) => {
-    let sloikHomePage = new SloikHomePage(page);
-    let getRandomSentence = await getRandomDescription({ request });
-
-    await sloikHomePage.clickAddSloikBtn();
-    await sloikHomePage.fillSloikTitleInput(sloikOneTitle);
-    await sloikHomePage.fillSloikDescriptionInput(getRandomSentence);
-    await sloikHomePage.fillSLoikGoalSumInput(sloikOneGoalSum);
-    await sloikHomePage.clickSloikSumbitBtn();
-    await sloikHomePage.clickAddSloikBtn();
-    await sloikHomePage.fillSloikTitleInput(sloikTwoTitle);
-    await sloikHomePage.fillSloikDescriptionInput(sloikTwoDescription);
-    await sloikHomePage.fillSLoikGoalSumInput(sloikTwoGoalSum);
-    await sloikHomePage.clickSloikSumbitBtn();
-    await sloikHomePage.clickSloikOneBtn();
-    await assertSloikValues(
-      { page },
-      sloikOneTitle,
-      getRandomSentence,
-      "0",
-      sloikOneGoalSum.toString(),
-      "0%"
-    );
-    await sloikSloikPage.clickHomeBtn();
-    await sloikHomePage.clickSloikTwoBtn();
-    await assertSloikValues(
-      { page },
-      sloikTwoTitle,
-      sloikTwoDescription,
-      "0",
-      sloikTwoGoalSum.toString(),
-      "0%"
-    );
   });
 
   test("Should add money to sloik", async ({ page }) => {
@@ -277,7 +234,6 @@ test.skip("E2E", () => {
   });
 
   test("Should show an achievement", async ({ page }) => {
-    let sloikHomePage = new SloikHomePage(page);
     const transaction1 = 777;
 
     await createAndOpenSloik(
@@ -308,7 +264,6 @@ test.skip("E2E", () => {
   test("Should check the proper save of data for 2 sloiks", async ({
     page,
   }) => {
-    let sloikHomePage = new SloikHomePage(page);
     const transaction1 = 10000;
     const transaction2 = 15000;
     const transaction3 = 6250;
@@ -371,42 +326,5 @@ test.skip("E2E", () => {
       sloikTwoGoalSum.toString(),
       "46%"
     );
-  });
-
-  test("Should properly show achievements", async ({ page }) => {
-    let sloikHomePage = new SloikHomePage(page);
-    let sloikAchievementsPage = new SloikAchievementsPage(page);
-    const addMoneySum = 777;
-
-    await sloikHomePage.clickAchievementsButton();
-    await expect(sloikAchievementsPage.achievementOne).not.toBeVisible();
-    await expect(sloikAchievementsPage.achievementTwo).not.toBeVisible();
-    await sloikAchievementsPage.clickHomeButton();
-    await createAndOpenSloik(
-      { page },
-      sloikOneTitle,
-      sloikOneDescription,
-      sloikOneGoalSum
-    );
-    await assertSloikValues(
-      { page },
-      sloikOneTitle,
-      sloikOneDescription,
-      "0",
-      sloikOneGoalSum.toString(),
-      "0%"
-    );
-    await sloikSloikPage.fillAddMoneyInput(addMoneySum.toString());
-    await sloikSloikPage.clickAddMoneyButton();
-    await sloikSloikPage.assertMoneyScoreValue(
-      `Your money : ${addMoneySum.toString()}`
-    );
-    await expect(sloikSloikPage.achievementOne).toBeInViewport();
-    await expect(sloikSloikPage.achievementOne).toBeVisible();
-    await expect(sloikSloikPage.achievementOne).toHaveCSS("display", "block");
-    await sloikSloikPage.clickHomeBtn();
-    await sloikHomePage.clickAchievementsButton();
-    await expect(sloikAchievementsPage.achievementOne).toBeVisible();
-    await expect(sloikAchievementsPage.achievementTwo).not.toBeVisible();
   });
 });
