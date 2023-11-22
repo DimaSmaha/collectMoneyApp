@@ -1,4 +1,4 @@
-import { test } from "../fixtures/pagesFixture";
+import { test } from "../fixtures/mergeFixtures";
 
 test.describe("Fixture test suite", () => {
   test("Should use fixture", async ({ sloikHomePage, setup }) => {
