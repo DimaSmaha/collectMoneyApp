@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "@playwright/test": "^1.35.1"
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.9.4"
   },
   "scripts": {
     "pw-test": "npx playwright test --reporter=list",
