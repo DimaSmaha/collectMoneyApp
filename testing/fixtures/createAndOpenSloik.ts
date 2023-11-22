@@ -23,6 +23,7 @@ export const test = base.extend<myFixtures>({
     await sloikHomePage.clickSloikSumbitBtn();
     await sloikHomePage.clickSloikOneBtn();
     await use(page); // will run all the time until test are done/resolved
+    //here we write any teardown
   },
 });
 
