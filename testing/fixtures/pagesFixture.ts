@@ -7,6 +7,7 @@ type Pages = {
   sloikHomePage: SloikHomePage;
   sloikSloikPage: SloikSloikPage;
   sloikAchievementsPage: SloikAchievementsPage;
+  setup: any;
 };
 
 export const test = base.extend<Pages>({
@@ -21,5 +22,12 @@ export const test = base.extend<Pages>({
   sloikAchievementsPage: ({ page }, use) => {
     const achievementsPage = new SloikAchievementsPage(page);
     use(achievementsPage);
+  },
+  setup: async ({ page, context }, use) => {
+    let sloikHomePage = new SloikHomePage(page);
+    await sloikHomePage.goto();
+    await page.waitForLoadState();
+    await context.clearCookies();
+    await use(page);
   },
 });

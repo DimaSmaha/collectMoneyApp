@@ -5,6 +5,7 @@ type myFixtures = {
   title: string;
   description: string;
   yourGoal: number;
+  setup: any;
 };
 
 export const test = base.extend<myFixtures>({
