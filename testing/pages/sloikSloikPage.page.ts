@@ -125,6 +125,21 @@ export class SloikSloikPage extends Helper {
   //   this.page.locator(`cancel_transaction_${transactionBoxId}`);
   // }
 
+  async assertSloikValues(
+    title: string,
+    description: string,
+    moneyScore: string,
+    yourGoal: string,
+    progressBar: string
+  ) {
+    await this.page.waitForLoadState();
+    await this.assertSloikTitleValue(title);
+    await this.assertSloikDesriptionValue(description);
+    await this.assertMoneyScoreValue(`Your money : ${moneyScore}`);
+    await this.assertYourGoalValue(`Your goal : ${yourGoal}`);
+    await this.assertProgressBarValue(progressBar);
+  }
+
   async assertTransactionByNumber(
     transactionBoxId: number,
     transactionSum: number,

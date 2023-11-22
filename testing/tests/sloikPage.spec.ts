@@ -1,7 +1,6 @@
-import { test, expect, request, APIResponse } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { SloikHomePage } from "../pages/sloikHomePage.page";
 import { SloikSloikPage } from "../pages/sloikSloikPage.page";
-import { SloikAchievementsPage } from "../pages/sloikAchievementsPage.page";
 import {
   sloikOneTitle,
   sloikOneDescription,
@@ -13,22 +12,6 @@ test.describe("Sloik page test suite", () => {
   const sloikTwoTitle = test_data.sloikTwoTitle;
   const sloikTwoDescription = "Gift for my sweetie";
   const sloikTwoGoalSum = 13500;
-
-  async function assertSloikValues(
-    { page },
-    title: string,
-    description: string,
-    moneyScore: string,
-    yourGoal: string,
-    progressBar: string
-  ) {
-    await page.waitForLoadState();
-    await sloikSloikPage.assertSloikTitleValue(title);
-    await sloikSloikPage.assertSloikDesriptionValue(description);
-    await sloikSloikPage.assertMoneyScoreValue(`Your money : ${moneyScore}`);
-    await sloikSloikPage.assertYourGoalValue(`Your goal : ${yourGoal}`);
-    await sloikSloikPage.assertProgressBarValue(progressBar);
-  }
 
   async function createAndOpenSloik(
     { page },
@@ -110,8 +93,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneDescription,
       sloikOneGoalSum
     );
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikOneTitle,
       sloikOneDescription,
       "0",
@@ -138,8 +120,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneDescription,
       sloikOneGoalSum
     );
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikOneTitle,
       sloikOneDescription,
       "0",
@@ -188,8 +169,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneDescription,
       sloikOneGoalSum
     );
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikOneTitle,
       sloikOneDescription,
       "0",
@@ -213,8 +193,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneDescription,
       sloikOneGoalSum
     );
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikOneTitle,
       sloikOneDescription,
       "0",
@@ -243,8 +222,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneDescription,
       sloikOneGoalSum
     );
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikOneTitle,
       sloikOneDescription,
       "0",
@@ -275,8 +253,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneDescription,
       sloikOneGoalSum
     );
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikOneTitle,
       sloikOneDescription,
       "0",
@@ -295,8 +272,7 @@ test.describe("Sloik page test suite", () => {
       sloikTwoGoalSum
     );
     await sloikHomePage.clickSloikTwoBtn();
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikTwoTitle,
       sloikTwoDescription,
       "0",
@@ -307,8 +283,7 @@ test.describe("Sloik page test suite", () => {
     await sloikSloikPage.assertTransactionByNumber(0, transaction3, new Date());
     await sloikSloikPage.clickHomeBtn();
     await sloikHomePage.clickSloikOneBtn();
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikOneTitle,
       sloikOneDescription,
       "25000",
@@ -319,8 +294,7 @@ test.describe("Sloik page test suite", () => {
     await sloikSloikPage.isTransactionByIdDisplayed(1);
     await sloikSloikPage.clickHomeBtn();
     await sloikHomePage.clickSloikTwoBtn();
-    await assertSloikValues(
-      { page },
+    await sloikSloikPage.assertSloikValues(
       sloikTwoTitle,
       sloikTwoDescription,
       "6250",
