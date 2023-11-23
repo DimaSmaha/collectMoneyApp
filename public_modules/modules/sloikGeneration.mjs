@@ -71,12 +71,7 @@ function renderSloik() {
 }
 
 function renderExistingSloiks() {
-  let sloikCounter1 = Cookies.get("sloiksCounter");
-  console.log(sloikCounter1);
-  let sloikCounter2 = Cookies.get("sloikTitle_0");
-  console.log(sloikCounter2);
   let sloikCounter = parseInt(Cookies.get("sloiksCounter"));
-  console.log(sloikCounter);
   const sloiksList = document.getElementById("sloiksList");
   for (let i = 0; i < sloikCounter; i++) {
     sloiksList.insertAdjacentHTML(
