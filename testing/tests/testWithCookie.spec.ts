@@ -7,7 +7,7 @@ test.describe("Fixture test suite", () => {
     const sloikTitle = "Title made with fixture";
     const sloikDescription = "Description made with fixture";
     const sloikGoalSum = 10000;
-    let sloikHomePage = new SloikHomePage(setCookies);
+    let sloikHomePage = new SloikHomePage(setCookies); //to use a browser context u have to connect pages to the context
     let sloikSloikPage = new SloikSloikPage(setCookies);
     await setCookies;
     await sloikHomePage.clickSloikOneBtn();

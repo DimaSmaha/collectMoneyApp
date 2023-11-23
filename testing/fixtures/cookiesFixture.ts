@@ -14,7 +14,7 @@ const userCookies = [
     name: "sloiksCounter",
     value: "1",
     path: "/",
-    domain: "127.0.0.1:5500", //to fillup all subdomains with cookies
+    domain: "127.0.0.1:5500", //to fillup all subdomains with cookies use .  .somenane
     httpOnly: true,
     secure: true,
     expires: expires,
@@ -23,7 +23,7 @@ const userCookies = [
     name: "totalMoney_0",
     value: "999",
     path: "/",
-    domain: "127.0.0.1:5500", //to fillup all subdomains with cookies
+    domain: "127.0.0.1:5500",
     httpOnly: true,
     secure: true,
     expires: expires,
@@ -80,20 +80,3 @@ export const test = base.extend<Pages>({
     await use(page);
   },
 });
-
-// test("Should use cookies", async ({ page, setCookies }) => {
-//     const sloikTitle = "Title made with fixture";
-//     const sloikDescription = "Description made with fixture";
-//     const sloikGoalSum = 10000;
-//     let sloikHomePage = new SloikHomePage(page);
-//     let sloikSloikPage = new SloikSloikPage(page);
-//     await setCookies;
-//     await sloikHomePage.clickSloikOneBtn();
-//     await sloikSloikPage.assertSloikValues(
-//       sloikTitle,
-//       sloikDescription,
-//       "0",
-//       sloikGoalSum.toString(),
-//       "0%"
-//     );
-//   });
