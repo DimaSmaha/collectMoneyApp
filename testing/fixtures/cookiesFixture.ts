@@ -76,7 +76,6 @@ export const test = base.extend<Pages>({
     await page.waitForLoadState();
     await context.addCookies(userCookies);
     console.log(await context.cookies());
-    await page.waitForTimeout(60000);
     await page.reload();
     await use(page);
   },
