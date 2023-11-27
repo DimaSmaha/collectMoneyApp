@@ -16,6 +16,7 @@ export class SloikAchievementsPage {
 
   async checkPageUrl() {
     await expect(this.page).toHaveURL("/achievements.html");
+    await expect(this.page).not.toHaveURL("/achievements.html");
   }
 
   async clickHomeButton() {
