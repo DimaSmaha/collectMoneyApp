@@ -167,16 +167,12 @@ export class SloikSloikPage extends Helper {
     expect(await transactionText.innerText()).toContain("Date:");
     let getDate = date.getDate();
     let getMonth = date.getMonth();
-    if (getMonth == 11) {
-      getMonth = 0;
-    } else {
-      getMonth++;
-    }
+    getMonth++;
     let getYear = date.getFullYear();
     let getHours = date.getHours();
     let getMinutes = date.getMinutes();
     let passZero;
-    if (getMonth < 10) {
+    if (date.getMonth() < 10) {
       passZero = 0;
     } else {
       passZero = "";
@@ -193,8 +189,14 @@ export class SloikSloikPage extends Helper {
     } else {
       passZeroHrs = "";
     }
+    let passZeroDays;
+    if (getDate < 10) {
+      passZeroDays = 0;
+    } else {
+      passZeroDays = "";
+    }
     expect(await transactionText.innerText()).toContain(
-      `${getDate}/${passZero}${getMonth}/${getYear}, ${passZeroHrs}${getHours}:${passZeroMin}${getMinutes}:`
+      `${passZeroDays}${getDate}/${passZero}${getMonth}/${getYear}, ${passZeroHrs}${getHours}:${passZeroMin}${getMinutes}:`
     );
     await expect(editTransaction).toBeVisible();
     await expect(cancelTransaction).toBeVisible();
