@@ -28,10 +28,10 @@ jobs:
         run: sleep 10
 
       - name: Build Playwright Docker image
-        run: docker build -t playwright-tests .
+        run: cd testing && docker build -t playwright-tests .
 
       - name: Run Playwright Docker container
-        run: docker run -v $(pwd)/testing/playwright-report:/tests/playwright-report playwright-tests
+        run: cd testing && docker run -v $(pwd)/testing/playwright-report:/tests/playwright-report playwright-tests
 
       - name: Archive Playwright report
         uses: actions/upload-artifact@v3
