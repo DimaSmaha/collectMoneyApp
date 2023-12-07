@@ -1,7 +1,6 @@
-import { expect } from "@playwright/test";
-import { sloikOneTitle, sloikOneGoalSum } from "../fixtures/fixtures";
+import { test, expect } from "../fixtures/mergeFixtures";
 import { test_data } from "../fixtures/data.json";
-import { test } from "../fixtures/pagesFixture";
+import { sloikOneTitle, sloikOneGoalSum } from "../fixtures/fixtures";
 
 test.describe("Home page test suite", () => {
   const sloikTwoTitle = test_data.sloikTwoTitle;

@@ -1,6 +1,4 @@
-import { test, expect } from "@playwright/test";
-import { SloikHomePage } from "../pages/sloikHomePage.page";
-import { SloikSloikPage } from "../pages/sloikSloikPage.page";
+import { test, expect } from "../fixtures/mergeFixtures";
 import {
   sloikOneTitle,
   sloikOneDescription,
@@ -14,12 +12,11 @@ test.describe("Sloik page test suite", () => {
   const sloikTwoGoalSum = 13500;
 
   async function createAndOpenSloik(
-    { page },
+    { sloikHomePage },
     title: string,
     description: string,
     yourGoal: number
   ) {
-    sloikHomePage = new SloikHomePage(page);
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(title);
     await sloikHomePage.fillSloikDescriptionInput(description);
@@ -29,12 +26,11 @@ test.describe("Sloik page test suite", () => {
   }
 
   async function createSloik(
-    { page },
+    { sloikHomePage },
     title: string,
     description: string,
     yourGoal: number
   ) {
-    sloikHomePage = new SloikHomePage(page);
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(title);
     await sloikHomePage.fillSloikDescriptionInput(description);
@@ -42,13 +38,13 @@ test.describe("Sloik page test suite", () => {
     await sloikHomePage.clickSloikSumbitBtn();
   }
 
-  async function addMoneyToSloik({ page }, addMoneySum: number) {
+  async function addMoneyToSloik({ sloikSloikPage }, addMoneySum: number) {
     await sloikSloikPage.fillAddMoneyInput(addMoneySum.toString());
     await sloikSloikPage.clickAddMoneyButton();
   }
 
   async function assertProgressBar(
-    { page },
+    { sloikSloikPage },
     addMoneySum: number,
     sloikGoal: number
   ) {
@@ -57,14 +53,14 @@ test.describe("Sloik page test suite", () => {
     );
   }
 
-  async function assertMoneyScore({ page }, moneyScore: number) {
+  async function assertMoneyScore({ sloikSloikPage }, moneyScore: number) {
     await sloikSloikPage.assertMoneyScoreValue(
       `Your money : ${moneyScore.toString()}`
     );
   }
 
   async function editTransactionById(
-    { page },
+    { page, sloikSloikPage },
     transactionId: number,
     editedSum: number
   ) {
@@ -74,21 +70,20 @@ test.describe("Sloik page test suite", () => {
     await sloikSloikPage.clickAcceptEditTransactionBtnById(transactionId);
   }
 
-  let sloikHomePage;
-  let sloikSloikPage;
-  test.beforeEach(async ({ page, context }) => {
-    sloikHomePage = new SloikHomePage(page);
-    sloikSloikPage = new SloikSloikPage(page);
+  test.beforeEach(async ({ page, context, sloikHomePage }) => {
     await sloikHomePage.goto();
     await page.waitForLoadState();
     await context.clearCookies();
   });
 
-  test("Should add money to sloik", async ({ page }) => {
+  test("Should add money to sloik", async ({
+    sloikHomePage,
+    sloikSloikPage,
+  }) => {
     const addMoneySum = 10000;
 
     await createAndOpenSloik(
-      { page },
+      { sloikHomePage },
       sloikOneTitle,
       sloikOneDescription,
       sloikOneGoalSum
@@ -105,17 +100,21 @@ test.describe("Sloik page test suite", () => {
     await sloikSloikPage.assertMoneyScoreValue(
       `Your money : ${addMoneySum.toString()}`
     );
-    await assertProgressBar({ page }, addMoneySum, sloikOneGoalSum);
+    await assertProgressBar({ sloikSloikPage }, addMoneySum, sloikOneGoalSum);
     await sloikSloikPage.assertTransactionByNumber(0, addMoneySum, new Date());
   });
 
-  test("Should edit the existing transaction", async ({ page }) => {
+  test("Should edit the existing transaction", async ({
+    sloikHomePage,
+    sloikSloikPage,
+    page,
+  }) => {
     const transaction1 = 15000;
     const transaction2 = 10000;
     const editedTransaction1 = 25000;
 
     await createAndOpenSloik(
-      { page },
+      { sloikHomePage },
       sloikOneTitle,
       sloikOneDescription,
       sloikOneGoalSum
@@ -127,16 +126,16 @@ test.describe("Sloik page test suite", () => {
       sloikOneGoalSum.toString(),
       "0%"
     );
-    await addMoneyToSloik({ page }, transaction1);
+    await addMoneyToSloik({ sloikSloikPage }, transaction1);
     await sloikSloikPage.assertMoneyScoreValue(
       `Your money : ${transaction1.toString()}`
     );
-    await addMoneyToSloik({ page }, transaction2);
+    await addMoneyToSloik({ sloikSloikPage }, transaction2);
     await sloikSloikPage.assertMoneyScoreValue(
       `Your money : ${(transaction1 + transaction2).toString()}`
     );
     await assertProgressBar(
-      { page },
+      { sloikSloikPage },
       transaction1 + transaction2,
       sloikOneGoalSum
     );
@@ -146,10 +145,13 @@ test.describe("Sloik page test suite", () => {
     expect(page.locator(`#transaction_${0}_Text`)).toBeVisible();
     expect(page.locator(`#edit_transaction_${0}`)).toBeVisible();
     expect(page.locator(`#editMoneyInput_${0}`)).not.toBeVisible();
-    await editTransactionById({ page }, 0, editedTransaction1);
-    await assertMoneyScore({ page }, editedTransaction1 + transaction2);
+    await editTransactionById({ page, sloikSloikPage }, 0, editedTransaction1);
+    await assertMoneyScore(
+      { sloikSloikPage },
+      editedTransaction1 + transaction2
+    );
     await assertProgressBar(
-      { page },
+      { sloikSloikPage },
       editedTransaction1 + transaction2,
       sloikOneGoalSum
     );
@@ -159,12 +161,15 @@ test.describe("Sloik page test suite", () => {
     );
   });
 
-  test("Should delete the existing transaction", async ({ page }) => {
+  test("Should delete the existing transaction", async ({
+    sloikHomePage,
+    sloikSloikPage,
+  }) => {
     const transaction1 = 15000;
     const transaction2 = 10000;
 
     await createAndOpenSloik(
-      { page },
+      { sloikHomePage },
       sloikOneTitle,
       sloikOneDescription,
       sloikOneGoalSum
@@ -176,19 +181,22 @@ test.describe("Sloik page test suite", () => {
       sloikOneGoalSum.toString(),
       "0%"
     );
-    await addMoneyToSloik({ page }, transaction1);
-    await addMoneyToSloik({ page }, transaction2);
+    await addMoneyToSloik({ sloikSloikPage }, transaction1);
+    await addMoneyToSloik({ sloikSloikPage }, transaction2);
     await sloikSloikPage.deleteTransactionById(1);
-    await assertMoneyScore({ page }, transaction1);
-    await assertProgressBar({ page }, transaction1, sloikOneGoalSum);
+    await assertMoneyScore({ sloikSloikPage }, transaction1);
+    await assertProgressBar({ sloikSloikPage }, transaction1, sloikOneGoalSum);
   });
 
-  test("Should edit the existing goal", async ({ page }) => {
+  test("Should edit the existing goal", async ({
+    sloikHomePage,
+    sloikSloikPage,
+  }) => {
     const transaction1 = 15000;
     const editedGoalSum = 100000;
 
     await createAndOpenSloik(
-      { page },
+      { sloikHomePage },
       sloikOneTitle,
       sloikOneDescription,
       sloikOneGoalSum
@@ -200,7 +208,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneGoalSum.toString(),
       "0%"
     );
-    await addMoneyToSloik({ page }, transaction1);
+    await addMoneyToSloik({ sloikSloikPage }, transaction1);
     await sloikSloikPage.clickEditGoalBtn();
     await expect(sloikSloikPage.editGoalButton).not.toBeVisible();
     await sloikSloikPage.clickCancelEditGoalBtn();
@@ -210,14 +218,18 @@ test.describe("Sloik page test suite", () => {
     await sloikSloikPage.clickEditGoalBtn();
     await sloikSloikPage.fillEditGoalInput(editedGoalSum);
     await sloikSloikPage.clickAcceptEditGoalBtn();
-    await assertProgressBar({ page }, transaction1, editedGoalSum);
+    await assertProgressBar({ sloikSloikPage }, transaction1, editedGoalSum);
   });
 
-  test("Should show an achievement", async ({ page }) => {
+  test("Should show an achievement", async ({
+    sloikHomePage,
+    sloikSloikPage,
+    page,
+  }) => {
     const transaction1 = 777;
 
     await createAndOpenSloik(
-      { page },
+      { sloikHomePage },
       sloikOneTitle,
       sloikOneDescription,
       sloikOneGoalSum
@@ -229,26 +241,27 @@ test.describe("Sloik page test suite", () => {
       sloikOneGoalSum.toString(),
       "0%"
     );
-    await addMoneyToSloik({ page }, transaction1);
+    await addMoneyToSloik({ sloikSloikPage }, transaction1);
     await expect(sloikSloikPage.achievementOne).toBeInViewport();
     await expect(sloikSloikPage.achievementOne).toBeVisible();
     await expect(sloikSloikPage.achievementOne).toHaveCSS("display", "block");
     await sloikSloikPage.clickHomeBtn();
     await sloikHomePage.clickSloikOneBtn();
-    await addMoneyToSloik({ page }, transaction1);
+    await addMoneyToSloik({ sloikSloikPage }, transaction1);
     await page.waitForTimeout(1000);
     await expect(sloikSloikPage.achievementOne).not.toBeVisible();
   });
 
   test("Should check the proper save of data for 2 sloiks", async ({
-    page,
+    sloikHomePage,
+    sloikSloikPage,
   }) => {
     const transaction1 = 10000;
     const transaction2 = 15000;
     const transaction3 = 6250;
 
     await createAndOpenSloik(
-      { page },
+      { sloikHomePage },
       sloikOneTitle,
       sloikOneDescription,
       sloikOneGoalSum
@@ -260,13 +273,13 @@ test.describe("Sloik page test suite", () => {
       sloikOneGoalSum.toString(),
       "0%"
     );
-    await addMoneyToSloik({ page }, transaction1);
-    await addMoneyToSloik({ page }, transaction2);
+    await addMoneyToSloik({ sloikSloikPage }, transaction1);
+    await addMoneyToSloik({ sloikSloikPage }, transaction2);
     await sloikSloikPage.assertTransactionByNumber(0, transaction1, new Date());
     await sloikSloikPage.assertTransactionByNumber(1, transaction2, new Date());
     await sloikSloikPage.clickHomeBtn();
     await createSloik(
-      { page },
+      { sloikHomePage },
       sloikTwoTitle,
       sloikTwoDescription,
       sloikTwoGoalSum
@@ -279,7 +292,7 @@ test.describe("Sloik page test suite", () => {
       sloikTwoGoalSum.toString(),
       "0%"
     );
-    await addMoneyToSloik({ page }, transaction3);
+    await addMoneyToSloik({ sloikSloikPage }, transaction3);
     await sloikSloikPage.assertTransactionByNumber(0, transaction3, new Date());
     await sloikSloikPage.clickHomeBtn();
     await sloikHomePage.clickSloikOneBtn();

@@ -1,7 +1,5 @@
-import { test, expect, request, APIResponse } from "@playwright/test";
-import { SloikHomePage } from "../pages/sloikHomePage.page";
-import { SloikSloikPage } from "../pages/sloikSloikPage.page";
-import { SloikAchievementsPage } from "../pages/sloikAchievementsPage.page";
+import { test, expect } from "../fixtures/mergeFixtures";
+
 import {
   sloikOneTitle,
   sloikOneDescription,
@@ -10,7 +8,7 @@ import {
 
 test.describe("Achievements page test suite", () => {
   async function assertSloikValues(
-    { page },
+    { page, sloikSloikPage },
     title: string,
     description: string,
     moneyScore: string,
@@ -26,12 +24,11 @@ test.describe("Achievements page test suite", () => {
   }
 
   async function createAndOpenSloik(
-    { page },
+    { sloikHomePage },
     title: string,
     description: string,
     yourGoal: number
   ) {
-    let sloikHomePage = new SloikHomePage(page);
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(title);
     await sloikHomePage.fillSloikDescriptionInput(description);
@@ -40,19 +37,18 @@ test.describe("Achievements page test suite", () => {
     await sloikHomePage.clickSloikOneBtn();
   }
 
-  let sloikHomePage;
-  let sloikSloikPage;
-  let sloikAchievementsPage;
-  test.beforeEach(async ({ page, context }) => {
-    sloikHomePage = new SloikHomePage(page);
-    sloikSloikPage = new SloikSloikPage(page);
-    sloikAchievementsPage = new SloikAchievementsPage(page);
+  test.beforeEach(async ({ page, context, sloikHomePage }) => {
     await sloikHomePage.goto();
     await page.waitForLoadState();
     await context.clearCookies();
   });
 
-  test("Should properly show achievements", async ({ page }) => {
+  test("Should properly show achievements", async ({
+    page,
+    sloikHomePage,
+    sloikAchievementsPage,
+    sloikSloikPage,
+  }) => {
     const addMoneySum = 777;
 
     await sloikHomePage.clickAchievementsButton();
@@ -60,13 +56,13 @@ test.describe("Achievements page test suite", () => {
     await expect(sloikAchievementsPage.achievementTwo).not.toBeVisible();
     await sloikAchievementsPage.clickHomeButton();
     await createAndOpenSloik(
-      { page },
+      { sloikHomePage },
       sloikOneTitle,
       sloikOneDescription,
       sloikOneGoalSum
     );
     await assertSloikValues(
-      { page },
+      { page, sloikSloikPage },
       sloikOneTitle,
       sloikOneDescription,
       "0",
