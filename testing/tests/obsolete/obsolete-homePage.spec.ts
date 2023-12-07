@@ -3,7 +3,7 @@ import { sloikOneTitle, sloikOneGoalSum } from "../fixtures/fixtures";
 import { test_data } from "../fixtures/data.json";
 import { test } from "../fixtures/pagesFixture";
 
-test.describe("Home page test suite", () => {
+test.skip("Home page test suite", () => {
   const sloikTwoTitle = test_data.sloikTwoTitle;
   const sloikTwoDescription = "Gift for my sweetie";
   const sloikTwoGoalSum = 13500;

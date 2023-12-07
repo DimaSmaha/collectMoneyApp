@@ -8,7 +8,7 @@ import {
   sloikOneGoalSum,
 } from "../fixtures/fixtures";
 
-test.describe("Achievements page test suite", () => {
+test.skip("Achievements page test suite", () => {
   async function assertSloikValues(
     { page },
     title: string,

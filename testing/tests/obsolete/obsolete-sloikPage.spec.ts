@@ -8,7 +8,7 @@ import {
 } from "../fixtures/fixtures";
 import { test_data } from "../fixtures/data.json";
 
-test.describe("Sloik page test suite", () => {
+test.skip("Sloik page test suite", () => {
   const sloikTwoTitle = test_data.sloikTwoTitle;
   const sloikTwoDescription = "Gift for my sweetie";
   const sloikTwoGoalSum = 13500;
