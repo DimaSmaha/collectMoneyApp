@@ -98,7 +98,7 @@ test.describe("Sloik page test suite", () => {
     await sloikSloikPage.fillAddMoneyInput(addMoneySum);
     await sloikSloikPage.clickAddMoneyButton();
     await sloikSloikPage.assertMoneyScoreValue(
-      `Your money : ${addMoneySum.toString()}`
+      `Your money : ${addMoneySum}`
     );
     await assertProgressBar({ sloikSloikPage }, addMoneySum, sloikOneGoalSum);
     await sloikSloikPage.assertTransactionByNumber(0, addMoneySum, new Date());
@@ -128,11 +128,11 @@ test.describe("Sloik page test suite", () => {
     );
     await addMoneyToSloik({ sloikSloikPage }, transaction1);
     await sloikSloikPage.assertMoneyScoreValue(
-      `Your money : ${transaction1.toString()}`
+      `Your money : ${transaction1}`
     );
     await addMoneyToSloik({ sloikSloikPage }, transaction2);
     await sloikSloikPage.assertMoneyScoreValue(
-      `Your money : ${(transaction1 + transaction2).toString()}`
+      `Your money : ${(transaction1 + transaction2)}`
     );
     await assertProgressBar(
       { sloikSloikPage },
