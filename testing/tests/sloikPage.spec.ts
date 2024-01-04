@@ -92,10 +92,10 @@ test.describe("Sloik page test suite", () => {
       sloikOneTitle,
       sloikOneDescription,
       "0",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "0%"
     );
-    await sloikSloikPage.fillAddMoneyInput(addMoneySum.toString());
+    await sloikSloikPage.fillAddMoneyInput(addMoneySum);
     await sloikSloikPage.clickAddMoneyButton();
     await sloikSloikPage.assertMoneyScoreValue(
       `Your money : ${addMoneySum.toString()}`
@@ -123,7 +123,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneTitle,
       sloikOneDescription,
       "0",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "0%"
     );
     await addMoneyToSloik({ sloikSloikPage }, transaction1);
@@ -178,7 +178,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneTitle,
       sloikOneDescription,
       "0",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "0%"
     );
     await addMoneyToSloik({ sloikSloikPage }, transaction1);
@@ -205,7 +205,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneTitle,
       sloikOneDescription,
       "0",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "0%"
     );
     await addMoneyToSloik({ sloikSloikPage }, transaction1);
@@ -238,7 +238,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneTitle,
       sloikOneDescription,
       "0",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "0%"
     );
     await addMoneyToSloik({ sloikSloikPage }, transaction1);
@@ -270,7 +270,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneTitle,
       sloikOneDescription,
       "0",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "0%"
     );
     await addMoneyToSloik({ sloikSloikPage }, transaction1);
@@ -289,7 +289,7 @@ test.describe("Sloik page test suite", () => {
       sloikTwoTitle,
       sloikTwoDescription,
       "0",
-      sloikTwoGoalSum.toString(),
+      sloikTwoGoalSum,
       "0%"
     );
     await addMoneyToSloik({ sloikSloikPage }, transaction3);
@@ -300,7 +300,7 @@ test.describe("Sloik page test suite", () => {
       sloikOneTitle,
       sloikOneDescription,
       "25000",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "17%"
     );
     await sloikSloikPage.isTransactionByIdDisplayed(0);
@@ -311,7 +311,7 @@ test.describe("Sloik page test suite", () => {
       sloikTwoTitle,
       sloikTwoDescription,
       "6250",
-      sloikTwoGoalSum.toString(),
+      sloikTwoGoalSum,
       "46%"
     );
   });
