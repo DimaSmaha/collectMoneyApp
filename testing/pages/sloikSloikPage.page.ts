@@ -99,7 +99,7 @@ export class SloikSloikPage extends Helper {
   }
 
   async assertMoneyScoreValue(moneyScore: string) {
-    expect.soft(await this.yourMoneyScore.textContent()).toBe(moneyScore); //wont terminate a test, the test will end the execution, but it will be marked as failed
+    expect.soft(await this.yourMoneyScore.textContent()).toBe(moneyScore.toString()); //wont terminate a test, the test will end the execution, but it will be marked as failed
   }
 
   async assertYourGoalValue(yourGoal: string) {
@@ -110,8 +110,8 @@ export class SloikSloikPage extends Helper {
     expect(await this.progressBarText.innerText()).toBe(progressBar);
   }
 
-  async fillAddMoneyInput(title: string) {
-    await this.addMoneyInput.type(title);
+  async fillAddMoneyInput(title: number) {
+    await this.addMoneyInput.fill(title.toString());
   }
 
   async clickAddMoneyButton() {

@@ -1,5 +1,4 @@
 import { test, expect } from "../fixtures/mergeFixtures";
-
 import {
   sloikOneTitle,
   sloikOneDescription,
@@ -12,14 +11,14 @@ test.describe("Achievements page test suite", () => {
     title: string,
     description: string,
     moneyScore: string,
-    yourGoal: string,
+    yourGoal: number,
     progressBar: string
   ) {
     await page.waitForLoadState();
     await sloikSloikPage.assertSloikTitleValue(title);
     await sloikSloikPage.assertSloikDesriptionValue(description);
     await sloikSloikPage.assertMoneyScoreValue(`Your money : ${moneyScore}`);
-    await sloikSloikPage.assertYourGoalValue(`Your goal : ${yourGoal}`);
+    await sloikSloikPage.assertYourGoalValue(`Your goal : ${yourGoal.toString()}`);
     await sloikSloikPage.assertProgressBarValue(progressBar);
   }
 
@@ -66,14 +65,12 @@ test.describe("Achievements page test suite", () => {
       sloikOneTitle,
       sloikOneDescription,
       "0",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "0%"
     );
-    await sloikSloikPage.fillAddMoneyInput(addMoneySum.toString());
+    await sloikSloikPage.fillAddMoneyInput(addMoneySum);
     await sloikSloikPage.clickAddMoneyButton();
-    await sloikSloikPage.assertMoneyScoreValue(
-      `Your money : ${addMoneySum.toString()}`
-    );
+    await sloikSloikPage.assertMoneyScoreValue(`Your money : ${addMoneySum}`);
     await expect(sloikSloikPage.achievementOne).toBeInViewport();
     await expect(sloikSloikPage.achievementOne).toBeVisible();
     await expect(sloikSloikPage.achievementOne).toHaveCSS("display", "block");
