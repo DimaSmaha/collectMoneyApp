@@ -43,7 +43,7 @@ test.describe("Home page test suite", () => {
       sloikOneTitle,
       getRandomSentence,
       "0",
-      sloikOneGoalSum.toString(),
+      sloikOneGoalSum,
       "0%"
     );
     await sloikSloikPage.clickHomeBtn();
@@ -52,7 +52,7 @@ test.describe("Home page test suite", () => {
       sloikTwoTitle,
       sloikTwoDescription,
       "0",
-      sloikTwoGoalSum.toString(),
+      sloikTwoGoalSum,
       "0%"
     );
   });

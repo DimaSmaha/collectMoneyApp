@@ -129,14 +129,14 @@ export class SloikSloikPage extends Helper {
     title: string,
     description: string,
     moneyScore: string,
-    yourGoal: string,
+    yourGoal: number,
     progressBar: string
   ) {
     await this.page.waitForLoadState();
     await this.assertSloikTitleValue(title);
     await this.assertSloikDesriptionValue(description);
     await this.assertMoneyScoreValue(`Your money : ${moneyScore}`);
-    await this.assertYourGoalValue(`Your goal : ${yourGoal}`);
+    await this.assertYourGoalValue(`Your goal : ${yourGoal.toString()}`);
     await this.assertProgressBarValue(progressBar);
   }
 
