@@ -15,19 +15,15 @@ test.describe("Home page test suite", () => {
     return getSentence;
   }
 
-  test.beforeEach(async ({ page, context, sloikHomePage }) => {
-    await sloikHomePage.goto();
-    await page.waitForLoadState();
-    await context.clearCookies();
-  });
 
   test("Should create 2 sloiks", async ({
     sloikHomePage,
     sloikSloikPage,
     request,
+    setup
   }) => {
     let getRandomSentence = await getRandomDescription({ request });
-
+    await setup;
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(sloikOneTitle);
     await sloikHomePage.fillSloikDescriptionInput(getRandomSentence);

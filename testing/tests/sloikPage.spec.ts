@@ -70,18 +70,13 @@ test.describe("Sloik page test suite", () => {
     await sloikSloikPage.clickAcceptEditTransactionBtnById(transactionId);
   }
 
-  test.beforeEach(async ({ page, context, sloikHomePage }) => {
-    await sloikHomePage.goto();
-    await page.waitForLoadState();
-    await context.clearCookies();
-  });
-
   test("Should add money to sloik", async ({
     sloikHomePage,
     sloikSloikPage,
+    setup
   }) => {
     const addMoneySum = 10000;
-
+    await setup;
     await createAndOpenSloik(
       { sloikHomePage },
       sloikOneTitle,
@@ -108,11 +103,12 @@ test.describe("Sloik page test suite", () => {
     sloikHomePage,
     sloikSloikPage,
     page,
+    setup
   }) => {
     const transaction1 = 15000;
     const transaction2 = 10000;
     const editedTransaction1 = 25000;
-
+    await setup;
     await createAndOpenSloik(
       { sloikHomePage },
       sloikOneTitle,
@@ -164,10 +160,11 @@ test.describe("Sloik page test suite", () => {
   test("Should delete the existing transaction", async ({
     sloikHomePage,
     sloikSloikPage,
+    setup
   }) => {
     const transaction1 = 15000;
     const transaction2 = 10000;
-
+    await setup;
     await createAndOpenSloik(
       { sloikHomePage },
       sloikOneTitle,
@@ -191,10 +188,11 @@ test.describe("Sloik page test suite", () => {
   test("Should edit the existing goal", async ({
     sloikHomePage,
     sloikSloikPage,
+    setup
   }) => {
     const transaction1 = 15000;
     const editedGoalSum = 100000;
-
+    await setup;
     await createAndOpenSloik(
       { sloikHomePage },
       sloikOneTitle,
@@ -225,9 +223,10 @@ test.describe("Sloik page test suite", () => {
     sloikHomePage,
     sloikSloikPage,
     page,
+    setup
   }) => {
     const transaction1 = 777;
-
+    await setup;
     await createAndOpenSloik(
       { sloikHomePage },
       sloikOneTitle,
@@ -255,11 +254,12 @@ test.describe("Sloik page test suite", () => {
   test("Should check the proper save of data for 2 sloiks", async ({
     sloikHomePage,
     sloikSloikPage,
+    setup
   }) => {
     const transaction1 = 10000;
     const transaction2 = 15000;
     const transaction3 = 6250;
-
+    await setup;
     await createAndOpenSloik(
       { sloikHomePage },
       sloikOneTitle,

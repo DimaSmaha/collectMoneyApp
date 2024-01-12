@@ -7,14 +7,13 @@ import {
 
 test.describe("Achievements page test suite", () => {
   async function assertSloikValues(
-    { page, sloikSloikPage },
+    { sloikSloikPage },
     title: string,
     description: string,
     moneyScore: string,
     yourGoal: number,
     progressBar: string
   ) {
-    await page.waitForLoadState();
     await sloikSloikPage.assertSloikTitleValue(title);
     await sloikSloikPage.assertSloikDesriptionValue(description);
     await sloikSloikPage.assertMoneyScoreValue(`Your money : ${moneyScore}`);
@@ -36,20 +35,14 @@ test.describe("Achievements page test suite", () => {
     await sloikHomePage.clickSloikOneBtn();
   }
 
-  test.beforeEach(async ({ page, context, sloikHomePage }) => {
-    await sloikHomePage.goto();
-    await page.waitForLoadState();
-    await context.clearCookies();
-  });
-
   test("Should properly show achievements", async ({
-    page,
     sloikHomePage,
     sloikAchievementsPage,
     sloikSloikPage,
+    setup
   }) => {
     const addMoneySum = 777;
-
+    await setup;
     await sloikHomePage.clickAchievementsButton();
     await expect(sloikAchievementsPage.achievementOne).not.toBeVisible();
     await expect(sloikAchievementsPage.achievementTwo).not.toBeVisible();
@@ -61,7 +54,7 @@ test.describe("Achievements page test suite", () => {
       sloikOneGoalSum
     );
     await assertSloikValues(
-      { page, sloikSloikPage },
+      { sloikSloikPage },
       sloikOneTitle,
       sloikOneDescription,
       "0",
