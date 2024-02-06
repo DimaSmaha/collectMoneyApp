@@ -28,10 +28,10 @@ const config: PlaywrightTestConfig = {
     ignoreHTTPSErrors: true,
   },
   projects: [
-    {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-    },
+    // {
+    //   name: "chromium",
+    //   use: { ...devices["Desktop Chrome"] },
+    // },
     {
       name: "gh-actions",
       use: {
@@ -45,7 +45,21 @@ const config: PlaywrightTestConfig = {
         baseURL: "http://app/public/home.html", // local docker-compose IP
         headless: true,
       },
-    } /*
+      
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'mobile_chrome',
+      use: { ...devices['Pixel 5'] },
+    },
+    {
+      name: 'safari',
+      use: { ...devices['Desktop Safari'] },
+    }
+    /*
     {
       name: "Desktop Chrome",
       use: { browserName: "chromium" },

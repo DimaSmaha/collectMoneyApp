@@ -5,6 +5,9 @@
   },
   "scripts": {
     "pw-test": "npx playwright test --reporter=list",
+    "pw-test-firefox": "npx playwright test --project=firefox",
+    "pw-test-mobile-chrome": "npx playwright test --project=mobile_chrome",
+    "pw-test-safari": "npx playwright test --project=safari",
     "pw-test-modules": "npx playwright test --reporter=list --project=gh-actions --workers=1",
     "pw-open-report": "npx playwright show-report"
   }
