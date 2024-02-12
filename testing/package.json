@@ -10,5 +10,8 @@
     "pw-test-safari": "npx playwright test --project=safari",
     "pw-test-modules": "npx playwright test --reporter=list --project=gh-actions --workers=1",
     "pw-open-report": "npx playwright show-report"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1"
   }
 }
