@@ -28,10 +28,10 @@ const config: PlaywrightTestConfig = {
     ignoreHTTPSErrors: true,
   },
   projects: [
-    // {
-    //   name: "chromium",
-    //   use: { ...devices["Desktop Chrome"] },
-    // },
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
     {
       name: "gh-actions",
       use: {
@@ -45,20 +45,19 @@ const config: PlaywrightTestConfig = {
         baseURL: "http://app/public/home.html", // local docker-compose IP
         headless: true,
       },
-      
     },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"], browserName: "firefox" },
     },
     {
-      name: 'mobile_chrome',
-      use: { ...devices['Pixel 5'] },
+      name: "mobile_chrome",
+      use: { ...devices["Pixel 5"] },
     },
     {
-      name: 'safari',
-      use: { ...devices['Desktop Safari'] },
-    }
+      name: "safari",
+      use: { ...devices["Desktop Safari"], browserName: "webkit" },
+    } /* Test against mobile viewports. */ /* Test against branded browsers. */,
     /*
     {
       name: "Desktop Chrome",
@@ -71,7 +70,7 @@ const config: PlaywrightTestConfig = {
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    },*/ /* Test against mobile viewports. */ /* Test against branded browsers. */, // { //   name: 'Mobile Chrome', //   use: { //     ...devices['Pixel 5'], //   }, // }, // { //   name: 'Mobile Safari', //   use: { //     ...devices['iPhone 12'], //   }, // }, // { //   name: 'Microsoft Edge', //   use: { //     channel: 'msedge', //   }, // }, // { //   name: 'Google Chrome', //   use: { //     channel: 'chrome', //   }, // },
+    },*/ // { //   name: 'Mobile Chrome', //   use: { //     ...devices['Pixel 5'], //   }, // }, // { //   name: 'Mobile Safari', //   use: { //     ...devices['iPhone 12'], //   }, // }, // { //   name: 'Microsoft Edge', //   use: { //     channel: 'msedge', //   }, // }, // { //   name: 'Google Chrome', //   use: { //     channel: 'chrome', //   }, // },
   ] /* Folder for test artifacts such as screenshots, videos, traces, etc. */ /* Run your local dev server before starting the tests */, // outputDir: 'test-results/', // webServer: { //   command: 'npm run start', //   port: 3000, // },
 };
 export default config;
