@@ -30,7 +30,10 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        // viewport: { width: 1920, height: 1080 }, // the viewport may be overwritten by device, so u have to specify it inside of project
+      },
     },
     {
       name: "gh-actions",
@@ -52,7 +55,7 @@ const config: PlaywrightTestConfig = {
     },
     {
       name: "mobile_chrome",
-      use: { ...devices["Pixel 5"] },
+      use: { ...devices["Pixel 5"], browserName: "chromium" },
     },
     {
       name: "safari",
