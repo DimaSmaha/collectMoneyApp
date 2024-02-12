@@ -1,5 +1,6 @@
 import { test, expect } from "../fixtures/mergeFixtures";
 import { test_data } from "../fixtures/data.json";
+import { fakerSloikInfo } from "../fixtures/generateSloikInfo";
 import { sloikOneTitle, sloikOneGoalSum } from "../fixtures/fixtures";
 
 test.describe("Home page test suite", () => {
@@ -15,38 +16,37 @@ test.describe("Home page test suite", () => {
     return getSentence;
   }
 
-
   test("Should create 2 sloiks", async ({
     sloikHomePage,
     sloikSloikPage,
     request,
-    setup
+    setup,
   }) => {
     let getRandomSentence = await getRandomDescription({ request });
     await setup;
     await sloikHomePage.clickAddSloikBtn();
-    await sloikHomePage.fillSloikTitleInput(sloikOneTitle);
-    await sloikHomePage.fillSloikDescriptionInput(getRandomSentence);
-    await sloikHomePage.fillSLoikGoalSumInput(sloikOneGoalSum);
+    await sloikHomePage.fillSloikTitleInput(fakerSloikInfo.title);
+    await sloikHomePage.fillSloikDescriptionInput(fakerSloikInfo.description);
+    await sloikHomePage.fillSLoikGoalSumInput(fakerSloikInfo.goalSum);
     await sloikHomePage.clickSloikSumbitBtn();
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(sloikTwoTitle);
-    await sloikHomePage.fillSloikDescriptionInput(sloikTwoDescription);
+    await sloikHomePage.fillSloikDescriptionInput(getRandomSentence);
     await sloikHomePage.fillSLoikGoalSumInput(sloikTwoGoalSum);
     await sloikHomePage.clickSloikSumbitBtn();
     await sloikHomePage.clickSloikOneBtn();
     await sloikSloikPage.assertSloikValues(
-      sloikOneTitle,
-      getRandomSentence,
+      fakerSloikInfo.title,
+      fakerSloikInfo.description,
       "0",
-      sloikOneGoalSum,
+      fakerSloikInfo.goalSum,
       "0%"
     );
     await sloikSloikPage.clickHomeBtn();
     await sloikHomePage.clickSloikTwoBtn();
     await sloikSloikPage.assertSloikValues(
       sloikTwoTitle,
-      sloikTwoDescription,
+      getRandomSentence,
       "0",
       sloikTwoGoalSum,
       "0%"
