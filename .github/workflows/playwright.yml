@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies
         run: cd testing && npm ci
 
+      - name: Install Playwright
+        run: cd testing && npx playwright install
+
       - name: Run Playwright tests
         run: cd testing && xvfb-run npx playwright test --project=gh-actions
 
