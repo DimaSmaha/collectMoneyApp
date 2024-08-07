@@ -1,9 +1,0 @@
-{
-  "totalMoney": 867,
-  "goalValue": 5000,
-  "isGoalReached": false,
-  "transactionsList": [
-    { "transactionSum": 654, "date": "2023-07-04T18:03:44.492Z" },
-    { "transactionSum": 213, "date": "2023-07-04T18:04:44.492Z" }
-  ]
-}
