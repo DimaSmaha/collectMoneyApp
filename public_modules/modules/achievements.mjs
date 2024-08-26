@@ -59,7 +59,7 @@ function achievementTwo(transactionsArray) {
 }
 
 function achievementThree(transactionsArray) {
-  //Achievement Three, the user made a transaction on the Christmas 12-25
+  //Achievement Three, the user made 3 transactions on the same day
   let achievementCookieName = "achievement_3_Complete";
   if (Cookies.get(achievementCookieName) == undefined) {
     Cookies.set(achievementCookieName, JSON.stringify(false), {
