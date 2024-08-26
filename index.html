@@ -20,10 +20,24 @@
     <div id="popupContainer">
       <div class="popupContent">
         <h2>Create a sloik</h2>
-        <input type="text" id="inputField1" placeholder="Title*" />
-        <input type="text" id="inputField2" placeholder="Description*" />
-        <input type="number" id="inputField3" placeholder="Goal sum*" />
+        <div>
+          <input type="text" id="inputField1" placeholder="Title*" />
+          <p class="popupError" id="inputField1Error">
+            Please enter some value
+          </p>
+        </div>
+        <div>
+          <input type="text" id="inputField2" placeholder="Description*" />
+          <p class="popupError" id="inputField2Error">
+            Please enter some value
+          </p>
+        </div>
+        <div>
+          <input type="number" id="inputField3" placeholder="Goal sum*" />
+          <p class="popupError" id="inputField3Error">Please enter a number</p>
+        </div>
         <button id="submitBtn">Submit</button>
+        <button class="cancelCreateSloikBtn" id="cancelBtn">X</button>
       </div>
     </div>
     <div>
