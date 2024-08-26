@@ -29,9 +29,13 @@ window.onload = function () {
 };
 
 const addSloikBtn = document.getElementById("add_sloik");
+const cancelCreateSloikBtn = document.getElementById("cancelBtn");
 if (document.title == "SloikApp Home") {
   addSloikBtn.onclick = function () {
     showPopup();
+  };
+  cancelCreateSloikBtn.onclick = function () {
+    hidePopup();
   };
 }
 

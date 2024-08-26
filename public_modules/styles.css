@@ -192,3 +192,12 @@
 .sloikCancelBtn {
   cursor: pointer;
 }
+.cancelCreateSloikBtn {
+  background-color: rgb(218, 30, 30);
+  border: solid 2px;
+  position: fixed;
+  bottom: 89%;
+  right: 10%;
+  border-color: black;
+  color: white;
+}
