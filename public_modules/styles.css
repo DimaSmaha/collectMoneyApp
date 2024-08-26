@@ -201,3 +201,8 @@
   border-color: black;
   color: white;
 }
+.popupError {
+  color: red;
+  margin-top: 0px;
+  display: none;
+}
