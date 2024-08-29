@@ -164,6 +164,11 @@ function updateCookies(sloikID) {
     }
   );
 }
+function updateCookieByName(sloikID, cookieName, cookieValue) {
+  Cookies.set(`${cookieName}_${sloikID}`, JSON.stringify(`${cookieValue}`), {
+    expires: 365,
+  });
+}
 
 function recalculateMoneyScore() {
   totalMoney = 0;
@@ -243,34 +248,6 @@ function acceptEditGoal() {
   editGoalInput.value = "";
 }
 
-function submitForm() {
-  const sloikTitle = document.getElementById("sloikTitle");
-  const sloikDescription = document.getElementById("sloikDescription");
-  const titleValue = document.getElementById("inputField1").value;
-  const descriptionValue = document.getElementById("inputField2").value;
-  const goalSum = document.getElementById("inputField3");
-  if (goalSum != null) {
-    const goalSumValue = document.getElementById("inputField3").value;
-    if (
-      titleValue != "" &&
-      descriptionValue != "" &&
-      isNaN(goalSumValue) == false &&
-      goalSumValue > 0
-    ) {
-      sloikTitle.textContent = titleValue;
-      sloikDescription.textContent = descriptionValue;
-      setGoal();
-      setProgressBar();
-      hidePopup();
-      updateCookies(sloikID);
-    }
-  } else {
-    sloikTitle.textContent = titleValue;
-    sloikDescription.textContent = descriptionValue;
-    hidePopup();
-  }
-}
-
 function deleteTransaction(transaction_id) {
   const transactionBox = document.getElementById(
     `transaction_${transaction_id}_Box`
@@ -338,10 +315,48 @@ function showHowMuchSameTransactionsUserNeed() {
   }, 3100);
 }
 
+function renderEditInputButtons(box) {
+  const getBox = document.getElementById(`${box}Box`);
+  const getEditButton = document.getElementById(`${box}Edit`);
+  getEditButton.style.display = "none";
+  getBox.insertAdjacentHTML(
+    "beforeEnd",
+    `<input class="genericInput"id=${box}Input placeholder="edit"></input>
+     <button class="genericAcceptBtn" id=${box}Accept><b>V</b></button>
+     <button class="genericCancelBtn" id="${box}Cancel"><b>X</b></button`
+  );
+  renderActions(box);
+}
+
+function renderActions(box) {
+  const getBox = document.getElementById(`${box}`);
+  const getAcceptButton = document.getElementById(`${box}Accept`);
+  const getCancelButton = document.getElementById(`${box}Cancel`);
+  const getInput = document.getElementById(`${box}Input`);
+  const getEditButton = document.getElementById(`${box}Edit`);
+
+  getCancelButton.onclick = function () {
+    getCancelButton.remove();
+    getAcceptButton.remove();
+    getInput.remove();
+    getEditButton.style.display = "inline-block";
+  };
+
+  getAcceptButton.onclick = function () {
+    getBox.textContent = getInput.value;
+    getCancelButton.remove();
+    getAcceptButton.remove();
+    getInput.remove();
+    getEditButton.style.display = "inline-block";
+    updateCookieByName(sloikID, box, getBox.textContent);
+  };
+}
+
 export {
   getData,
   addMoney,
   acceptEditGoal,
   deleteTransaction,
   acceptEditTransaction,
+  renderEditInputButtons,
 };

@@ -163,7 +163,7 @@
   margin-bottom: 10px;
 }
 #submitBtn {
-  background-color: #4caf50;
+  background-color: lawngreen;
   color: white;
   border: none;
   border-radius: 5px;
@@ -209,4 +209,25 @@
 }
 .sloikDeleteButtons {
   display: none;
+}
+.edit-button {
+  display: inline-block;
+  margin-left: 12px;
+}
+#sloikTitle {
+  display: inline-block;
+}
+#sloikDescription {
+  display: inline-block;
+}
+.genericAcceptBtn {
+  background-color: lawngreen;
+  display: inline-block;
+}
+.genericCancelBtn {
+  background-color: red;
+  display: inline-block;
+}
+.genericInput {
+  display: inline-block;
 }

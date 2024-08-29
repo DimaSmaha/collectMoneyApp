@@ -7,6 +7,7 @@ import {
   getData,
   addMoney,
   acceptEditGoal,
+  renderEditInputButtons,
   deleteTransaction,
 } from "./modules/insideSloik.mjs";
 import {
@@ -53,8 +54,18 @@ if (document.title == "SloikApp Home") {
 
 const addMoneyBtn = document.getElementById("addMoneyBtn");
 const editGoalBtn = document.getElementById("edit_goal_button");
+const editTitleBtn = document.getElementById("sloikTitleEdit");
+const editDescriptionBtn = document.getElementById("sloikDescriptionEdit");
 
 if (document.title == "SloikApp Sloik") {
+  editTitleBtn.onclick = function () {
+    const editTitle = "sloikTitle";
+    renderEditInputButtons(editTitle);
+  };
+  editDescriptionBtn.onclick = function () {
+    const editDescription = "sloikDescription";
+    renderEditInputButtons(editDescription);
+  };
   addMoneyBtn.onclick = function () {
     addMoney();
   };
