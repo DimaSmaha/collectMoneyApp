@@ -162,7 +162,8 @@
 #submitBtn {
   background-color: lawngreen;
   color: white;
-  border: none;
+  border-width: 1px;
+  border-color: black;
   border-radius: 5px;
   cursor: pointer;
   width: max-content;
