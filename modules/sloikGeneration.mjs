@@ -12,9 +12,6 @@ function addSloikData(
   let titleValue = document.getElementById("inputField1").value;
   let descriptionValue = document.getElementById("inputField2").value;
   let goalSumValue = document.getElementById("inputField3").value;
-  let titleInput = document.getElementById("inputField1");
-  let descriptionInput = document.getElementById("inputField2");
-  let goalSumInput = document.getElementById("inputField3");
   let inputError1 = document.getElementById("inputField1Error");
   let inputError2 = document.getElementById("inputField2Error");
   let inputError3 = document.getElementById("inputField3Error");
@@ -35,7 +32,6 @@ function addSloikData(
   ) {
     sloikTitle = titleValue;
     sloikDescription = descriptionValue;
-    hidePopup();
     renderSloik();
     setupSloikCookies(
       numberOfChildren,
@@ -45,9 +41,7 @@ function addSloikData(
       cookiesIsGoalReached,
       cookiesTransactionsArray
     );
-    titleInput.value = "";
-    descriptionInput.value = "";
-    goalSumInput.value = "";
+    hidePopup();
   }
 }
 

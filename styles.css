@@ -46,9 +46,6 @@
   align-items: center;
   justify-content: left;
 }
-#yourGoal {
-  margin-right: 16px;
-}
 #editGoalInput {
   margin-right: 8px;
 }
@@ -163,9 +160,10 @@
   margin-bottom: 10px;
 }
 #submitBtn {
-  background-color: #4caf50;
+  background-color: lawngreen;
   color: white;
-  border: none;
+  border-width: 1px;
+  border-color: black;
   border-radius: 5px;
   cursor: pointer;
   width: max-content;
@@ -209,4 +207,29 @@
 }
 .sloikDeleteButtons {
   display: none;
+}
+.edit-button {
+  display: inline-block;
+  margin-left: 12px;
+}
+#sloikTitle {
+  display: inline-block;
+}
+#sloikDescription {
+  display: inline-block;
+}
+#sloikGoal {
+  display: inline-block;
+}
+.genericAcceptBtn {
+  background-color: lawngreen;
+  display: inline-block;
+}
+.genericCancelBtn {
+  background-color: red;
+  display: inline-block;
+}
+.genericInput {
+  display: inline-block;
+  margin-left: 12px;
 }
