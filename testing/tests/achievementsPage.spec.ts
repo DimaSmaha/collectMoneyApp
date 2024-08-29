@@ -29,8 +29,8 @@ test.describe("Achievements page test suite", () => {
     const addMoneySum = 777;
     await setup;
     await sloikHomePage.clickAchievementsButton();
-    await expect(sloikAchievementsPage.achievementOne).not.toBeVisible();
-    await expect(sloikAchievementsPage.achievementTwo).not.toBeVisible();
+    await expect(sloikAchievementsPage.achievementOne).toBeVisible();
+    await expect(sloikAchievementsPage.achievementTwo).toBeVisible();
     await sloikAchievementsPage.clickHomeButton();
     await createAndOpenSloik(
       { sloikHomePage },
@@ -47,6 +47,14 @@ test.describe("Achievements page test suite", () => {
     await sloikSloikPage.clickHomeBtn();
     await sloikHomePage.clickAchievementsButton();
     await expect(sloikAchievementsPage.achievementOne).toBeVisible();
-    await expect(sloikAchievementsPage.achievementTwo).not.toBeVisible();
+    await expect(sloikAchievementsPage.achievementOne).toHaveCSS(
+      "background-color",
+      "rgb(50, 205, 50)"
+    );
+    await expect(sloikAchievementsPage.achievementTwo).toBeVisible();
+    await expect(sloikAchievementsPage.achievementTwo).toHaveCSS(
+      "background-color",
+      "rgb(255, 255, 255)"
+    );
   });
 });
