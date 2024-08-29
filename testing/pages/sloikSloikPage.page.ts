@@ -44,14 +44,14 @@ export class SloikSloikPage extends Helper {
     this.sloikTitle = page.locator('[id="sloikTitle"]');
     this.sloikDescription = page.locator('[id="sloikDescription"]');
     this.yourMoneyScore = page.locator('[id="yourMoneyScore"]');
-    this.yourGoal = page.locator('[id="yourGoal"]');
+    this.yourGoal = page.locator('[id="sloikGoal"]');
     this.progressBarText = page.locator('[id="progressBarParent"]');
     this.addMoneyInput = page.locator("#addMoneyInput");
     this.addMoneyButton = page.locator("#addMoneyBtn");
-    this.editGoalButton = page.locator("#edit_goal_button");
-    this.editGoalInput = page.locator("#editGoalInput");
-    this.acceptEditGoalButton = page.locator("#accept_edit_goal");
-    this.cancelEditGoalButton = page.locator("#cancel_edit_goal");
+    this.editGoalButton = page.locator("#sloikGoalEdit");
+    this.editGoalInput = page.locator("#sloikGoalInput");
+    this.acceptEditGoalButton = page.locator("#sloikGoalAccept");
+    this.cancelEditGoalButton = page.locator("#sloikGoalCancel");
     this.achievementOne = page.locator("#achievement_1");
   }
 
@@ -99,7 +99,9 @@ export class SloikSloikPage extends Helper {
   }
 
   async assertMoneyScoreValue(moneyScore: string) {
-    expect.soft(await this.yourMoneyScore.textContent()).toBe(moneyScore.toString()); //wont terminate a test, the test will end the execution, but it will be marked as failed
+    expect
+      .soft(await this.yourMoneyScore.textContent())
+      .toBe(moneyScore.toString()); //wont terminate a test, the test will end the execution, but it will be marked as failed
   }
 
   async assertYourGoalValue(yourGoal: string) {
