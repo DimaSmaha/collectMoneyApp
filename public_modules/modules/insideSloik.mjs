@@ -1,10 +1,6 @@
 import { showPopup, hidePopup } from "./popup.mjs";
 import { Transactions } from "./transactionsClass.mjs";
 import { addTransactionDIV, renderTransactions } from "./transactions.mjs";
-import {
-  removeEditGoalElementsDisplay,
-  setEditGoalBtnDisplay,
-} from "./editGoal.mjs";
 import { checkAchievements } from "./achievements.mjs";
 
 let sloikID;
@@ -85,7 +81,7 @@ function getGoal() {
 }
 
 function setGoal() {
-  let userGoal = document.getElementById("yourGoal");
+  let userGoal = document.getElementById("sloikGoal");
   if (goalValue == 0 || goalValue == undefined || goalValue == null) {
     goalValue = getGoal();
     updateCookies(sloikID);
@@ -234,19 +230,7 @@ function formArray(addedMoney) {
   console.log(transactionsArray);
 }
 
-function acceptEditGoal() {
-  const editGoalInput = document.getElementById("editGoalInput");
-  const editedGoal = parseInt(editGoalInput.value);
-  if (isNaN(editedGoal) == false && editedGoal > 0) {
-    goalValue = editedGoal;
-    removeEditGoalElementsDisplay();
-    setEditGoalBtnDisplay("flex");
-    setProgressBar();
-    setGoal();
-    updateCookies(sloikID);
-  }
-  editGoalInput.value = "";
-}
+function acceptEditGoal() {}
 
 function deleteTransaction(transaction_id) {
   const transactionBox = document.getElementById(
@@ -325,7 +309,12 @@ function renderEditInputButtons(box) {
      <button class="genericAcceptBtn" id=${box}Accept><b>V</b></button>
      <button class="genericCancelBtn" id="${box}Cancel"><b>X</b></button`
   );
-  renderActions(box);
+  if (box == "sloikGoal") {
+    renderGoalActions(box);
+  }
+  if (box !== "sloikGoal") {
+    renderActions(box);
+  }
 }
 
 function renderActions(box) {
@@ -349,6 +338,37 @@ function renderActions(box) {
     getInput.remove();
     getEditButton.style.display = "inline-block";
     updateCookieByName(sloikID, box, getBox.textContent);
+  };
+}
+
+function renderGoalActions(box) {
+  const getBox = document.getElementById(`${box}`);
+  const getAcceptButton = document.getElementById(`${box}Accept`);
+  const getCancelButton = document.getElementById(`${box}Cancel`);
+  const getInput = document.getElementById(`${box}Input`);
+  const getEditButton = document.getElementById(`${box}Edit`);
+  getInput.type = "number";
+
+  getCancelButton.onclick = function () {
+    getCancelButton.remove();
+    getAcceptButton.remove();
+    getInput.remove();
+    getEditButton.style.display = "inline-block";
+  };
+
+  getAcceptButton.onclick = function () {
+    const editedGoal = parseInt(getInput.value);
+    if (isNaN(editedGoal) == false && editedGoal > 0) {
+      goalValue = editedGoal;
+      getCancelButton.remove();
+      getAcceptButton.remove();
+      getInput.remove();
+      getEditButton.style.display = "inline-block";
+      setProgressBar();
+      setGoal();
+      updateCookies(sloikID);
+    }
+    getInput.value = "";
   };
 }
 

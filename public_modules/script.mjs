@@ -6,15 +6,8 @@ import { showPopup, hidePopup } from "./modules/popup.mjs";
 import {
   getData,
   addMoney,
-  acceptEditGoal,
   renderEditInputButtons,
-  deleteTransaction,
 } from "./modules/insideSloik.mjs";
-import {
-  editGoal,
-  setEditGoalBtnDisplay,
-  removeEditGoalElementsDisplay,
-} from "./modules/editGoal.mjs";
 import { renderAchievements } from "./modules/achievements.mjs";
 
 window.onload = function () {
@@ -53,7 +46,7 @@ if (document.title == "SloikApp Home") {
 }
 
 const addMoneyBtn = document.getElementById("addMoneyBtn");
-const editGoalBtn = document.getElementById("edit_goal_button");
+const editGoalBtn = document.getElementById("sloikGoalEdit");
 const editTitleBtn = document.getElementById("sloikTitleEdit");
 const editDescriptionBtn = document.getElementById("sloikDescriptionEdit");
 
@@ -66,21 +59,11 @@ if (document.title == "SloikApp Sloik") {
     const editDescription = "sloikDescription";
     renderEditInputButtons(editDescription);
   };
+  editGoalBtn.onclick = function () {
+    const editGoal = "sloikGoal";
+    renderEditInputButtons(editGoal);
+  };
   addMoneyBtn.onclick = function () {
     addMoney();
-  };
-  editGoalBtn.onclick = function () {
-    editGoal();
-    if (editGoalBtn.style.display == "none") {
-      const cancelEditGoalBtn = document.getElementById("cancel_edit_goal");
-      const acceptEditGoalBtn = document.getElementById("accept_edit_goal");
-      cancelEditGoalBtn.onclick = function () {
-        setEditGoalBtnDisplay("flex");
-        removeEditGoalElementsDisplay();
-      };
-      acceptEditGoalBtn.onclick = function () {
-        acceptEditGoal();
-      };
-    }
   };
 }

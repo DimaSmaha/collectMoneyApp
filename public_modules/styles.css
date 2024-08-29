@@ -46,9 +46,6 @@
   align-items: center;
   justify-content: left;
 }
-#yourGoal {
-  margin-right: 16px;
-}
 #editGoalInput {
   margin-right: 8px;
 }
@@ -220,6 +217,9 @@
 #sloikDescription {
   display: inline-block;
 }
+#sloikGoal {
+  display: inline-block;
+}
 .genericAcceptBtn {
   background-color: lawngreen;
   display: inline-block;
@@ -230,4 +230,5 @@
 }
 .genericInput {
   display: inline-block;
+  margin-left: 12px;
 }
