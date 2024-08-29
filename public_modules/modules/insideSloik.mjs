@@ -36,9 +36,7 @@ const getData = async () => {
   showRandomCommendation();
   console.log(transactionsArray);
   updateCookies(sloikID);
-  if (Cookies.get(`achievement_1_Complete`) == undefined) {
-    checkAchievements(transactionsArray);
-  }
+  checkAchievements(transactionsArray);
 };
 
 function getCookiesByID(sloikNumber) {

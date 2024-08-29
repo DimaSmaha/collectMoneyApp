@@ -1,5 +1,6 @@
 let achievement1Complete = false;
 let achievement2Complete = false;
+let achievement3Complete = false;
 let achievementCounter = 3;
 
 function checkAchievements(transactionsArray) {
@@ -103,7 +104,7 @@ function renderAchievements() {
     const achievement = document.getElementById(`achievement_${i}`);
     console.log(achievementCookie);
     if (!achievementCookie) {
-      achievement.style.display = "none";
+      achievement.style.backgroundColor = "white";
     }
     if (achievementCookie) {
       achievement.style.backgroundColor = "limegreen";
