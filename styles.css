@@ -13,11 +13,11 @@
   align-items: center;
 }
 .cancelBtn {
-  background-color: rgb(218, 30, 30);
+  background-color: var(--red);
   border: solid 2px;
 }
 .acceptBtn {
-  background-color: lawngreen;
+  background-color: var(--green);
   border: solid 2px;
 }
 #progressBarParent {
@@ -30,7 +30,7 @@
 #progressBar {
   width: 250px;
   height: 20px;
-  background-color: lawngreen;
+  background-color: var(--green);
 }
 #progressBarText {
   position: absolute;
@@ -60,7 +60,7 @@
 }
 .achievementList {
   height: 55px;
-  border: 1px solid black;
+  border: 1px solid var(--black);
   align-items: center;
   padding-left: 12px;
   padding-right: 12px;
@@ -102,7 +102,7 @@
 }
 .achievement {
   display: none;
-  background-color: white;
+  background-color: var(--white);
   padding: 16px;
   position: fixed;
   bottom: -100%;
@@ -121,7 +121,7 @@
   padding-right: 12px;
   margin-top: 16px;
   display: none;
-  background-color: white;
+  background-color: var(--white);
   padding: 16px;
   position: fixed;
   bottom: -100%;
@@ -148,7 +148,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 .popupContent {
-  background-color: white;
+  background-color: var(--white);
   padding: 20px;
   border-radius: 5px;
 }
@@ -160,10 +160,10 @@
   margin-bottom: 10px;
 }
 #submitBtn {
-  background-color: lawngreen;
-  color: white;
+  background-color: var(--green);
+  color: var(--white);
   border-width: 1px;
-  border-color: black;
+  border-color: var(--black);
   border-radius: 5px;
   cursor: pointer;
   width: max-content;
@@ -185,23 +185,23 @@
   width: 250px;
 }
 .sloikNavigation {
-  color: blue;
+  color: var(--purple);
   font-size: 18px;
 }
 .sloikCancelBtn {
   cursor: pointer;
 }
 .cancelCreateSloikBtn {
-  background-color: rgb(218, 30, 30);
+  background-color: var(--red);
   border: solid 2px;
   position: fixed;
   bottom: 89%;
   right: 10%;
-  border-color: black;
-  color: white;
+  border-color: var(--black);
+  color: var(--white);
 }
 .popupError {
-  color: red;
+  color: var(--red);
   margin-top: 0px;
   display: none;
 }
@@ -222,14 +222,24 @@
   display: inline-block;
 }
 .genericAcceptBtn {
-  background-color: lawngreen;
+  background-color: var(--green);
   display: inline-block;
 }
 .genericCancelBtn {
-  background-color: red;
+  background-color: var(--red);
   display: inline-block;
 }
 .genericInput {
   display: inline-block;
   margin-left: 12px;
+}
+:root {
+  --white: #ffffff;
+  --red: #bd363b;
+  --green: #2f8521;
+  --black: #000000;
+  --gray: #667180;
+  --purple: #2c2543;
+  --successAchievement: #7cfc00;
+  --successAchievementText: #616161;
 }
