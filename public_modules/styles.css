@@ -130,7 +130,7 @@
   transform: translateX(-50%);
   border-radius: 10px;
   animation: smooth-appear 1s ease forwards,
-    smooth-disappear 1s ease forwards 3s;
+    smooth-disappear 1s ease forwards 6s;
 }
 .achievementWithMoreText {
   padding-top: 8px;
