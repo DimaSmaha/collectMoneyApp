@@ -55,6 +55,23 @@ function setTestingCookies() {
   );
 }
 
+function bulkUpdateCookies(numberOfChildren) {
+  let titleValue = document.getElementById("inputField1").value;
+  let descriptionValue = document.getElementById("inputField2").value;
+  let goalSumValue = document.getElementById("inputField3").value;
+  Cookies.set(`sloikTitle_${numberOfChildren}`, JSON.stringify(titleValue), {
+    expires: 365,
+  });
+  Cookies.set(
+    `sloikDescription_${numberOfChildren}`,
+    JSON.stringify(descriptionValue),
+    { expires: 365 }
+  );
+  Cookies.set(`goalValue_${numberOfChildren}`, JSON.stringify(goalSumValue), {
+    expires: 365,
+  });
+}
+
 function removeCookiesByID(sloikID) {
   Cookies.remove(`goalValue_${sloikID}`);
   Cookies.remove(`isGoalReached_${sloikID}`);
@@ -64,4 +81,4 @@ function removeCookiesByID(sloikID) {
   Cookies.remove(`transactionsList_${sloikID}`);
 }
 
-export { setupSloikCookies, removeCookiesByID };
+export { setupSloikCookies, removeCookiesByID, bulkUpdateCookies };

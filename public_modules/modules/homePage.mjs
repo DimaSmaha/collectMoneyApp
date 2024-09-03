@@ -1,4 +1,6 @@
-import { removeCookiesByID } from "./cookies.mjs";
+import { removeCookiesByID, bulkUpdateCookies } from "./cookies.mjs";
+import { hidePopup } from "./popup.mjs";
+import { renderExistingSloiks } from "./sloikGeneration.mjs";
 
 function tryToDeleteSloik(sloikID) {
   const tryToDeleteSloikButton = document.getElementById(
@@ -39,4 +41,34 @@ function deleteSloik(sloikID) {
   Cookies.set("sloiksCounter", JSON.stringify(sloikCounter), { expires: 365 });
 }
 
-export { deleteSloik, tryToDeleteSloik, resetButtons };
+function bulkEditSloik(sloikID) {
+  let titleValue = document.getElementById("inputField1").value;
+  let descriptionValue = document.getElementById("inputField2").value;
+  let goalSumValue = document.getElementById("inputField3").value;
+  let inputError1 = document.getElementById("inputField1Error");
+  let inputError2 = document.getElementById("inputField2Error");
+  let inputError3 = document.getElementById("inputField3Error");
+  if (titleValue == "") {
+    inputError1.style.display = "block";
+  }
+  if (descriptionValue == "") {
+    inputError2.style.display = "block";
+  }
+  if (goalSumValue == "" || isNaN(goalSumValue) == false || goalSumValue > 0) {
+    inputError3.style.display = "block";
+  }
+  if (
+    titleValue != "" &&
+    descriptionValue != "" &&
+    isNaN(goalSumValue) == false &&
+    goalSumValue > 0
+  ) {
+    bulkUpdateCookies(sloikID);
+    const sloikList = document.getElementById("sloiksList");
+    sloikList.innerHTML = "";
+    renderExistingSloiks();
+    hidePopup();
+  }
+}
+
+export { deleteSloik, tryToDeleteSloik, resetButtons, bulkEditSloik };

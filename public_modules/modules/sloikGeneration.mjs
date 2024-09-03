@@ -1,6 +1,11 @@
 import { showPopup, hidePopup } from "./popup.mjs";
 import { setupSloikCookies } from "./cookies.mjs";
-import { deleteSloik, resetButtons, tryToDeleteSloik } from "./homePage.mjs";
+import {
+  deleteSloik,
+  resetButtons,
+  tryToDeleteSloik,
+  bulkEditSloik,
+} from "./homePage.mjs";
 
 let sloikTitle = "";
 let sloikDescription = "";
@@ -62,6 +67,7 @@ function renderSloik() {
       <a id="sloik_${numberOfChildren}" class="sloikNavigation"
       href="./sloik.html" onclick="getSloikID(${numberOfChildren});">
       ${sloikTitle} Sloik</a>
+      <button class="edit-button" id="editSloikBtn_${numberOfChildren}">Edit</button>
       <button id="tryToDeleteSloikBtn_${numberOfChildren}" class="cancelBtn sloikCancelBtn">X</button>
       <button class="acceptBtn sloikDeleteButtons" id="deleteSloikBtn_${numberOfChildren}"><b>V</b></button>
       <button class="cancelBtn sloikDeleteButtons" id="declineDeleteSloik_${numberOfChildren}"><b>X</b></button
@@ -99,6 +105,7 @@ function renderExistingSloiks() {
       <a id="sloik_${i}" class="sloikNavigation"
       href="./sloik.html" onclick="getSloikID(${i});">
       ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
+      <button class="edit-button" id="editSloikBtn_${i}">Edit</button>
       <button id="tryToDeleteSloikBtn_${i}" class="cancelBtn sloikCancelBtn">X</button>
       <button class="acceptBtn sloikDeleteButtons" id="deleteSloikBtn_${i}"><b>V</b></button>
       <button class="cancelBtn sloikDeleteButtons" id="declineDeleteSloik_${i}"><b>X</b></button
@@ -114,6 +121,7 @@ function renderExistingSloiks() {
     let sloikDeclineDeleteBtns = document.getElementById(
       `declineDeleteSloik_${i}`
     );
+    let sloikEditBtns = document.getElementById(`editSloikBtn_${i}`);
     sloikTryToDeleteBtns.onclick = function () {
       tryToDeleteSloik(i);
     };
@@ -122,6 +130,15 @@ function renderExistingSloiks() {
     };
     sloikDeclineDeleteBtns.onclick = function () {
       resetButtons(i);
+    };
+    sloikEditBtns.onclick = function () {
+      showPopup();
+      const popupDescription = document.getElementById(`popupDescription`);
+      popupDescription.innerText = "Edit Sloik";
+      const submitPopupBtn = document.getElementById("submitBtn");
+      submitPopupBtn.onclick = function () {
+        bulkEditSloik(i);
+      };
     };
   }
 }
