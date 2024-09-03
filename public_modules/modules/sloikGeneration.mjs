@@ -97,17 +97,18 @@ function renderExistingSloiks() {
   for (let i = 0; i < sloikCounter; i++) {
     sloiksList.insertAdjacentHTML(
       "beforeend",
-      `<div id="sloikBox_${i}" class="sloikBox">
-      <nav>
-      <a id="sloik_${i}" class="sloikNavigation"
-      href="./sloik.html" onclick="getSloikID(${i});">
-      ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
-      <button class="edit-button" id="editSloikBtn_${i}">Edit</button>
-      <button id="tryToDeleteSloikBtn_${i}" class="cancelBtn sloikCancelBtn">X</button>
-      <button class="acceptBtn sloikDeleteButtons" id="deleteSloikBtn_${i}"><b>V</b></button>
-      <button class="cancelBtn sloikDeleteButtons" id="declineDeleteSloik_${i}"><b>X</b></button
-      </nav>
-    </div>`
+      `
+      <div id="sloikBox_${i}" class="sloikBox">
+        <nav>
+          <a id="sloik_${i}" class="sloikNavigation"
+          href="./sloik.html" onclick="getSloikID(${i});">
+          ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
+          <button class="edit-button" id="editSloikBtn_${i}">Edit</button>
+          <button id="tryToDeleteSloikBtn_${i}" class="cancelBtn sloikCancelBtn">X</button>
+          <button class="acceptBtn sloikDeleteButtons" id="deleteSloikBtn_${i}"><b>V</b></button>
+          <button class="cancelBtn sloikDeleteButtons" id="declineDeleteSloik_${i}"><b>X</b></button
+        </nav>
+      </div>`
     );
   }
   for (let i = 0; i < sloikCounter; i++) {
