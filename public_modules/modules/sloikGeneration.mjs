@@ -1,11 +1,6 @@
-import { showPopup, hidePopup } from "./popup.mjs";
+import { showPopup, hidePopup, showBulkEditPopup } from "./popup.mjs";
 import { setupSloikCookies } from "./cookies.mjs";
-import {
-  deleteSloik,
-  resetButtons,
-  tryToDeleteSloik,
-  bulkEditSloik,
-} from "./homePage.mjs";
+import { deleteSloik, resetButtons, tryToDeleteSloik } from "./homePage.mjs";
 
 let sloikTitle = "";
 let sloikDescription = "";
@@ -98,6 +93,7 @@ function renderSloik() {
 function renderExistingSloiks() {
   let sloikCounter = parseInt(Cookies.get("sloiksCounter"));
   const sloiksList = document.getElementById("sloiksList");
+  sloiksList.innerHTML = "";
   for (let i = 0; i < sloikCounter; i++) {
     sloiksList.insertAdjacentHTML(
       "beforeend",
@@ -134,18 +130,7 @@ function renderExistingSloiks() {
     };
     sloikEditBtns.onclick = function () {
       showPopup();
-      const popupDescription = document.getElementById(`popupDescription`);
-      const titleInput = document.getElementById("inputField1");
-      const descriptionInput = document.getElementById("inputField2");
-      const goalSumInput = document.getElementById("inputField3");
-      popupDescription.innerText = "Edit Sloik";
-      titleInput.value = JSON.parse(Cookies.get(`sloikTitle_${i}`));
-      descriptionInput.value = JSON.parse(Cookies.get(`sloikDescription_${i}`));
-      goalSumInput.value = JSON.parse(Cookies.get(`goalValue_${i}`));
-      const submitPopupBtn = document.getElementById("submitBtn");
-      submitPopupBtn.onclick = function () {
-        bulkEditSloik(i);
-      };
+      showBulkEditPopup(i);
     };
   }
 }

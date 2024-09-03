@@ -64,8 +64,6 @@ function bulkEditSloik(sloikID) {
     goalSumValue > 0
   ) {
     bulkUpdateCookies(sloikID);
-    const sloikList = document.getElementById("sloiksList");
-    sloikList.innerHTML = "";
     renderExistingSloiks();
     hidePopup();
   }
