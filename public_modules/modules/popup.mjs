@@ -29,14 +29,13 @@ function showPopup() {
 }
 
 function showBulkEditPopup(sloikID) {
+  showPopup();
   submitPopupBtn.style.display = "none";
   editPopupBtn.style.display = "block";
 
   popupDescription.innerText = "Edit Sloik";
   titleInput.value = JSON.parse(Cookies.get(`sloikTitle_${sloikID}`));
-  descriptionInput.value = JSON.parse(
-    Cookies.get(`sloikDescription_${sloikID}`)
-  );
+  descriptionInput.value = JSON.parse(Cookies.get(`sloikDescription_${sloikID}`));
   goalSumInput.value = JSON.parse(Cookies.get(`goalValue_${sloikID}`));
 
   editPopupBtn.onclick = function () {
