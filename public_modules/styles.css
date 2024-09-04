@@ -19,6 +19,7 @@
 .acceptBtn {
   background-color: var(--green);
   border: solid 2px;
+  margin-left: 12px;
 }
 #progressBarParent {
   width: 250px;
