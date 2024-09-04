@@ -1,6 +1,7 @@
 import { showPopup, hidePopup, showBulkEditPopup } from "./popup.mjs";
 import { setupSloikCookies } from "./cookies.mjs";
 import { deleteSloik, resetButtons, tryToDeleteSloik } from "./homePage.mjs";
+import { editBtnSvg } from "./editSvg.mjs";
 
 function addNewSloik() {
   let totalMoney = 0;
@@ -73,7 +74,7 @@ function renderExistingSloiks() {
             <a id="sloik_${i}" class="sloikNavigation"
             href="./sloik.html" onclick="getSloikID(${i});">
             ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
-            <button class="edit-button" id="editSloikBtn_${i}">Edit</button>
+            <button class="edit-button" id="editSloikBtn_${i}"></button>
             <button id="tryToDeleteSloikBtn_${i}" class="cancelBtn sloikCancelBtn">X</button>
             <button class="acceptBtn sloikDeleteButtons" id="deleteSloikBtn_${i}"><b>V</b></button>
             <button class="cancelBtn sloikDeleteButtons" id="declineDeleteSloik_${i}"><b>X</b></button
@@ -95,6 +96,7 @@ function renderExistingSloiks() {
     sloikDeclineDeleteBtns.onclick = function () {
       resetButtons(i);
     };
+    document.getElementById(`editSloikBtn_${i}`).insertAdjacentHTML("afterbegin", editBtnSvg);
     sloikEditBtns.onclick = function () {
       showBulkEditPopup(i);
     };

@@ -110,7 +110,8 @@
   left: 50%;
   transform: translateX(-50%);
   border-radius: 10px;
-  animation: smooth-appear 1s ease forwards,
+  animation:
+    smooth-appear 1s ease forwards,
     smooth-disappear 1s ease forwards 3s;
 }
 #commendationPopup {
@@ -129,7 +130,8 @@
   left: 50%;
   transform: translateX(-50%);
   border-radius: 10px;
-  animation: smooth-appear 1s ease forwards,
+  animation:
+    smooth-appear 1s ease forwards,
     smooth-disappear 1s ease forwards 6s;
 }
 .achievementWithMoreText {
@@ -210,7 +212,16 @@
 }
 .edit-button {
   display: inline-block;
+  padding: 0%;
+  border: 0;
+  width: 20px;
+  height: 20px;
+  vertical-align: bottom;
   margin-left: 12px;
+  cursor: pointer;
+}
+.edit-button-sloik {
+  vertical-align: -3px;
 }
 #sloikTitle {
   display: inline-block;
@@ -240,6 +251,7 @@
   --black: #000000;
   --gray: #667180;
   --purple: #2c2543;
+  --blue: #0f4176;
   --successAchievement: #7cfc00;
   --successAchievementText: #616161;
 }
