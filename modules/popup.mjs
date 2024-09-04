@@ -60,15 +60,15 @@ function validatePopupValues() {
   // let inputError1 = document.getElementById("inputField1Error");
   // let inputError2 = document.getElementById("inputField2Error");
   // let inputError3 = document.getElementById("inputField3Error");
-  // if (titleValue == "") {
+  // if (!stringRegExp.test(titleValue)) {
   //   inputError1.style.display = "block";
   //   return false;
   // }
-  // if (descriptionValue == "") {
+  // if (!stringRegExp.test(descriptionValue)) {
   //   inputError2.style.display = "block";
   //   return false;
   // }
-  // if (goalSumValue == "" || isNaN(goalSumValue) == false || goalSumValue > 0) {
+  // if (!numberRegExp.test(goalSumValue) || goalSumValue > 0) {
   //   inputError3.style.display = "block";
   //   return false;
   // }
