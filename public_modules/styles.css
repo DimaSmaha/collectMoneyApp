@@ -272,3 +272,7 @@
   --successAchievement: #7cfc00;
   --successAchievementText: #616161;
 }
+#errorNotNumber{
+  display: none;
+  color: var(--red);
+}
