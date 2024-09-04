@@ -1,13 +1,6 @@
-import {
-  renderExistingSloiks,
-  addSloikData,
-} from "./modules/sloikGeneration.mjs";
+import { renderExistingSloiks, addNewSloik } from "./modules/sloikGeneration.mjs";
 import { showPopup, hidePopup } from "./modules/popup.mjs";
-import {
-  getData,
-  addMoney,
-  renderEditInputButtons,
-} from "./modules/insideSloik.mjs";
+import { getData, addMoney, renderEditInputButtons } from "./modules/insideSloik.mjs";
 import { renderAchievements } from "./modules/achievements.mjs";
 
 window.onload = function () {
@@ -33,14 +26,11 @@ if (document.title == "SloikApp Home") {
   };
 }
 
-let totalMoney = 0;
-let isGoalReached = false;
-let transactionsArray = [];
 if (document.title == "SloikApp Home") {
   const submitPopupBtn = document.getElementById("submitBtn");
   submitPopupBtn.onclick = function () {
     if (document.title == "SloikApp Home") {
-      addSloikData(totalMoney, isGoalReached, transactionsArray);
+      addNewSloik();
     }
   };
 }
