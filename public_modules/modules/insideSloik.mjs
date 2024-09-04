@@ -37,16 +37,14 @@ const getData = async () => {
 
 function getCookiesByID(sloikNumber) {
   document.getElementById("sloikTitle").textContent = JSON.parse(
-    Cookies.get(`sloikTitle_${sloikNumber}`)
+    Cookies.get(`sloikTitle_${sloikNumber}`),
   );
   document.getElementById("sloikDescription").textContent = JSON.parse(
-    Cookies.get(`sloikDescription_${sloikNumber}`)
+    Cookies.get(`sloikDescription_${sloikNumber}`),
   );
   goalValue = parseInt(JSON.parse(Cookies.get(`goalValue_${sloikNumber}`)));
   isGoalReached = JSON.parse(Cookies.get(`isGoalReached_${sloikNumber}`));
-  transactionsArray = JSON.parse(
-    Cookies.get(`transactionsList_${sloikNumber}`)
-  );
+  transactionsArray = JSON.parse(Cookies.get(`transactionsList_${sloikNumber}`));
   return goalValue, isGoalReached, transactionsArray;
 }
 
@@ -138,11 +136,9 @@ function updateCookies(sloikID) {
   Cookies.set(`sloikTitle_${sloikID}`, JSON.stringify(sloikTitle.textContent), {
     expires: 365,
   });
-  Cookies.set(
-    `sloikDescription_${sloikID}`,
-    JSON.stringify(sloikDescription.textContent),
-    { expires: 365 }
-  );
+  Cookies.set(`sloikDescription_${sloikID}`, JSON.stringify(sloikDescription.textContent), {
+    expires: 365,
+  });
   Cookies.set(`totalMoney_${sloikID}`, JSON.stringify(totalMoney), {
     expires: 365,
   });
@@ -152,13 +148,9 @@ function updateCookies(sloikID) {
   Cookies.set(`isGoalReached_${sloikID}`, JSON.stringify(isGoalReached), {
     expires: 365,
   });
-  Cookies.set(
-    `transactionsList_${sloikID}`,
-    JSON.stringify(transactionsArray),
-    {
-      expires: 365,
-    }
-  );
+  Cookies.set(`transactionsList_${sloikID}`, JSON.stringify(transactionsArray), {
+    expires: 365,
+  });
 }
 function updateCookieByName(sloikID, cookieName, cookieValue) {
   Cookies.set(`${cookieName}_${sloikID}`, JSON.stringify(`${cookieValue}`), {
@@ -214,18 +206,14 @@ function addMoney() {
 function checkGoal() {
   if (totalMoney >= goalValue) {
     setTimeout(function () {
-      alert(
-        "Congrats you have reached your goal, you have made a great job. I'm proud of you 💚"
-      );
+      alert("Congrats you have reached your goal, you have made a great job. I'm proud of you 💚");
     }, 500);
     isGoalReached = true;
   }
 }
 
 function formArray(addedMoney) {
-  transactionsArray.push(
-    JSON.parse(JSON.stringify(new Transactions(addedMoney)))
-  );
+  transactionsArray.push(JSON.parse(JSON.stringify(new Transactions(addedMoney))));
   updateCookies(sloikID);
   console.log(transactionsArray);
 }
@@ -233,9 +221,7 @@ function formArray(addedMoney) {
 function acceptEditGoal() {}
 
 function deleteTransaction(transaction_id) {
-  const transactionBox = document.getElementById(
-    `transaction_${transaction_id}_Box`
-  );
+  const transactionBox = document.getElementById(`transaction_${transaction_id}_Box`);
   transactionBox.remove();
   totalMoney -= transactionsArray[transaction_id].transactionSum;
   changeMoneyScore();
@@ -249,9 +235,7 @@ function deleteTransaction(transaction_id) {
 }
 
 function acceptEditTransaction(transaction_id) {
-  const transactionEditInput = document.getElementById(
-    `editMoneyInput_${transaction_id}`
-  );
+  const transactionEditInput = document.getElementById(`editMoneyInput_${transaction_id}`);
   const editedSum = parseInt(transactionEditInput.value);
   if (isNaN(editedSum) == false && editedSum > 0) {
     transactionsArray[transaction_id].transactionSum = editedSum;
@@ -280,21 +264,14 @@ function showHowMuchSameTransactionsUserNeed() {
   }
 
   if (
-    (transactionsArray[transactionsArray.length - 1].transactionSum /
-      goalValue) *
-      100 >=
-      5 ||
+    (transactionsArray[transactionsArray.length - 1].transactionSum / goalValue) * 100 >= 5 ||
     transactionsArray[transactionsArray.length - 1].transactionSum >= 1000
   ) {
-    commendationMainBox.insertAdjacentHTML(
-      "beforeend",
-      `<div id="commendationPopup"></div>`
-    );
+    commendationMainBox.insertAdjacentHTML("beforeend", `<div id="commendationPopup"></div>`);
     const commendationBox = document.getElementById("commendationPopup");
 
     let numberOfTransactionsToDo = Math.ceil(
-      (goalValue - totalMoney) /
-        transactionsArray[transactionsArray.length - 1].transactionSum
+      (goalValue - totalMoney) / transactionsArray[transactionsArray.length - 1].transactionSum,
     );
     commendationBox.innerHTML = `Great job! You will achieve your goal if you make <b>${numberOfTransactionsToDo}</b> more of the same transactions. Keep going`;
     commendationBox.style.display = "block";
@@ -313,7 +290,7 @@ function renderEditInputButtons(box) {
     "beforeEnd",
     `<input class="genericInput"id=${box}Input placeholder="edit"></input>
      <button class="genericAcceptBtn" id=${box}Accept><b>V</b></button>
-     <button class="genericCancelBtn" id="${box}Cancel"><b>X</b></button`
+     <button class="genericCancelBtn" id="${box}Cancel"><b>X</b></button`,
   );
   if (box == "sloikGoal") {
     renderGoalActions(box);

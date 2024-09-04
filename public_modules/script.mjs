@@ -1,14 +1,8 @@
-import {
-  renderExistingSloiks,
-  addSloikData,
-} from "./modules/sloikGeneration.mjs";
+import { renderExistingSloiks, addNewSloik } from "./modules/sloikGeneration.mjs";
 import { showPopup, hidePopup } from "./modules/popup.mjs";
-import {
-  getData,
-  addMoney,
-  renderEditInputButtons,
-} from "./modules/insideSloik.mjs";
+import { getData, addMoney, renderEditInputButtons } from "./modules/insideSloik.mjs";
 import { renderAchievements } from "./modules/achievements.mjs";
+import { editBtnSvg } from "./modules/editSvg.mjs";
 
 window.onload = function () {
   if (document.title == "SloikApp Home") {
@@ -33,14 +27,11 @@ if (document.title == "SloikApp Home") {
   };
 }
 
-let totalMoney = 0;
-let isGoalReached = false;
-let transactionsArray = [];
 if (document.title == "SloikApp Home") {
   const submitPopupBtn = document.getElementById("submitBtn");
   submitPopupBtn.onclick = function () {
     if (document.title == "SloikApp Home") {
-      addSloikData(totalMoney, isGoalReached, transactionsArray);
+      addNewSloik();
     }
   };
 }
@@ -51,6 +42,9 @@ const editTitleBtn = document.getElementById("sloikTitleEdit");
 const editDescriptionBtn = document.getElementById("sloikDescriptionEdit");
 
 if (document.title == "SloikApp Sloik") {
+  editTitleBtn.insertAdjacentHTML("beforeend", editBtnSvg);
+  editDescriptionBtn.insertAdjacentHTML("beforeend", editBtnSvg);
+  editGoalBtn.insertAdjacentHTML("beforeend", editBtnSvg);
   editTitleBtn.onclick = function () {
     const editTitle = "sloikTitle";
     renderEditInputButtons(editTitle);
