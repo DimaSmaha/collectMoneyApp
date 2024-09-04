@@ -2,6 +2,7 @@ import { showPopup, hidePopup } from "./popup.mjs";
 import { Transactions } from "./transactionsClass.mjs";
 import { addTransactionDIV, renderTransactions } from "./transactions.mjs";
 import { checkAchievements } from "./achievements.mjs";
+import { numberRegExp, stringRegExp } from "./regExp.mjs";
 
 let sloikID;
 sloikID = localStorage.getItem("currentSloikID");
@@ -166,23 +167,15 @@ function recalculateMoneyScore() {
 }
 
 function addMoney() {
-  const errorNegative = document.getElementById("errorNegativeNumber");
   const errorNotNumber = document.getElementById("errorNotNumber");
   const moneyInput = document.getElementById("addMoneyInput");
   const addedMoney = moneyInput.value;
   const moneyToBeAdded = parseInt(addedMoney);
-  if (isNaN(moneyToBeAdded)) {
+  if (!numberRegExp.test(moneyToBeAdded) || moneyToBeAdded<1) {
     moneyInput.value = "";
     errorNotNumber.style.display = "flex";
     return setTimeout(function () {
       errorNotNumber.style.display = "none";
-    }, 2000);
-  }
-  if (moneyToBeAdded <= 0) {
-    moneyInput.value = "";
-    errorNegative.style.display = "flex";
-    return setTimeout(function () {
-      errorNegative.style.display = "none";
     }, 2000);
   }
   totalMoney += moneyToBeAdded;
@@ -237,7 +230,7 @@ function deleteTransaction(transaction_id) {
 function acceptEditTransaction(transaction_id) {
   const transactionEditInput = document.getElementById(`editMoneyInput_${transaction_id}`);
   const editedSum = parseInt(transactionEditInput.value);
-  if (isNaN(editedSum) == false && editedSum > 0) {
+  if (numberRegExp.test(editedSum) && editedSum > 0) {
     transactionsArray[transaction_id].transactionSum = editedSum;
     const transactionBoxes = document.getElementById("transactionBoxes");
     transactionBoxes.replaceChildren();
@@ -315,12 +308,14 @@ function renderActions(box) {
   };
 
   getAcceptButton.onclick = function () {
-    getBox.textContent = getInput.value;
-    getCancelButton.remove();
-    getAcceptButton.remove();
-    getInput.remove();
-    getEditButton.style.display = "inline-block";
-    updateCookieByName(sloikID, box, getBox.textContent);
+    if(stringRegExp.test(getInput.value)){
+      getBox.textContent = getInput.value;
+      getCancelButton.remove();
+      getAcceptButton.remove();
+      getInput.remove();
+      getEditButton.style.display = "inline-block";
+      updateCookieByName(sloikID, box, getBox.textContent);
+    }
   };
 }
 
@@ -341,7 +336,7 @@ function renderGoalActions(box) {
 
   getAcceptButton.onclick = function () {
     const editedGoal = parseInt(getInput.value);
-    if (isNaN(editedGoal) == false && editedGoal > 0) {
+    if (numberRegExp.test(editedGoal) && editedGoal > 0) {
       goalValue = editedGoal;
       getCancelButton.remove();
       getAcceptButton.remove();

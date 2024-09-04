@@ -2,6 +2,7 @@ import { showPopup, hidePopup, showBulkEditPopup } from "./popup.mjs";
 import { setupSloikCookies } from "./cookies.mjs";
 import { deleteSloik, resetButtons, tryToDeleteSloik } from "./homePage.mjs";
 import { editBtnSvg } from "./editSvg.mjs";
+import { numberRegExp, stringRegExp } from "./regExp.mjs";
 
 function addNewSloik() {
   let totalMoney = 0;
@@ -14,20 +15,20 @@ function addNewSloik() {
   let inputError1 = document.getElementById("inputField1Error");
   let inputError2 = document.getElementById("inputField2Error");
   let inputError3 = document.getElementById("inputField3Error");
-  if (titleValue == "") {
+  if (!stringRegExp.test(titleValue)) {
     inputError1.style.display = "block";
   }
-  if (descriptionValue == "") {
+  if (!stringRegExp.test(descriptionValue)) {
     inputError2.style.display = "block";
   }
-  if (goalSumValue == "" || isNaN(goalSumValue) == false || goalSumValue > 0) {
+  if (!numberRegExp.test(goalSumValue) || goalSumValue > 0) {
     inputError3.style.display = "block";
   }
 
   if (
-    titleValue != "" &&
-    descriptionValue != "" &&
-    isNaN(goalSumValue) == false &&
+    stringRegExp.test(titleValue) &&
+    stringRegExp.test(descriptionValue) &&
+    numberRegExp.test(goalSumValue) &&
     goalSumValue > 0
   ) {
     setupSloikCookies(
