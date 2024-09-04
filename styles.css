@@ -91,9 +91,25 @@
     opacity: 1;
   }
 }
+@keyframes smooth-appear-achievement {
+  to {
+    bottom: 100px;
+    opacity: 1;
+  }
+}
 @keyframes smooth-disappear {
   from {
     bottom: 20px;
+    opacity: 1;
+  }
+  to {
+    bottom: -100%;
+    opacity: 0;
+  }
+}
+@keyframes smooth-disappear-achievement {
+  from {
+    bottom: 100px;
     opacity: 1;
   }
   to {
@@ -112,8 +128,8 @@
   transform: translateX(-50%);
   border-radius: 10px;
   animation:
-    smooth-appear 1s ease forwards,
-    smooth-disappear 1s ease forwards 3s;
+    smooth-appear-achievement 1s ease forwards,
+    smooth-disappear-achievement 1s ease forwards 6s;
 }
 #commendationPopup {
   height: 40px;
@@ -133,7 +149,7 @@
   border-radius: 10px;
   animation:
     smooth-appear 1s ease forwards,
-    smooth-disappear 1s ease forwards 6s;
+    smooth-disappear 1s ease forwards 8s;
 }
 .achievementWithMoreText {
   padding-top: 8px;
