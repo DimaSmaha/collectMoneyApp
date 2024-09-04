@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -34,11 +34,11 @@
     <div>
       <div id="sloikTitleBox">
         <h2 id="sloikTitle"></h2>
-        <button class="edit-button" id="sloikTitleEdit">Edit</button>
+        <button class="edit-button edit-button-sloik" id="sloikTitleEdit"></button>
       </div>
       <div id="sloikDescriptionBox">
         <p id="sloikDescription"></p>
-        <button class="edit-button" id="sloikDescriptionEdit">Edit</button>
+        <button class="edit-button edit-button-sloik" id="sloikDescriptionEdit"></button>
       </div>
     </div>
     <div>
@@ -46,7 +46,7 @@
     </div>
     <div id="sloikGoalBox">
       <h2 id="sloikGoal">Your goal :</h2>
-      <button class="edit-button" id="sloikGoalEdit">Edit</button>
+      <button class="edit-button edit-button-sloik" id="sloikGoalEdit"></button>
     </div>
     <div id="progressBarParent">
       <div id="progressBar"></div>
@@ -57,21 +57,13 @@
     </div>
     <div>
       <p>Enter your amount of money</p>
-      <p id="errorNegativeNumber" style="display: none">
-        Its a negative number
-      </p>
+      <p id="errorNegativeNumber" style="display: none">Its a negative number</p>
       <p id="errorNotNumber" style="display: none">Its not a number</p>
-      <input
-        type="number"
-        id="addMoneyInput"
-        placeholder="enter money amount"
-      />
+      <input type="number" id="addMoneyInput" placeholder="enter money amount" />
       <button id="addMoneyBtn">Add Money</button>
     </div>
     <div id="transactionBoxes"></div>
-    <div id="commendationBox">
-      <div id="commendationPopup"></div>
-    </div>
+    <div id="commendationBox"></div>
     <div id="achievements">
       <div class="achievement" id="achievement_1">
         <h3 class="achievement_name">777 Transaction</h3>
@@ -79,15 +71,11 @@
       </div>
       <div class="achievement achievementWithMoreText" id="achievement_2">
         <h3 class="achievement_name">Christmas present</h3>
-        <p class="achievement_text">
-          HO! HO! HO! Merry Christmas, you are doing a great job
-        </p>
+        <p class="achievement_text">HO! HO! HO! Merry Christmas, you are doing a great job</p>
       </div>
       <div class="achievement achievementWithMoreText" id="achievement_3">
         <h3 class="achievement_name">Speedrunner</h3>
-        <p class="achievement_text">
-          Kchau. Your are going very fast racer. Keep the same speed
-        </p>
+        <p class="achievement_text">Kchau. Your are going very fast racer. Keep the same speed</p>
       </div>
     </div>
   </body>
