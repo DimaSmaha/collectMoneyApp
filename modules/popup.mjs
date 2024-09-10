@@ -1,3 +1,4 @@
+import { getCookie } from "./cookies.mjs";
 import { bulkEditSloik } from "./homePage.mjs";
 
 const popup = document.getElementById("popupContainer");
@@ -34,9 +35,9 @@ function showBulkEditPopup(sloikID) {
   editPopupBtn.style.display = "block";
 
   popupDescription.innerText = "Edit Sloik";
-  titleInput.value = JSON.parse(Cookies.get(`sloikTitle_${sloikID}`));
-  descriptionInput.value = JSON.parse(Cookies.get(`sloikDescription_${sloikID}`));
-  goalSumInput.value = JSON.parse(Cookies.get(`goalValue_${sloikID}`));
+  titleInput.value = getCookie(`sloikTitle_${sloikID}`);
+  descriptionInput.value = getCookie(`sloikDescription_${sloikID}`);
+  goalSumInput.value = getCookie(`goalValue_${sloikID}`);
 
   editPopupBtn.onclick = function () {
     bulkEditSloik(sloikID);

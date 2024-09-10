@@ -1,5 +1,5 @@
 import { showPopup, hidePopup, showBulkEditPopup } from "./popup.mjs";
-import { setupSloikCookies } from "./cookies.mjs";
+import { getCookie, setCookie, setupSloikCookies } from "./cookies.mjs";
 import { deleteSloik, resetButtons, tryToDeleteSloik } from "./homePage.mjs";
 import { editBtnSvg } from "./editSvg.mjs";
 import { numberRegExp, stringRegExp } from "./regExp.mjs";
@@ -48,23 +48,23 @@ function addNewSloik() {
 
 function getCurrentSloikCounter() {
   let sloikCounter = 0;
-  if (Cookies.get("sloiksCounter") != undefined) {
-    sloikCounter = Cookies.get("sloiksCounter");
+  if (getCookie("sloiksCounter") != undefined) {
+    sloikCounter = getCookie("sloiksCounter");
   }
   return sloikCounter;
 }
 
 function increaseSloikCounter() {
   let sloikCounter = 0;
-  if (Cookies.get("sloiksCounter") != undefined) {
-    sloikCounter = Cookies.get("sloiksCounter");
+  if (getCookie("sloiksCounter") != undefined) {
+    sloikCounter = getCookie("sloiksCounter");
   }
   sloikCounter++;
-  Cookies.set("sloiksCounter", JSON.stringify(sloikCounter), { expires: 365 });
+  setCookie("sloiksCounter", sloikCounter);
 }
 
 function renderExistingSloiks() {
-  let sloikCounter = parseInt(Cookies.get("sloiksCounter"));
+  let sloikCounter = parseInt(getCookie("sloiksCounter"));
   const sloiksList = document.getElementById("sloiksList");
   sloiksList.innerHTML = "";
   for (let i = 0; i < sloikCounter; i++) {
@@ -74,7 +74,7 @@ function renderExistingSloiks() {
           <nav>
             <a id="sloik_${i}" class="sloikNavigation"
             href="./sloik.html" onclick="getSloikID(${i});">
-            ${JSON.parse(Cookies.get(`sloikTitle_${i}`))} Sloik</a>
+            ${getCookie(`sloikTitle_${i}`)} Sloik</a>
             <button class="edit-button" id="editSloikBtn_${i}"></button>
             <button id="tryToDeleteSloikBtn_${i}" class="cancelBtn sloikCancelBtn">X</button>
             <button class="acceptBtn sloikDeleteButtons" id="deleteSloikBtn_${i}"><b>V</b></button>

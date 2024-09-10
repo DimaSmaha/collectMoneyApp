@@ -3,6 +3,7 @@ import { Transactions } from "./transactionsClass.mjs";
 import { addTransactionDIV, renderTransactions } from "./transactions.mjs";
 import { checkAchievements } from "./achievements.mjs";
 import { numberRegExp, stringRegExp } from "./regExp.mjs";
+import { getCookie, setCookie } from "./cookies.mjs";
 
 let sloikID;
 sloikID = localStorage.getItem("currentSloikID");
@@ -37,15 +38,13 @@ const getData = async () => {
 };
 
 function getCookiesByID(sloikNumber) {
-  document.getElementById("sloikTitle").textContent = JSON.parse(
-    Cookies.get(`sloikTitle_${sloikNumber}`),
+  document.getElementById("sloikTitle").textContent = getCookie(`sloikTitle_${sloikNumber}`);
+  document.getElementById("sloikDescription").textContent = getCookie(
+    `sloikDescription_${sloikNumber}`,
   );
-  document.getElementById("sloikDescription").textContent = JSON.parse(
-    Cookies.get(`sloikDescription_${sloikNumber}`),
-  );
-  goalValue = parseInt(JSON.parse(Cookies.get(`goalValue_${sloikNumber}`)));
-  isGoalReached = JSON.parse(Cookies.get(`isGoalReached_${sloikNumber}`));
-  transactionsArray = JSON.parse(Cookies.get(`transactionsList_${sloikNumber}`));
+  goalValue = parseInt(getCookie(`goalValue_${sloikNumber}`));
+  isGoalReached = getCookie(`isGoalReached_${sloikNumber}`);
+  transactionsArray = getCookie(`transactionsList_${sloikNumber}`);
   return goalValue, isGoalReached, transactionsArray;
 }
 
@@ -134,29 +133,15 @@ function showRandomCommendation() {
 function updateCookies(sloikID) {
   const sloikTitle = document.getElementById("sloikTitle");
   const sloikDescription = document.getElementById("sloikDescription");
-  Cookies.set(`sloikTitle_${sloikID}`, JSON.stringify(sloikTitle.textContent), {
-    expires: 365,
-  });
-  Cookies.set(`sloikDescription_${sloikID}`, JSON.stringify(sloikDescription.textContent), {
-    expires: 365,
-  });
-  Cookies.set(`totalMoney_${sloikID}`, JSON.stringify(totalMoney), {
-    expires: 365,
-  });
-  Cookies.set(`goalValue_${sloikID}`, JSON.stringify(goalValue), {
-    expires: 365,
-  });
-  Cookies.set(`isGoalReached_${sloikID}`, JSON.stringify(isGoalReached), {
-    expires: 365,
-  });
-  Cookies.set(`transactionsList_${sloikID}`, JSON.stringify(transactionsArray), {
-    expires: 365,
-  });
+  setCookie(`sloikTitle_${sloikID}`, sloikTitle.textContent);
+  setCookie(`sloikDescription_${sloikID}`, sloikDescription.textContent);
+  setCookie(`totalMoney_${sloikID}`, totalMoney);
+  setCookie(`goalValue_${sloikID}`, goalValue);
+  setCookie(`isGoalReached_${sloikID}`, isGoalReached);
+  setCookie(`transactionsList_${sloikID}`, transactionsArray);
 }
 function updateCookieByName(sloikID, cookieName, cookieValue) {
-  Cookies.set(`${cookieName}_${sloikID}`, JSON.stringify(`${cookieValue}`), {
-    expires: 365,
-  });
+  setCookie(`${cookieName}_${sloikID}`, `${cookieValue}`);
 }
 
 function recalculateMoneyScore() {
@@ -171,7 +156,7 @@ function addMoney() {
   const moneyInput = document.getElementById("addMoneyInput");
   const addedMoney = moneyInput.value;
   const moneyToBeAdded = parseInt(addedMoney);
-  if (!numberRegExp.test(moneyToBeAdded) || moneyToBeAdded<1) {
+  if (!numberRegExp.test(moneyToBeAdded) || moneyToBeAdded < 1) {
     moneyInput.value = "";
     errorNotNumber.style.display = "flex";
     return setTimeout(function () {
@@ -308,7 +293,7 @@ function renderActions(box) {
   };
 
   getAcceptButton.onclick = function () {
-    if(stringRegExp.test(getInput.value)){
+    if (stringRegExp.test(getInput.value)) {
       getBox.textContent = getInput.value;
       getCancelButton.remove();
       getAcceptButton.remove();
