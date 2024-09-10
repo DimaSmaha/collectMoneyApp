@@ -32,9 +32,7 @@ export class SloikSloikPage extends Helper {
     this.page = page;
     this.loginInput = page.locator('input[name="user\\[login\\]"]');
     this.passwordInput = page.locator('input[name="user\\[password\\]"]');
-    this.passwordConfirmInput = page.locator(
-      'input[name="user\\[password_confirmation\\]"]'
-    );
+    this.passwordConfirmInput = page.locator('input[name="user\\[password_confirmation\\]"]');
     this.firstnameInput = page.locator('input[name="user\\[firstname\\]"]');
     this.lastnameInput = page.locator('input[name="user\\[lastname\\]"]');
     this.emailInput = page.locator('input[name="user\\[mail\\]"]');
@@ -68,7 +66,7 @@ export class SloikSloikPage extends Helper {
     password: string,
     firstname: string,
     lastname: string,
-    email: string
+    email: string,
   ) {
     await this.loginInput.fill(username);
     await this.passwordInput.fill(password);
@@ -99,9 +97,7 @@ export class SloikSloikPage extends Helper {
   }
 
   async assertMoneyScoreValue(moneyScore: string) {
-    expect
-      .soft(await this.yourMoneyScore.textContent())
-      .toBe(moneyScore.toString()); //wont terminate a test, the test will end the execution, but it will be marked as failed
+    expect.soft(await this.yourMoneyScore.textContent()).toBe(moneyScore.toString()); //wont terminate a test, the test will end the execution, but it will be marked as failed
   }
 
   async assertYourGoalValue(yourGoal: string) {
@@ -132,7 +128,7 @@ export class SloikSloikPage extends Helper {
     description: string,
     moneyScore: string,
     yourGoal: number,
-    progressBar: string
+    progressBar: string,
   ) {
     await this.page.waitForLoadState();
     await this.assertSloikTitleValue(title);
@@ -142,30 +138,16 @@ export class SloikSloikPage extends Helper {
     await this.assertProgressBarValue(progressBar);
   }
 
-  async assertTransactionByNumber(
-    transactionBoxId: number,
-    transactionSum: number,
-    date: Date
-  ) {
-    const transactionBox = this.page.locator(
-      `#transaction_${transactionBoxId}_Box`
-    );
-    const transactionText = this.page.locator(
-      `#transaction_${transactionBoxId}_Text`
-    );
-    const editTransaction = this.page.locator(
-      `#edit_transaction_${transactionBoxId}`
-    );
-    const cancelTransaction = this.page.locator(
-      `#cancel_transaction_${transactionBoxId}`
-    );
+  async assertTransactionByNumber(transactionBoxId: number, transactionSum: number, date: Date) {
+    const transactionBox = this.page.locator(`#transaction_${transactionBoxId}_Box`);
+    const transactionText = this.page.locator(`#transaction_${transactionBoxId}_Text`);
+    const editTransaction = this.page.locator(`#edit_transaction_${transactionBoxId}`);
+    const cancelTransaction = this.page.locator(`#cancel_transaction_${transactionBoxId}`);
     console.log(transactionText.innerHTML);
     await expect(transactionBox).toBeVisible();
     await expect(transactionText).toBeVisible();
     expect(await transactionText.innerText()).toContain("Transaction sum:");
-    expect(await transactionText.innerText()).toContain(
-      transactionSum.toString()
-    );
+    expect(await transactionText.innerText()).toContain(transactionSum.toString());
     expect(await transactionText.innerText()).toContain("Date:");
     let getDate = date.getDate();
     let getMonth = date.getMonth();
@@ -198,73 +180,53 @@ export class SloikSloikPage extends Helper {
       passZeroDays = "";
     }
     expect(await transactionText.innerText()).toContain(
-      `${passZeroDays}${getDate}/${passZero}${getMonth}/${getYear}, ${passZeroHrs}${getHours}:${passZeroMin}${getMinutes}:`
+      `${passZeroDays}${getDate}/${passZero}${getMonth}/${getYear}, ${passZeroHrs}${getHours}:${passZeroMin}${getMinutes}:`,
     );
     await expect(editTransaction).toBeVisible();
     await expect(cancelTransaction).toBeVisible();
   }
 
   async isTransactionByIdDisplayed(transactionId: number) {
-    const transactionBox = this.page.locator(
-      `#transaction_${transactionId}_Box`
-    );
+    const transactionBox = this.page.locator(`#transaction_${transactionId}_Box`);
 
     await expect(transactionBox).toBeVisible();
   }
 
   async clickEditTransactionBtnById(transactionId: number) {
-    const transactionEditBtn = this.page.locator(
-      `#edit_transaction_${transactionId}`
-    );
+    const transactionEditBtn = this.page.locator(`#edit_transaction_${transactionId}`);
 
     await transactionEditBtn.click();
   }
 
   async clickCancelEditTransactionBtnById(transactionId: number) {
     const cancelEditTransactionButton = this.page.locator(
-      `#decline_edit_transaction_${transactionId}`
+      `#decline_edit_transaction_${transactionId}`,
     );
 
     await cancelEditTransactionButton.click();
   }
 
-  async fillEditTransactionInputById(
-    transactionId: number,
-    editedTransaction: number
-  ) {
-    const transactionEditInput = this.page.locator(
-      `#editMoneyInput_${transactionId}`
-    );
+  async fillEditTransactionInputById(transactionId: number, editedTransaction: number) {
+    const transactionEditInput = this.page.locator(`#editMoneyInput_${transactionId}`);
 
     transactionEditInput.fill(editedTransaction.toString());
   }
 
   async clickAcceptEditTransactionBtnById(transactionId: number) {
-    const acceptEditTransactionBtn = this.page.locator(
-      `#accept_edit_transaction_${transactionId}`
-    );
+    const acceptEditTransactionBtn = this.page.locator(`#accept_edit_transaction_${transactionId}`);
 
     await acceptEditTransactionBtn.click();
   }
 
-  async assertTransactionTransactionSumById(
-    transactionBoxId: number,
-    transactionSum: number
-  ) {
-    const transactionText = this.page.locator(
-      `#transaction_${transactionBoxId}_Text`
-    );
+  async assertTransactionTransactionSumById(transactionBoxId: number, transactionSum: number) {
+    const transactionText = this.page.locator(`#transaction_${transactionBoxId}_Text`);
     await expect(transactionText).toBeVisible();
     expect(await transactionText.innerText()).toContain("Transaction sum:");
-    expect(await transactionText.innerText()).toContain(
-      transactionSum.toString()
-    );
+    expect(await transactionText.innerText()).toContain(transactionSum.toString());
   }
 
   async deleteTransactionById(transactionId: number) {
-    const deleteTransactionBtn = this.page.locator(
-      `#cancel_transaction_${transactionId}`
-    );
+    const deleteTransactionBtn = this.page.locator(`#cancel_transaction_${transactionId}`);
 
     await deleteTransactionBtn.click();
   }

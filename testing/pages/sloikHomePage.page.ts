@@ -14,6 +14,8 @@ export class SloikHomePage {
   readonly sloikGoalSumInput: Locator;
   readonly sloikSubmitBtn: Locator;
   readonly achievementsBtn: Locator;
+  readonly bulkEditSloikButton: Locator;
+  readonly bulkEditButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -25,6 +27,8 @@ export class SloikHomePage {
     this.sloikGoalSumInput = page.locator('[id="inputField3"]');
     this.sloikSubmitBtn = page.locator('[id="submitBtn"]');
     this.achievementsBtn = page.locator('//a[text()="Achievements"]');
+    this.bulkEditSloikButton = page.locator("#editSloikBtn_0");
+    this.bulkEditButton = page.locator("#editBtn");
   }
 
   async goto() {

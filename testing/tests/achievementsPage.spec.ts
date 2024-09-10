@@ -1,16 +1,12 @@
 import { test, expect } from "../fixtures/mergeFixtures";
-import {
-  sloikOneTitle,
-  sloikOneDescription,
-  sloikOneGoalSum,
-} from "../fixtures/fixtures";
+import { sloikOneTitle, sloikOneDescription, sloikOneGoalSum } from "../fixtures/fixtures";
 
 test.describe("Achievements page test suite", () => {
   async function createAndOpenSloik(
     { sloikHomePage },
     title: string,
     description: string,
-    yourGoal: number
+    yourGoal: number,
   ) {
     await sloikHomePage.clickAddSloikBtn();
     await sloikHomePage.fillSloikTitleInput(title);
@@ -36,7 +32,7 @@ test.describe("Achievements page test suite", () => {
       { sloikHomePage },
       sloikOneTitle,
       sloikOneDescription,
-      sloikOneGoalSum
+      sloikOneGoalSum,
     );
     await sloikSloikPage.fillAddMoneyInput(addMoneySum);
     await sloikSloikPage.clickAddMoneyButton();
@@ -49,12 +45,12 @@ test.describe("Achievements page test suite", () => {
     await expect(sloikAchievementsPage.achievementOne).toBeVisible();
     await expect(sloikAchievementsPage.achievementOne).toHaveCSS(
       "background-color",
-      "rgb(50, 205, 50)"
+      "rgb(50, 205, 50)",
     );
     await expect(sloikAchievementsPage.achievementTwo).toBeVisible();
     await expect(sloikAchievementsPage.achievementTwo).toHaveCSS(
       "background-color",
-      "rgb(255, 255, 255)"
+      "rgb(255, 255, 255)",
     );
   });
 });
