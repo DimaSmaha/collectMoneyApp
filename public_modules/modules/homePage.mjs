@@ -2,6 +2,8 @@ import {
   removeCookiesByID,
   bulkUpdateCookies,
   replaceCookiesOfDeletedSloik,
+  getCookie,
+  setCookie,
 } from "./cookies.mjs";
 import { hidePopup } from "./popup.mjs";
 import { numberRegExp, stringRegExp } from "./regExp.mjs";
@@ -34,10 +36,10 @@ function deleteSloik(sloikID) {
   sloiksBoxToDelete.remove();
   removeCookiesByID(sloikID);
 
-  let sloikCounter = JSON.parse(Cookies.get("sloiksCounter"));
+  let sloikCounter = getCookie("sloiksCounter");
   replaceCookiesOfDeletedSloik(sloikID, sloikCounter);
   sloikCounter--;
-  Cookies.set("sloiksCounter", JSON.stringify(sloikCounter), { expires: 365 });
+  setCookie("sloiksCounter", sloikCounter);
   renderExistingSloiks();
 }
 
