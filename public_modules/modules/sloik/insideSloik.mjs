@@ -1,9 +1,9 @@
-import { showPopup, hidePopup } from "./popup.mjs";
+import { showPopup, hidePopup } from "../popup.mjs";
 import { Transactions } from "./transactionsClass.mjs";
 import { addTransactionDIV, renderTransactions } from "./transactions.mjs";
-import { checkAchievements } from "./achievements.mjs";
-import { numberRegExp, stringRegExp } from "../const/regExp.mjs";
-import { getCookie, setCookie } from "./cookies.mjs";
+import { checkAchievements } from "../achievements/achievements.mjs";
+import { numberRegExp, stringRegExp } from "../../const/regExp.mjs";
+import { getCookie, setCookie } from "../cookies/cookies.mjs";
 
 let sloikID;
 sloikID = localStorage.getItem("currentSloikID");

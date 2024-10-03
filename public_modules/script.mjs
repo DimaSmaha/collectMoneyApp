@@ -1,7 +1,7 @@
-import { renderExistingSloiks, addNewSloik } from "./modules/sloikGeneration.mjs";
-import { showPopup, hidePopup } from "./modules/popup.mjs";
-import { getData, addMoney, renderEditInputButtons } from "./modules/insideSloik.mjs";
-import { renderAchievements } from "./modules/achievements.mjs";
+import { renderExistingSloiks, addNewSloik } from "./modules/home/sloikGeneration.mjs";
+import { showPopup, hidePopup } from "./modules/home/popup.mjs";
+import { getData, addMoney, renderEditInputButtons } from "./modules/sloik/insideSloik.mjs";
+import { renderAchievements } from "./modules/achievements/achievements.mjs";
 import { editBtnSvg } from "./const/editSvg.mjs";
 import {
   addSloikBtn,

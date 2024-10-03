@@ -4,7 +4,7 @@ import {
   replaceCookiesOfDeletedSloik,
   getCookie,
   setCookie,
-} from "./cookies.mjs";
+} from "./cookies/cookies.mjs";
 import { hidePopup } from "./popup.mjs";
 import { numberRegExp, stringRegExp } from "../const/regExp.mjs";
 import { renderExistingSloiks } from "./sloikGeneration.mjs";

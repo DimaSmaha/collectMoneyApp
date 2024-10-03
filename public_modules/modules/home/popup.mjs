@@ -1,4 +1,4 @@
-import { getCookie } from "./cookies.mjs";
+import { getCookie } from "./cookies/cookies.mjs";
 import { bulkEditSloik } from "./homePage.mjs";
 
 const popup = document.getElementById("popupContainer");

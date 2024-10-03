@@ -1,4 +1,4 @@
-import { getCookie, setCookie } from "./cookies.mjs";
+import { getCookie, setCookie } from "../cookies/cookies.mjs";
 
 let achievement1Complete = false;
 let achievement2Complete = false;
