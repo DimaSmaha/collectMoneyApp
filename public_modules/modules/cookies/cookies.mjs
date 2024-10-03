@@ -100,8 +100,6 @@ const setCookie = (cookieName, cookieValue) =>
     expires: 365,
   });
 
-//write functions for getting and setting cookies
-
 export {
   setupSloikCookies,
   removeCookiesByID,
