@@ -3,6 +3,15 @@ import { showPopup, hidePopup } from "./modules/popup.mjs";
 import { getData, addMoney, renderEditInputButtons } from "./modules/insideSloik.mjs";
 import { renderAchievements } from "./modules/achievements.mjs";
 import { editBtnSvg } from "./modules/editSvg.mjs";
+import {
+  addSloikBtn,
+  cancelCreateSloikBtn,
+  submitPopupBtn,
+  addMoneyBtn,
+  editGoalBtn,
+  editTitleBtn,
+  editDescriptionBtn,
+} from "./modules/locators.mjs";
 
 window.onload = function () {
   if (document.title == "SloikApp Home") {
@@ -16,8 +25,6 @@ window.onload = function () {
   }
 };
 
-const addSloikBtn = document.getElementById("add_sloik");
-const cancelCreateSloikBtn = document.getElementById("cancelBtn");
 if (document.title == "SloikApp Home") {
   addSloikBtn.onclick = function () {
     showPopup();
@@ -28,7 +35,6 @@ if (document.title == "SloikApp Home") {
 }
 
 if (document.title == "SloikApp Home") {
-  const submitPopupBtn = document.getElementById("submitBtn");
   submitPopupBtn.onclick = function () {
     if (document.title == "SloikApp Home") {
       addNewSloik();
@@ -36,23 +42,18 @@ if (document.title == "SloikApp Home") {
   };
 }
 
-const addMoneyBtn = document.getElementById("addMoneyBtn");
-const editGoalBtn = document.getElementById("sloikGoalEdit");
-const editTitleBtn = document.getElementById("sloikTitleEdit");
-const editDescriptionBtn = document.getElementById("sloikDescriptionEdit");
-
 if (document.title == "SloikApp Sloik") {
   editTitleBtn.insertAdjacentHTML("beforeend", editBtnSvg);
-  editDescriptionBtn.insertAdjacentHTML("beforeend", editBtnSvg);
-  editGoalBtn.insertAdjacentHTML("beforeend", editBtnSvg);
   editTitleBtn.onclick = function () {
     const editTitle = "sloikTitle";
     renderEditInputButtons(editTitle);
   };
+  editDescriptionBtn.insertAdjacentHTML("beforeend", editBtnSvg);
   editDescriptionBtn.onclick = function () {
     const editDescription = "sloikDescription";
     renderEditInputButtons(editDescription);
   };
+  editGoalBtn.insertAdjacentHTML("beforeend", editBtnSvg);
   editGoalBtn.onclick = function () {
     const editGoal = "sloikGoal";
     renderEditInputButtons(editGoal);
