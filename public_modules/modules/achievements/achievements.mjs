@@ -5,6 +5,7 @@ let achievement1Complete = false;
 let achievement2Complete = false;
 let achievement3Complete = false;
 let achievementCounter = 3;
+let transactionArrayIsNotEmpty = (transactionsArray) => transactionsArray != 0;
 
 function checkAchievements(transactionsArray) {
   achievementOne(transactionsArray);
@@ -18,7 +19,7 @@ function achievementOne(transactionsArray) {
   if (getCookie(achievementCookieName) == undefined) {
     setCookie(achievementCookieName, false);
   }
-  if (transactionsArray != 0) {
+  if (transactionArrayIsNotEmpty(transactionsArray)) {
     if (
       transactionsArray[transactionsArray.length - 1].transactionSum == 777 &&
       achievement1Complete == false &&
@@ -37,7 +38,7 @@ function achievementTwo(transactionsArray) {
   if (getCookie(achievementCookieName) == undefined) {
     setCookie(achievementCookieName, false);
   }
-  if (transactionsArray != 0) {
+  if (transactionArrayIsNotEmpty(transactionsArray)) {
     if (
       transactionsArray[transactionsArray.length - 1].date.includes("-12-25T") &&
       achievement2Complete == false &&
@@ -56,7 +57,7 @@ function achievementThree(transactionsArray) {
   if (getCookie(achievementCookieName) == undefined) {
     setCookie(achievementCookieName, false);
   }
-  if (transactionsArray != 0) {
+  if (transactionArrayIsNotEmpty(transactionsArray)) {
     if (transactionsArray.length >= 3) {
       let transaction3 = transactionsArray[transactionsArray.length - 1].date;
       let transaction1 = transactionsArray[transactionsArray.length - 3].date;
@@ -64,9 +65,9 @@ function achievementThree(transactionsArray) {
       let transaction3date = new Date(transaction3).getDate();
       let transaction3month = new Date(transaction3).getMonth();
       let transaction3year = new Date(transaction3).getFullYear();
-      let transaction1date = new Date(transaction3).getDate();
-      let transaction1month = new Date(transaction3).getMonth();
-      let transaction1year = new Date(transaction3).getFullYear();
+      let transaction1date = new Date(transaction1).getDate();
+      let transaction1month = new Date(transaction1).getMonth();
+      let transaction1year = new Date(transaction1).getFullYear();
       if (
         transaction3date == transaction1date &&
         transaction3month == transaction1month &&
