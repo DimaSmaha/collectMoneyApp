@@ -1,4 +1,4 @@
-import { showPopup, hidePopup } from "../popup.mjs";
+import { showPopup, hidePopup } from "../home/popup.mjs";
 import { Transactions } from "./transactionsClass.mjs";
 import { addTransactionDIV, renderTransactions } from "./transactions.mjs";
 import { checkAchievements } from "../achievements/achievements.mjs";
