@@ -51,18 +51,15 @@ function validatePopupValues() {
   let titleValue = loc.titleInput.value;
   let descriptionValue = loc.descriptionInput.value;
   let goalSumValue = loc.goalSumInput.value;
-  let inputError1 = loc.inputError1;
-  let inputError2 = loc.inputError2;
-  let inputError3 = loc.inputError3;
 
   if (!stringRegExp.test(titleValue)) {
-    inputError1.style.display = "block";
+    loc.inputError1.style.display = "block";
   }
   if (!stringRegExp.test(descriptionValue)) {
-    inputError2.style.display = "block";
+    loc.inputError2.style.display = "block";
   }
   if (!numberRegExp.test(goalSumValue) || goalSumValue > 0) {
-    inputError3.style.display = "block";
+    loc.inputError3.style.display = "block";
   }
   if (
     stringRegExp.test(titleValue) &&
