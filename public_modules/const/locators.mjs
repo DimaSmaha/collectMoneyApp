@@ -1,19 +1,25 @@
-export const addSloikBtn = document.getElementById("add_sloik");
-export const cancelCreateSloikBtn = document.getElementById("cancelBtn");
-export const submitPopupBtn = document.getElementById("submitBtn");
+class Locators {
+  constructor() {
+    this.addSloikBtn = document.getElementById("add_sloik");
+    this.cancelCreateSloikBtn = document.getElementById("cancelBtn");
+    this.submitPopupBtn = document.getElementById("submitBtn");
 
-export const editGoalBtn = document.getElementById("sloikGoalEdit");
-export const editTitleBtn = document.getElementById("sloikTitleEdit");
-export const editDescriptionBtn = document.getElementById("sloikDescriptionEdit");
+    this.editGoalBtn = document.getElementById("sloikGoalEdit");
+    this.editTitleBtn = document.getElementById("sloikTitleEdit");
+    this.editDescriptionBtn = document.getElementById("sloikDescriptionEdit");
 
-export const addMoneyBtn = document.getElementById("addMoneyBtn");
+    this.addMoneyBtn = document.getElementById("addMoneyBtn");
 
-export const popup = document.getElementById("popupContainer");
-export const popupDescription = document.getElementById("popupDescription");
-export const titleInput = document.getElementById("inputField1");
-export const descriptionInput = document.getElementById("inputField2");
-export const goalSumInput = document.getElementById("inputField3");
-export const inputError1 = document.getElementById("inputField1Error");
-export const inputError2 = document.getElementById("inputField2Error");
-export const inputError3 = document.getElementById("inputField3Error");
-export const editPopupBtn = document.getElementById("editBtn");
+    this.popup = document.getElementById("popupContainer");
+    this.popupDescription = document.getElementById("popupDescription");
+    this.titleInput = document.getElementById("inputField1");
+    this.descriptionInput = document.getElementById("inputField2");
+    this.goalSumInput = document.getElementById("inputField3");
+    this.inputError1 = document.getElementById("inputField1Error");
+    this.inputError2 = document.getElementById("inputField2Error");
+    this.inputError3 = document.getElementById("inputField3Error");
+    this.editPopupBtn = document.getElementById("editBtn");
+  }
+}
+
+export default new Locators();

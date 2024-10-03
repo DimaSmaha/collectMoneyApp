@@ -1,59 +1,47 @@
+import loc from "../../const/locators.mjs";
 import { getCookie } from "../cookies/cookies.mjs";
 import { bulkEditSloik } from "./homePage.mjs";
-import {
-  submitPopupBtn,
-  popup,
-  popupDescription,
-  titleInput,
-  descriptionInput,
-  goalSumInput,
-  inputError1,
-  inputError2,
-  inputError3,
-  editPopupBtn,
-} from "../../const/locators.mjs";
 import { numberRegExp, stringRegExp } from "../../const/regExp.mjs";
 
 function showPopup() {
-  popup.style.display = "block";
-  editPopupBtn.style.display = "none";
+  loc.popup.style.display = "block";
+  loc.editPopupBtn.style.display = "none";
 
-  titleInput.onclick = () => {
+  loc.titleInput.onclick = () => {
     inputError1.style.display = "none";
   };
 
-  descriptionInput.onclick = () => {
+  loc.descriptionInput.onclick = () => {
     inputError2.style.display = "none";
   };
 
-  goalSumInput.onclick = () => {
+  loc.goalSumInput.onclick = () => {
     inputError3.style.display = "none";
   };
 }
-
 function showBulkEditPopup(sloikID) {
   showPopup();
-  submitPopupBtn.style.display = "none";
-  editPopupBtn.style.display = "block";
+  loc.submitPopupBtn.style.display = "none";
+  loc.editPopupBtn.style.display = "block";
 
-  popupDescription.innerText = "Edit Sloik";
-  titleInput.value = getCookie(`sloikTitle_${sloikID}`);
-  descriptionInput.value = getCookie(`sloikDescription_${sloikID}`);
-  goalSumInput.value = getCookie(`goalValue_${sloikID}`);
+  loc.popupDescription.innerText = "Edit Sloik";
+  loc.titleInput.value = getCookie(`sloikTitle_${sloikID}`);
+  loc.descriptionInput.value = getCookie(`sloikDescription_${sloikID}`);
+  loc.goalSumInput.value = getCookie(`goalValue_${sloikID}`);
 
-  editPopupBtn.onclick = function () {
+  loc.editPopupBtn.onclick = function () {
     bulkEditSloik(sloikID);
   };
 }
 
 function hidePopup() {
-  popup.style.display = "none";
-  titleInput.value = "";
-  descriptionInput.value = "";
-  goalSumInput.value = "";
-  inputError1.style.display = "none";
-  inputError2.style.display = "none";
-  inputError3.style.display = "none";
+  loc.popup.style.display = "none";
+  loc.titleInput.value = "";
+  loc.descriptionInput.value = "";
+  loc.goalSumInput.value = "";
+  loc.inputError1.style.display = "none";
+  loc.inputError2.style.display = "none";
+  loc.inputError3.style.display = "none";
 }
 
 function validatePopupValues() {
