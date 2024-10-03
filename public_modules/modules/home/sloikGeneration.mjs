@@ -1,36 +1,18 @@
-import { hidePopup, showBulkEditPopup } from "../home/popup.mjs";
+import loc from "../../const/locators.mjs";
+import { hidePopup, showBulkEditPopup, validatePopupValues } from "../home/popup.mjs";
 import { getCookie, setCookie, setupSloikCookies } from "../cookies/cookies.mjs";
 import { deleteSloik, resetButtons, tryToDeleteSloik } from "./homePage.mjs";
 import { editBtnSvg } from "../../const/editSvg.mjs";
-import { numberRegExp, stringRegExp } from "../../const/regExp.mjs";
 
 function addNewSloik() {
   let totalMoney = 0;
   let isGoalReached = false;
   let transactionsArray = [];
-  let titleValue = document.getElementById("inputField1").value;
-  let descriptionValue = document.getElementById("inputField2").value;
-  let goalSumValue = document.getElementById("inputField3").value;
+  let titleValue = loc.titleInput.value;
+  let descriptionValue = loc.descriptionInput.value;
+  let goalSumValue = loc.goalSumInput.value;
 
-  let inputError1 = document.getElementById("inputField1Error");
-  let inputError2 = document.getElementById("inputField2Error");
-  let inputError3 = document.getElementById("inputField3Error");
-  if (!stringRegExp.test(titleValue)) {
-    inputError1.style.display = "block";
-  }
-  if (!stringRegExp.test(descriptionValue)) {
-    inputError2.style.display = "block";
-  }
-  if (!numberRegExp.test(goalSumValue) || goalSumValue > 0) {
-    inputError3.style.display = "block";
-  }
-
-  if (
-    stringRegExp.test(titleValue) &&
-    stringRegExp.test(descriptionValue) &&
-    numberRegExp.test(goalSumValue) &&
-    goalSumValue > 0
-  ) {
+  if (validatePopupValues()) {
     setupSloikCookies(
       getCurrentSloikCounter(),
       titleValue,
@@ -65,8 +47,8 @@ function increaseSloikCounter() {
 
 function renderExistingSloiks() {
   let sloikCounter = parseInt(getCookie("sloiksCounter"));
-  const sloiksList = document.getElementById("sloiksList");
-  sloiksList.innerHTML = "";
+
+  loc.sloiksList.innerHTML = "";
   for (let i = 0; i < sloikCounter; i++) {
     sloiksList.insertAdjacentHTML(
       "beforeend",
@@ -84,21 +66,17 @@ function renderExistingSloiks() {
     );
   }
   for (let i = 0; i < sloikCounter; i++) {
-    let sloikTryToDeleteBtns = document.getElementById(`tryToDeleteSloikBtn_${i}`);
-    let sloikDeleteBtns = document.getElementById(`deleteSloikBtn_${i}`);
-    let sloikDeclineDeleteBtns = document.getElementById(`declineDeleteSloik_${i}`);
-    let sloikEditBtns = document.getElementById(`editSloikBtn_${i}`);
-    sloikTryToDeleteBtns.onclick = function () {
+    loc.sloikTryToDeleteBtns(i).onclick = function () {
       tryToDeleteSloik(i);
     };
-    sloikDeleteBtns.onclick = function () {
+    loc.sloikDeleteBtns(i).onclick = function () {
       deleteSloik(i);
     };
-    sloikDeclineDeleteBtns.onclick = function () {
+    loc.sloikDeclineDeleteBtns(i).onclick = function () {
       resetButtons(i);
     };
-    document.getElementById(`editSloikBtn_${i}`).insertAdjacentHTML("afterbegin", editBtnSvg);
-    sloikEditBtns.onclick = function () {
+    loc.editSloikButton(i).insertAdjacentHTML("afterbegin", editBtnSvg);
+    loc.sloikEditBtns(i).onclick = function () {
       showBulkEditPopup(i);
     };
   }

@@ -27,6 +27,15 @@ class Locators {
     this.declineDeleteSloikButton = (sloikID) =>
       document.getElementById(`declineDeleteSloik_${sloikID}`);
     this.sloiksBoxToDelete = (sloikID) => document.getElementById(`sloikBox_${sloikID}`);
+
+    this.sloiksList = document.getElementById("sloiksList");
+
+    this.sloikTryToDeleteBtns = (sloikID) =>
+      document.getElementById(`tryToDeleteSloikBtn_${sloikID}`);
+    this.sloikDeleteBtns = (sloikID) => document.getElementById(`deleteSloikBtn_${sloikID}`);
+    this.sloikDeclineDeleteBtns = (sloikID) =>
+      document.getElementById(`declineDeleteSloik_${sloikID}`);
+    this.sloikEditBtns = (sloikID) => document.getElementById(`editSloikBtn_${sloikID}`);
   }
 }
 
