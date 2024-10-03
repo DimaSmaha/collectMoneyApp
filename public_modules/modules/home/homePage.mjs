@@ -6,7 +6,6 @@ import {
   setCookie,
 } from "../cookies/cookies.mjs";
 import { hidePopup, validatePopupValues } from "./popup.mjs";
-import { numberRegExp, stringRegExp } from "../../const/regExp.mjs";
 import { renderExistingSloiks } from "./sloikGeneration.mjs";
 
 function tryToDeleteSloik(sloikID) {

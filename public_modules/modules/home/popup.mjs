@@ -5,26 +5,29 @@ import { numberRegExp, stringRegExp } from "../../const/regExp.mjs";
 
 function showPopup() {
   loc.popup.style.display = "block";
+  loc.popupDescription.innerText = "Create a Sloik";
+  loc.submitPopupBtn.style.display = "block";
   loc.editPopupBtn.style.display = "none";
 
   loc.titleInput.onclick = () => {
-    inputError1.style.display = "none";
+    loc.inputError1.style.display = "none";
   };
 
   loc.descriptionInput.onclick = () => {
-    inputError2.style.display = "none";
+    loc.inputError2.style.display = "none";
   };
 
   loc.goalSumInput.onclick = () => {
-    inputError3.style.display = "none";
+    loc.inputError3.style.display = "none";
   };
 }
+
 function showBulkEditPopup(sloikID) {
   showPopup();
+  loc.popupDescription.innerText = "Edit Sloik";
   loc.submitPopupBtn.style.display = "none";
   loc.editPopupBtn.style.display = "block";
 
-  loc.popupDescription.innerText = "Edit Sloik";
   loc.titleInput.value = getCookie(`sloikTitle_${sloikID}`);
   loc.descriptionInput.value = getCookie(`sloikDescription_${sloikID}`);
   loc.goalSumInput.value = getCookie(`goalValue_${sloikID}`);
@@ -45,12 +48,13 @@ function hidePopup() {
 }
 
 function validatePopupValues() {
-  let titleValue = document.getElementById("inputField1").value;
-  let descriptionValue = document.getElementById("inputField2").value;
-  let goalSumValue = document.getElementById("inputField3").value;
-  let inputError1 = document.getElementById("inputField1Error");
-  let inputError2 = document.getElementById("inputField2Error");
-  let inputError3 = document.getElementById("inputField3Error");
+  let titleValue = loc.titleInput.value;
+  let descriptionValue = loc.descriptionInput.value;
+  let goalSumValue = loc.goalSumInput.value;
+  let inputError1 = loc.inputError1;
+  let inputError2 = loc.inputError2;
+  let inputError3 = loc.inputError3;
+
   if (!stringRegExp.test(titleValue)) {
     inputError1.style.display = "block";
   }
