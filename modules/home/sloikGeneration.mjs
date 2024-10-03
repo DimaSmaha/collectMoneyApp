@@ -55,7 +55,7 @@ function renderExistingSloiks() {
       `<div id="sloikBox_${i}" class="sloikBox">
           <nav>
             <a id="sloik_${i}" class="sloikNavigation"
-            href="./sloik.html" onclick="getSloikID(${i});">
+            href="./pages/sloik.html" onclick="getSloikID(${i});">
             ${getCookie(`sloikTitle_${i}`)} Sloik</a>
             <button class="edit-button" id="editSloikBtn_${i}"></button>
             <button id="tryToDeleteSloikBtn_${i}" class="cancelBtn sloikCancelBtn">X</button>
