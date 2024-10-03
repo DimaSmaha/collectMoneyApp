@@ -156,7 +156,7 @@ export class SloikSloikPage extends Helper {
     let getHours = date.getHours();
     let getMinutes = date.getMinutes();
     let passZero;
-    if (date.getMonth() < 10) {
+    if (date.getMonth() < 9) {
       passZero = 0;
     } else {
       passZero = "";
