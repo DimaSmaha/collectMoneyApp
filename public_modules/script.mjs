@@ -2,7 +2,7 @@ import { renderExistingSloiks, addNewSloik } from "./modules/sloikGeneration.mjs
 import { showPopup, hidePopup } from "./modules/popup.mjs";
 import { getData, addMoney, renderEditInputButtons } from "./modules/insideSloik.mjs";
 import { renderAchievements } from "./modules/achievements.mjs";
-import { editBtnSvg } from "./modules/editSvg.mjs";
+import { editBtnSvg } from "./const/editSvg.mjs";
 import {
   addSloikBtn,
   cancelCreateSloikBtn,
@@ -11,7 +11,7 @@ import {
   editGoalBtn,
   editTitleBtn,
   editDescriptionBtn,
-} from "./modules/locators.mjs";
+} from "./const/locators.mjs";
 
 window.onload = function () {
   if (document.title == "SloikApp Home") {

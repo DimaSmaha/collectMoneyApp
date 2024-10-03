@@ -1,8 +1,8 @@
 import { showPopup, hidePopup, showBulkEditPopup } from "./popup.mjs";
 import { getCookie, setCookie, setupSloikCookies } from "./cookies.mjs";
 import { deleteSloik, resetButtons, tryToDeleteSloik } from "./homePage.mjs";
-import { editBtnSvg } from "./editSvg.mjs";
-import { numberRegExp, stringRegExp } from "./regExp.mjs";
+import { editBtnSvg } from "../const/editSvg.mjs";
+import { numberRegExp, stringRegExp } from "../const/regExp.mjs";
 
 function addNewSloik() {
   let totalMoney = 0;

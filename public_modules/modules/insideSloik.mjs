@@ -2,7 +2,7 @@ import { showPopup, hidePopup } from "./popup.mjs";
 import { Transactions } from "./transactionsClass.mjs";
 import { addTransactionDIV, renderTransactions } from "./transactions.mjs";
 import { checkAchievements } from "./achievements.mjs";
-import { numberRegExp, stringRegExp } from "./regExp.mjs";
+import { numberRegExp, stringRegExp } from "../const/regExp.mjs";
 import { getCookie, setCookie } from "./cookies.mjs";
 
 let sloikID;
