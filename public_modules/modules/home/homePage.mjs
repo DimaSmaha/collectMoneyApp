@@ -5,7 +5,7 @@ import {
   getCookie,
   setCookie,
 } from "../cookies/cookies.mjs";
-import { hidePopup } from "./popup.mjs";
+import { hidePopup, validatePopupValues } from "./popup.mjs";
 import { numberRegExp, stringRegExp } from "../../const/regExp.mjs";
 import { renderExistingSloiks } from "./sloikGeneration.mjs";
 
@@ -44,27 +44,7 @@ function deleteSloik(sloikID) {
 }
 
 function bulkEditSloik(sloikID) {
-  let titleValue = document.getElementById("inputField1").value;
-  let descriptionValue = document.getElementById("inputField2").value;
-  let goalSumValue = document.getElementById("inputField3").value;
-  let inputError1 = document.getElementById("inputField1Error");
-  let inputError2 = document.getElementById("inputField2Error");
-  let inputError3 = document.getElementById("inputField3Error");
-  if (!stringRegExp.test(titleValue)) {
-    inputError1.style.display = "block";
-  }
-  if (!stringRegExp.test(descriptionValue)) {
-    inputError2.style.display = "block";
-  }
-  if (!numberRegExp.test(goalSumValue) || goalSumValue > 0) {
-    inputError3.style.display = "block";
-  }
-  if (
-    stringRegExp.test(titleValue) &&
-    stringRegExp.test(descriptionValue) &&
-    numberRegExp.test(goalSumValue) &&
-    goalSumValue > 0
-  ) {
+  if (validatePopupValues()) {
     bulkUpdateCookies(sloikID);
     renderExistingSloiks();
     hidePopup();

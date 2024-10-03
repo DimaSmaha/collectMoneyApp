@@ -1,16 +1,18 @@
 import { getCookie } from "../cookies/cookies.mjs";
 import { bulkEditSloik } from "./homePage.mjs";
-
-const popup = document.getElementById("popupContainer");
-const popupDescription = document.getElementById("popupDescription");
-const titleInput = document.getElementById("inputField1");
-const descriptionInput = document.getElementById("inputField2");
-const goalSumInput = document.getElementById("inputField3");
-const inputError1 = document.getElementById("inputField1Error");
-const inputError2 = document.getElementById("inputField2Error");
-const inputError3 = document.getElementById("inputField3Error");
-const submitPopupBtn = document.getElementById("submitBtn");
-const editPopupBtn = document.getElementById("editBtn");
+import {
+  submitPopupBtn,
+  popup,
+  popupDescription,
+  titleInput,
+  descriptionInput,
+  goalSumInput,
+  inputError1,
+  inputError2,
+  inputError3,
+  editPopupBtn,
+} from "../../const/locators.mjs";
+import { numberRegExp, stringRegExp } from "../../const/regExp.mjs";
 
 function showPopup() {
   popup.style.display = "block";
@@ -55,25 +57,30 @@ function hidePopup() {
 }
 
 function validatePopupValues() {
-  // let titleValue = document.getElementById("inputField1").value;
-  // let descriptionValue = document.getElementById("inputField2").value;
-  // let goalSumValue = document.getElementById("inputField3").value;
-  // let inputError1 = document.getElementById("inputField1Error");
-  // let inputError2 = document.getElementById("inputField2Error");
-  // let inputError3 = document.getElementById("inputField3Error");
-  // if (!stringRegExp.test(titleValue)) {
-  //   inputError1.style.display = "block";
-  //   return false;
-  // }
-  // if (!stringRegExp.test(descriptionValue)) {
-  //   inputError2.style.display = "block";
-  //   return false;
-  // }
-  // if (!numberRegExp.test(goalSumValue) || goalSumValue > 0) {
-  //   inputError3.style.display = "block";
-  //   return false;
-  // }
-  // return true;
+  let titleValue = document.getElementById("inputField1").value;
+  let descriptionValue = document.getElementById("inputField2").value;
+  let goalSumValue = document.getElementById("inputField3").value;
+  let inputError1 = document.getElementById("inputField1Error");
+  let inputError2 = document.getElementById("inputField2Error");
+  let inputError3 = document.getElementById("inputField3Error");
+  if (!stringRegExp.test(titleValue)) {
+    inputError1.style.display = "block";
+  }
+  if (!stringRegExp.test(descriptionValue)) {
+    inputError2.style.display = "block";
+  }
+  if (!numberRegExp.test(goalSumValue) || goalSumValue > 0) {
+    inputError3.style.display = "block";
+  }
+  if (
+    stringRegExp.test(titleValue) &&
+    stringRegExp.test(descriptionValue) &&
+    numberRegExp.test(goalSumValue) &&
+    goalSumValue > 0
+  ) {
+    return true;
+  }
+  return false;
 }
 
 export { showPopup, hidePopup, validatePopupValues, showBulkEditPopup };
