@@ -1,3 +1,4 @@
+import loc from "../../const/locators.mjs";
 import {
   removeCookiesByID,
   bulkUpdateCookies,
@@ -9,30 +10,21 @@ import { hidePopup, validatePopupValues } from "./popup.mjs";
 import { renderExistingSloiks } from "./sloikGeneration.mjs";
 
 function tryToDeleteSloik(sloikID) {
-  const editSloikButton = document.getElementById(`editSloikBtn_${sloikID}`);
-  const tryToDeleteSloikButton = document.getElementById(`tryToDeleteSloikBtn_${sloikID}`);
-  const deleteSloikButton = document.getElementById(`deleteSloikBtn_${sloikID}`);
-  const declineDeleteSloikButton = document.getElementById(`declineDeleteSloik_${sloikID}`);
-  editSloikButton.style.display = "none";
-  tryToDeleteSloikButton.style.display = "none";
-  deleteSloikButton.style.display = "inline-block";
-  declineDeleteSloikButton.style.display = "inline-block";
+  loc.editSloikButton(sloikID).style.display = "none";
+  loc.tryToDeleteSloikButton(sloikID).style.display = "none";
+  loc.deleteSloikButton(sloikID).style.display = "inline-block";
+  loc.declineDeleteSloikButton(sloikID).style.display = "inline-block";
 }
 
 function resetButtons(sloikID) {
-  const editSloikButton = document.getElementById(`editSloikBtn_${sloikID}`);
-  const tryToDeleteSloikButton = document.getElementById(`tryToDeleteSloikBtn_${sloikID}`);
-  const deleteSloikButton = document.getElementById(`deleteSloikBtn_${sloikID}`);
-  const declineDeleteSloikButton = document.getElementById(`declineDeleteSloik_${sloikID}`);
-  editSloikButton.style.display = "inline-block";
-  tryToDeleteSloikButton.style.display = "inline-block";
-  deleteSloikButton.style.display = "none";
-  declineDeleteSloikButton.style.display = "none";
+  loc.editSloikButton(sloikID).style.display = "inline-block";
+  loc.tryToDeleteSloikButton(sloikID).style.display = "inline-block";
+  loc.deleteSloikButton(sloikID).style.display = "none";
+  loc.declineDeleteSloikButton(sloikID).style.display = "none";
 }
 
 function deleteSloik(sloikID) {
-  const sloiksBoxToDelete = document.getElementById(`sloikBox_${sloikID}`);
-  sloiksBoxToDelete.remove();
+  loc.sloiksBoxToDelete(sloikID).remove();
   removeCookiesByID(sloikID);
 
   let sloikCounter = getCookie("sloiksCounter");

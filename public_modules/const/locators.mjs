@@ -19,6 +19,14 @@ class Locators {
     this.inputError2 = document.getElementById("inputField2Error");
     this.inputError3 = document.getElementById("inputField3Error");
     this.editPopupBtn = document.getElementById("editBtn");
+
+    this.editSloikButton = (sloikID) => document.getElementById(`editSloikBtn_${sloikID}`);
+    this.tryToDeleteSloikButton = (sloikID) =>
+      document.getElementById(`tryToDeleteSloikBtn_${sloikID}`);
+    this.deleteSloikButton = (sloikID) => document.getElementById(`deleteSloikBtn_${sloikID}`);
+    this.declineDeleteSloikButton = (sloikID) =>
+      document.getElementById(`declineDeleteSloik_${sloikID}`);
+    this.sloiksBoxToDelete = (sloikID) => document.getElementById(`sloikBox_${sloikID}`);
   }
 }
 
