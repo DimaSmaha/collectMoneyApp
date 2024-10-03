@@ -14,8 +14,8 @@ const config: PlaywrightTestConfig = {
   reporter: "html",
 
   use: {
-    baseURL: "http://127.0.0.1:5500/public_modules/home.html", //local server IP
-    // baseURL: "http://127.0.0.1:5500/public/home.html",           //local server IP
+    baseURL: "http://127.0.0.1:5500/public_modules/pages/home.html", //local server IP
+    // baseURL: "http://127.0.0.1:5500/public/pages/home.html",           //local server IP
     headless: false,
     browserName: "chromium",
     launchOptions: {
@@ -38,14 +38,14 @@ const config: PlaywrightTestConfig = {
     {
       name: "gh-actions",
       use: {
-        baseURL: "http://127.0.0.1:5500/public_modules/home.html", //local server IP
+        baseURL: "http://127.0.0.1:5500/public_modules/pages/home.html", //local server IP
       },
     },
     {
       name: "docker",
       use: {
         // baseURL: "http://172.20.0.1:5500/public/home.html",    // local docker-compose IP
-        baseURL: "http://app/public/home.html", // local docker-compose IP
+        baseURL: "http://app/public/pages/home.html", // local docker-compose IP
         headless: true,
       },
     },
