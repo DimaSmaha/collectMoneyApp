@@ -36,6 +36,11 @@ class Locators {
     this.sloikDeclineDeleteBtns = (sloikID) =>
       document.getElementById(`declineDeleteSloik_${sloikID}`);
     this.sloikEditBtns = (sloikID) => document.getElementById(`editSloikBtn_${sloikID}`);
+
+    this.achievementOne = document.getElementById("achievement_1");
+    this.achievementTwo = document.getElementById("achievement_2");
+    this.achievementThree = document.getElementById("achievement_3");
+    this.achievement = (achievementID) => document.getElementById(`achievement_${achievementID}`);
   }
 }
 

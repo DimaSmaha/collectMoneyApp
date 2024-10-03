@@ -1,3 +1,4 @@
+import loc from "../../const/locators.mjs";
 import { getCookie, setCookie } from "../cookies/cookies.mjs";
 
 let achievement1Complete = false;
@@ -23,8 +24,7 @@ function achievementOne(transactionsArray) {
       achievement1Complete == false &&
       getCookie(achievementCookieName) == false
     ) {
-      const achievementOne = document.getElementById("achievement_1");
-      achievementOne.style.display = "block";
+      loc.achievementOne.style.display = "block";
       achievement1Complete = true;
       setCookie(achievementCookieName, true);
     }
@@ -43,8 +43,7 @@ function achievementTwo(transactionsArray) {
       achievement2Complete == false &&
       getCookie(achievementCookieName) == false
     ) {
-      const achievementTwo = document.getElementById("achievement_2");
-      achievementTwo.style.display = "block";
+      loc.achievementTwo.style.display = "block";
       achievement2Complete = true;
       setCookie(achievementCookieName, true);
     }
@@ -74,8 +73,7 @@ function achievementThree(transactionsArray) {
         transaction3year == transaction1year &&
         getCookie(achievementCookieName) == false
       ) {
-        const achievementThree = document.getElementById("achievement_3");
-        achievementThree.style.display = "block";
+        loc.achievementThree.style.display = "block";
         setCookie(achievementCookieName, true);
       }
     }
@@ -83,19 +81,15 @@ function achievementThree(transactionsArray) {
 }
 
 function renderAchievements() {
-  // let achievementCounter = getCookie(`achievementCounter`);
-  console.log(achievementCounter);
   for (let i = 1; i <= achievementCounter; i++) {
     let achievementCookie = getCookie(`achievement_${i}_Complete`);
-    const achievement = document.getElementById(`achievement_${i}`);
-    console.log(achievementCookie);
     if (!achievementCookie) {
-      achievement.style.backgroundColor = "white";
+      loc.achievement(i).style.backgroundColor = "white";
     }
     if (achievementCookie) {
-      achievement.style.backgroundColor = "limegreen";
-      achievement.style.color = "white";
-      achievement.style.display = "block";
+      loc.achievement(i).style.backgroundColor = "limegreen";
+      loc.achievement(i).style.color = "white";
+      loc.achievement(i).style.display = "block";
     }
   }
 }
