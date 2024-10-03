@@ -1,3 +1,5 @@
+import loc from "../../const/locators.mjs";
+
 function setupSloikCookies(
   numberOfChildren,
   sloikTitle,
@@ -15,24 +17,10 @@ function setupSloikCookies(
   setCookie(`transactionsList_${numberOfChildren}`, transactionsArray);
 }
 
-function setTestingCookies() {
-  setCookie("sloikTitle", "House");
-  setCookie("sloikDescription", "Collecting for a house", {
-    expires: 365,
-  });
-  setCookie("totalMoney", 876);
-  setCookie("goalValue", 5000);
-  setCookie("isGoalReached", false);
-  setCookie("transactionsList", [
-    { transactionSum: 654, date: "2023-07-04T18:03:44.492Z" },
-    { transactionSum: 213, date: "2023-07-04T18:04:44.492Z" },
-  ]);
-}
-
 function bulkUpdateCookies(numberOfChildren) {
-  let titleValue = document.getElementById("inputField1").value;
-  let descriptionValue = document.getElementById("inputField2").value;
-  let goalSumValue = document.getElementById("inputField3").value;
+  let titleValue = loc.titleInput.value;
+  let descriptionValue = loc.descriptionInput.value;
+  let goalSumValue = loc.goalSumInput.value;
   setCookie(`sloikTitle_${numberOfChildren}`, titleValue);
   setCookie(`sloikDescription_${numberOfChildren}`, descriptionValue);
   setCookie(`goalValue_${numberOfChildren}`, goalSumValue);
@@ -99,6 +87,20 @@ const setCookie = (cookieName, cookieValue) =>
   Cookies.set(`${cookieName}`, JSON.stringify(cookieValue), {
     expires: 365,
   });
+
+// function setTestingCookies() {
+//   setCookie("sloikTitle", "House");
+//   setCookie("sloikDescription", "Collecting for a house", {
+//     expires: 365,
+//   });
+//   setCookie("totalMoney", 876);
+//   setCookie("goalValue", 5000);
+//   setCookie("isGoalReached", false);
+//   setCookie("transactionsList", [
+//     { transactionSum: 654, date: "2023-07-04T18:03:44.492Z" },
+//     { transactionSum: 213, date: "2023-07-04T18:04:44.492Z" },
+//   ]);
+// }
 
 export {
   setupSloikCookies,
