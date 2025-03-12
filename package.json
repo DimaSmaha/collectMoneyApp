@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "browser-sync": "^2.29.3",
+    "browser-sync": "^3.0.3",
     "express": "^4.21.0",
     "live-server": "^1.2.2",
     "nodemon": "^3.0.1"
